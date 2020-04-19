@@ -1,0 +1,324 @@
+html {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: -0.0025em;
+  color: #707070;
+}
+body * {
+  box-sizing: border-box;
+}
+*:focus {
+  outline: none;
+  box-shadow: 0 0 3px rgba(255,85, 31, .5);
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 1.4rem;
+  line-height: 1.5;
+}
+
+/* reset */
+h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dt, dd {
+  margin: 0;
+  padding: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+  color: #202020;
+  font-weight: 500;
+}
+ul, ol {list-style: none;}
+button {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+img {vertical-align: top;}
+
+/* common style */
+.a11yHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip: rect(0, 0);
+  clip-path: polygon(0, 0);
+  overflow: hidden;
+}
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.container {
+  min-height: 100vh;
+  padding-bottom: 69px;
+  background-color: #f6f6f6;
+}
+.btnEdit, .btnDelete {
+  width: 32px;
+  height: 32px;
+  margin: 4px;
+  padding-top: 32px;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 24px;
+}
+.btnDelete {background-image: url('../img/ico_delete.png');}
+.btnEdit {background-image: url('../img/ico_edit.png');}
+.btnClosed {
+  width: 24px;
+  height: 24px;
+  padding-top: 24px;
+  overflow: hidden;
+  background: url('../img/ico_closed.png') no-repeat center;
+  background-size: 24px 24px;
+}
+
+.progress {
+  position: relative;
+  width: 100%;
+  height: 8px;
+  background-color: #eee;
+  overflow: hidden;
+}
+.progressBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10%;
+  height: 8px;
+  border-radius: 0 4px 4px 0;
+  background-color: #FF551F;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+}
+#goal, #statistics, #schedule {padding-top: 64px;}
+#todos, #statistics, .schedule {background-color: #fff;}
+
+
+
+
+button, input[type="checkbox"], select, a {cursor: pointer;}
+input[type="text"], input[type="date"], input[type="number"], textarea {
+  width: 100%;
+  border-width: 0 0 1px 0;
+  border-color: #cecece;
+  border-style: solid;
+  color: #707070;
+}
+input[type="text"], input[type="number"], textarea {padding: 12px 10px 11px;}
+input[type="date"] {padding: 7px 0 7px 10px;}
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 100%;
+  padding: 12px 0 11px 10px;
+  border-width: 0 0 1px 0;
+  border-color: #cecece;
+  border-style: solid;
+  border-radius: 0;
+  background: url('../img/ico_arrow.png') no-repeat right center #fff;
+  background-size: 24px 24px;
+}
+select::-ms-expand {display: none;}
+input, a, button, select {outline: 0;}
+
+
+/* font setting */
+h2 {font-size: 2rem;}
+
+/* title */
+.titMenu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 16px;
+  border-bottom: 2px solid #cecece;
+  background-color: #fff;
+  z-index: 100;
+}
+.titMenu .period {
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 1.4rem;
+  color: #707070;
+}
+
+/* bottom nav */
+nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .15);
+  z-index: 100;
+}
+.btnAddTodo {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width:60px;
+  height: 40px;
+  padding-top: 40px;
+  margin: auto;
+  border-radius: 20px;
+  background: url('../img/ico_plus_white.png') no-repeat center;
+  background-size: 24px 24px;
+  background-color: #FF551F;
+  overflow: hidden;
+}
+.navLink {
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0 16px;
+}
+.navLink li:nth-child(2) {margin-right: 36px;}
+.navLink li:nth-child(3) {margin-left: 36px;}
+.navLink a {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 40px;
+  padding: 8px 0;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #202020;
+  text-align: center;
+}
+.navLink .active a::after {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: block;
+  content: '';
+  width: 6px;
+  height: 6px;
+  margin: 4px auto 0;
+  background-color: #FF551F;
+  border-radius: 4px;
+}
+
+.popup {
+  position: fixed;
+  display: none;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 320px;
+  padding: 24px;
+  margin: auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+  z-index: 200;
+}
+.popup h3 {
+  margin-bottom: 40px;
+  font-size: 20px;
+  font-weight: 400;
+}
+.popup .btnClosed {
+  position: absolute;
+  top: 28px;
+  right: 24px;
+}
+.popup .btnCancel, .popup .btnRegister {
+  position: absolute;
+  bottom: 0;
+  width: 50%;
+  padding: 16px;
+  font-size: 20px;
+  text-align: center;
+  border-top: 1px solid #FF551F;
+}
+.popup .btnCancel {
+  left: 0;
+  color: #FF551F;
+  border-bottom-left-radius: 16px;
+}
+.popup .btnRegister {
+  right: 0;
+  color: #fff;
+  background-color: #FF551F;
+  border-bottom-right-radius: 16px;
+}
+.popup.active {display: block;}
+.popup.active + .dimd {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, .6);
+  z-index: 150;
+}
+
+.addTodos.popup {height: 572px;}
+.addGoal.popup {height: 362px;}
+
+.addInput {
+  display: flex;
+  flex-wrap: wrap;
+}
+.addInput li {margin-bottom: 16px;}
+.category {width: 100%;}
+.addInput .categorySelect {
+  width: 100%;
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #707070;
+  border-bottom: 1px solid #cecece;
+}
+.todoInput {width: 232px;}
+.impSelect  button {
+  width: 40px;
+  height: 40px;
+  padding-left: 40px;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  background-position: center;
+  background-image: url('../img/ico_imp_off.png');
+  border-bottom: 1px solid #cecece;
+}
+.startDate, .endDate, .startTime, .goalTime  {
+  width: 50%;
+  text-align: center;
+}
+.contentInput {width: 100%;}
+.contentInput textarea {height: 80px;}
+.startTime, .goalTime {
+  display: flex;
+  flex-wrap: wrap;
+}
+.startDate label, .endDate label, .startTime label, .goalTime label {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 12px;
+  padding-left: 10px;
+  text-align: left;
+}
+.startTime input {width: 56px;}
+.startTime select {
+  width: 80px;
+  text-align: right;
+  color: #707070;
+}
+.goalTime select {
+  padding-left: 10px;
+  color: #707070;
+}

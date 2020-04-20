@@ -1,7 +1,7 @@
 let todos = [];
 
-const $totalTime = document.querySelector('.todayInformation > .totalTime');
 const $todoList = document.querySelector('.todoList');
+const $totalTime = document.querySelector('.todayInformation > .totalTime');
 // const $btnStopWatch = document.querySelector('.todoList > li > .btnStopWatch');
 const $timerPopup = document.querySelector('div.timer');
 const $popupSimulationTime = document.querySelector('div.timer > .stopTimer > .simulationTime');
@@ -10,7 +10,28 @@ const $simulationTime = document.querySelector('.simulationTime');
 
 // console.log($popupStopBtn, $timerPopup);
 
-// const render = 
+const render = () => {
+  let html = '';
+  todos.forEach(todo => {
+    html += `<li id="${todo.id}" class="yellow">
+    <button class="btnStopWatch">정지</button>
+    <a class="todoTitSet">
+      <h4 class="todoTit"><span class="icoImp impCheck">중요</span>투두리스트 제목111</h4>
+      <span class="todoSchedule">PM 3:00 ~ 5:30 예정</span>
+    </a>
+    <div class="simulationTime">00:30:05</div>
+    <div class="todoContent">
+      투두 상세 내용입니다.투두 상세 내용입니다.투두 상세 내용입니다.투두 상세 내용입니다.투두 상세 내용...
+    </div>
+    <button class="btnEdit">수정</button>
+    <button class="btnDelete">삭제</button>
+    <div class="progress">
+      <div class="progressBar"></div>
+    </div>
+  </li>`;
+  });
+  $todoList.innerHTML = html;
+};
 
 
 const getTodos = () => {
@@ -71,14 +92,14 @@ const startStopWatch = () => {
 
     timerClosure.name($popupSimulationTime);
     timerClosure.name($totalTime);
-    // timerClosure.name($simulationTime);
+    timerClosure.name($simulationTime);
     
     // 뒷 배경도 같이 올라갈거면 추가해야함
     if ($popupStopBtn.classList.contains('play')) clearInterval(timer);
     if (!$timerPopup.classList.contains('active')) {
       clearInterval(timer);
     }
-  }, 10);
+  }, 1000);
 };
 
 // popupStopBtn 일시정지

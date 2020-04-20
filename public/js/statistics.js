@@ -85,25 +85,22 @@ const getDay = day => {
   return newDay;
 };
 const getDate = date => date.split('-')[2];
+const allAchieve = 20;
+const sucessCriteria = () => (allAchieve > 30 ? (allAchieve > 80 ? 'perfect' : 'seccess') : 'fail');
+const getBtn = () => (allAchieve > 30 ? (allAchieve > 80 ? '<button class="stamp">성공</button>' : '<button class="stamp">통과</button>') : '<button class="stamp">실패</button>');
 
 const _week = week.map(day => ({ ...day, date: `${getDate(day.date)}`, day: `${getDay(day.day)}` }));
 
 const weeklyRender = () => {
   let html = '';
   _week.forEach(day => {
-    html += `<div class="seccess">
+    html += `<div class="${sucessCriteria(allAchieve)}">
     <dt>${day.day}</dt>
-    <dd>
-    ${getToday > +day.date ? '<button class="stamp"></button>' : ''}
-    ${day.date}
+    <dd>${getToday > +day.date ? getBtn(allAchieve) : ''}${day.date}
     </dd>
   </div>`;
-    console.log('[day.date]', typeof day.date, day.date);
-    console.log('[getToday]', typeof getToday, getToday);
-
   });
   $weeklyChallenge.innerHTML = html;
-  
 };
 
 window.onload = weeklyRender;

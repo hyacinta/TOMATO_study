@@ -269,6 +269,7 @@ nav {
 
 .addTodos.popup {height: 572px;}
 .addGoal.popup {height: 362px;}
+.timer.popup {height: 250px;}
 
 .addInput {
   display: flex;

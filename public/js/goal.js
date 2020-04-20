@@ -8,6 +8,7 @@ const oneHour = 3600000;
 const oneDay = 86400000;
 
 // Dom
+const $addGoal = document.querySelector('.addGoal');
 const $goalList = document.querySelector('.goalList');
 
 // 함수
@@ -30,8 +31,9 @@ const goalRender = () => {
 };
 
 // 이벤트 핸들러
-$goalList.onclick = target => {
-  if (target)
+$goalList.onclick = ({ target }) => {
+  if (!(target.matches('.btnEdit') || target.matches('.btnDelete'))) return;
+  if (target.matches('.btnEdit')) $addGoal.classList.add('active');
 };
 
 window.onload = () => {

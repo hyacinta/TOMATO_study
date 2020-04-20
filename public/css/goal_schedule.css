@@ -92,7 +92,14 @@
   left: 14px;
   opacity: 0;
 }
-
+.deleteGoal.popup {
+  padding-top: 64px;
+  height: 200px;
+}
+.deleteGoal.popup p {
+  font-size: 20px;
+  text-align: center;
+}
 /* 스케줄 플래너 */
 .scheduleList {position: relative;}
 .hour {display: flex;}

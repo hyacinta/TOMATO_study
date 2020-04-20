@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="KO-KR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1" />
+  <meta name="keywords" content="TOMATO Planner, Study Planner">
+  <meta name="description" content="">
+  <meta name="author" content="야채가게 사람들">
+  <title>Tomato Study</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1 class="a11yHidden">TOMATO Planner</h1>
+    <h2 class="titMenu">
+      학습통계
+      <span class="period">2020.04.19 ~ 04.25</span>
+    </h2>
+    <nav>
+      <h3 class="a11yHidden">내비게이션</h3>
+      <button class="btnAddTodo">투두 추가하기</button>
+      <ul class="navLink">
+        <li><a href="index.html">투두</a></li>
+        <li><a href="goal.html">목표</a></li>
+        <li class="active"><a href="statistics.html">통계</a></li>
+        <li><a href="schedule.html">스케줄</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main id="statistics">
+    <h3 class="a11yHidden">챌린지</h3>
+    <dl class="weeklyChallenge">
+      <div class="monDay perfect off">
+        <dt>월</dt>
+        <dd>19</dd>
+      </div>
+      <div class="tuesDay seccess off">
+        <dt>화</dt>
+        <dd>20</dd>
+      </div>
+      <div class="wednesDay fail off">
+        <dt>수</dt>
+        <dd>21</dd>
+      </div>
+      <div class="thursDay perfect">
+        <dt>목</dt>
+        <dd>22</dd>
+      </div>
+      <div class="friDay today">
+        <dt>금</dt>
+        <dd>23</dd>
+      </div>
+      <div class="saturDay">
+        <dt>토</dt>
+        <dd>24</dd>
+      </div>
+      <div class="sunDay">
+        <dt>일</dt>
+        <dd>25</dd>
+      </div>
+    </dl>
+    <div class="statsContent">
+      <div class="daily active">
+        <h3 class="a11yHidden">일간 통계</h3>
+        <button class="btnTab">일간</button>
+        <ul class="statsData">
+          <li class="dailyDate">
+            2020년 4월 22일 목요일
+          </li>
+          <li class="total">
+            <h4>총 공부 시간</h4>
+            <p>04시간 05분 40초</p>
+          </li>
+          <li class="achievement">
+            <h4>달성률 <span>목표시간 6시간 30분</span></h4>
+            <p>75%</p>
+            <div class="progress">
+              <div class="progressBar"></div>
+            </div>
+          </li>
+          <li class="category">
+            <h4>목표별 공부시간 <span>(%)</span></h4>
+            <ul class="graph">
+              <li class="red">
+                <label>목표1</label>
+                <div class="bar">
+                  <span class="percent">100%</span>
+                </div>
+              </li>
+              <li class="yellow">
+                <label>목표2</label>
+                <div class="bar">
+                  <span class="percent">100%</span>
+                </div>
+              </li>
+              <li class="blue">
+                <label>목표3</label>
+                <div class="bar">
+                  <span class="percent">100%</span>
+                </div>
+              </li>
+              <li class="green">
+                <label>목표4</label>
+                <div class="bar">
+                  <span class="percent">100%</span>
+                </div>
+              </li>
+              <li class="purple">
+                <label>목표5</label>
+                <div class="bar">
+                  <span class="percent">100%</span>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="weekly">
+        <h3 class="a11yHidden">주간 통계</h3>
+        <button class="btnTab">주간</button>
+        <ul class="statsData">
+          <li class="total">
+            <h4>총 공부 시간</h4>
+            <p>27시간 05분 40초</p>
+          </li>
+          <li class="sum">
+            <h4>일간 평균 시간</h4>
+            <p>27시간 05분 40초</p>
+          </li>
+          <li class="achievement">
+            <h4>달성률 <span>목표시간 6시간 30분</span></h4>
+            <p>75%</p>
+            <div class="progress">
+              <div class="progressBar"></div>
+            </div>
+          </li>
+          <li class="category">
+            <h4>목표별 공부시간 <span>(%)</span></h4>
+            <ul class="graph">
+              <li class="red">
+                <label>목표1</label>
+                <div class="bar">
+                  <span class="percent">100%</span>
+                </div>
+              </li>
+              <li class="yellow">
+                <label>목표2</label>
+                <div class="bar">
+                  <span class="percent">100%</span>
+                </div>
+              </li>
+              <li class="blue">
+                <label>목표3</label>
+                <div class="bar">
+                  <span class="percent">100%</span>
+                </div>
+              </li>
+              <li class="green">
+                <label>목표4</label>
+                <div class="bar">
+                  <span class="percent">100%</span>
+                </div>
+              </li>
+              <li class="purple">
+                <label>목표5</label>
+                <div class="bar">
+                  <span class="percent">100%</span>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </main>
+    <!-- 할일 추가 popup -->
+    <div class="addTodos popup active">
+      <h3>할일 추가</h3>
+      <button class="btnClosed">닫기</button>
+      <ul class="addInput">
+        <li class="category">
+          <label for="" class="a11yHidden">목표 선택</label>
+          <select id="categorySelect" class="categorySelect">
+            <option value="">목표를 선택하세요</option>
+          </select>
+        </li>
+        <li class="todoInput">
+          <label for="" class="a11yHidden">할일 입력</label>
+          <input type="text" placeholder="할일을 입력하세요">
+        </li>
+        <li class="impSelect"><label for="test" class="a11yHidden">text</label>
+          <button class="btnImp" id="test">중요</button>
+        </li>
+        <li class="startDate">
+          <label for="">시작 날짜</label>
+          <input type="date" name="" id="">
+        </li>
+        <li class="endDate">
+          <label for="">종료 날짜</label>
+          <input type="date" name="" id="">
+        </li>
+        <li class="startTime">
+          <label for="">공부 시작시간</label>
+          <input type="number" name="" id="" placeholder="시">
+          <select name="country" id="countrySelectBox">
+            <option value="">00분</option>
+            <option value="">10분</option>
+            <option value="">20분</option>
+            <option value="">30분</option>
+            <option value="">40분</option>
+            <option value="">50분</option>
+          </select>
+        </li>
+        <li class="goalTime">
+          <label for="">목표 공부시간</label>
+          <select name="country" id="countrySelectBox">
+            <option value="">30분</option>
+            <option value="">1시간</option>
+            <option value="">1시간 30분</option>
+            <option value="">2시간</option>
+            <option value="">2시간 30분</option>
+            <option value="">3시간</option>
+            <option value="">3시간 30분</option>
+            <option value="">4시간</option>
+            <option value="">4시간 30분</option>
+            <option value="">5시간</option>
+          </select>
+        </li>
+        <li class="contentInput">
+          <label for="" class="a11yHidden">상세 내용 입력</label>
+          <textarea name="" id="" cols="30" rows="10" placeholder="상세 내용을 입력하세요"></textarea>
+        </li>
+      </ul>
+      <button class="btnCancel">취소</button>
+      <button class="btnRegister">등록</button>
+    </div>
+    <div class="dimd"></div>
+</div>
+</body> 
+</html>

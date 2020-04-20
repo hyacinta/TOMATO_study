@@ -10,7 +10,7 @@
   
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
-  <link rel="stylesheet" href="/dist/css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 <div class="container">
@@ -21,10 +21,10 @@
       <h3 class="a11yHidden">내비게이션</h3>
       <button class="btnAddTodo">투두 추가하기</button>
       <ul class="navLink">
-        <li class="active"><a href="index.html">투두</a></li>
-        <li><a href="goal.html">목표</a></li>
-        <li><a href="statistics.html">통계</a></li>
-        <li><a href="schedule.html">스케줄</a></li>
+        <li class="active"><a href="">투두</a></li>
+        <li><a href="">목표</a></li>
+        <li><a href="">통계</a></li>
+        <li><a href="">스케줄</a></li>
       </ul>
     </nav>
   </header>
@@ -51,10 +51,10 @@
         </select>
       </div>
       <ul class="todoList">
-        <li class="yellow">
+        <li class="yellow default">
           <button class="btnStopWatch">정지</button>
           <a class="todoTitSet">
-            <h4 class="todoTit"><span class="icoImp impCheck">중요</span>투두리스트 제목</h4>
+            <h4 class="todoTit"><span class="icoImp">중요</span>투두리스트 제목</h4>
             <span class="todoSchedule">PM 3:00 ~ 5:30 예정</span>
           </a>
           <div class="simulationTime">00:30:05</div>
@@ -70,7 +70,7 @@
         <li class="red">
           <button class="btnStopWatch">정지</button>
           <a class="todoTitSet">
-            <h4 class="todoTit"><span class="icoImp impCheck">중요</span>투두리스트 제목</h4>
+            <h4 class="todoTit"><span class="icoImp">중요</span>투두리스트 제목</h4>
             <span class="todoSchedule">PM 3:00 ~ 5:30 예정</span>
           </a>
           <div class="simulationTime">00:30:05</div>
@@ -86,7 +86,7 @@
         <li class="green">
           <button class="btnStopWatch">정지</button>
           <a class="todoTitSet">
-            <h4 class="todoTit"><span class="icoImp impCheck">중요</span>투두리스트 제목</h4>
+            <h4 class="todoTit"><span class="icoImp">중요</span>투두리스트 제목</h4>
             <span class="todoSchedule">PM 3:00 ~ 5:30 예정</span>
           </a>
           <div class="simulationTime">00:30:05</div>
@@ -102,7 +102,7 @@
         <li class="blue">
           <button class="btnStopWatch">정지</button>
           <a class="todoTitSet">
-            <h4 class="todoTit"><span class="icoImp impCheck">중요</span>투두리스트 제목</h4>
+            <h4 class="todoTit"><span class="icoImp">중요</span>투두리스트 제목</h4>
             <span class="todoSchedule">PM 3:00 ~ 5:30 예정</span>
           </a>
           <div class="simulationTime">00:30:05</div>
@@ -131,24 +131,89 @@
             <div class="progressBar"></div>
           </div>
         </li>
+        <li class="yellow ing">
+          <button class="btnStopWatch">정지</button>
+          <a class="todoTitSet">
+            <h4 class="todoTit"><span class="icoImp">중요</span>투두리스트 제목</h4>
+            <span class="todoSchedule">PM 3:00 ~ 5:30 예정</span>
+          </a>
+          <div class="simulationTime">00:30:05</div>
+          <div class="todoContent">
+            투두 상세 내용입니다.투두 상세 내용입니다.투두 상세 내용입니다.투두 상세 내용입니다.투두 상세 내용...
+          </div>
+          <button class="btnEdit">수정</button>
+          <button class="btnDelete">삭제</button>
+          <div class="progress">
+            <div class="progressBar"></div>
+          </div>
+        </li>
+        <li class="red ing">
+          <button class="btnStopWatch">정지</button>
+          <a class="todoTitSet">
+            <h4 class="todoTit"><span class="icoImp">중요</span>투두리스트 제목</h4>
+            <span class="todoSchedule">PM 3:00 ~ 5:30 예정</span>
+          </a>
+          <div class="simulationTime">00:30:05</div>
+          <div class="todoContent">
+            투두 상세 내용입니다.투두 상세 내용입니다.투두 상세 내용입니다.투두 상세 내용입니다.투두 상세 내용...
+          </div>
+          <button class="btnEdit">수정</button>
+          <button class="btnDelete">삭제</button>
+          <div class="progress">
+            <div class="progressBar"></div>
+          </div>
+        </li>
+        <li class="green ing">
+          <button class="btnStopWatch">정지</button>
+          <a class="todoTitSet">
+            <h4 class="todoTit"><span class="icoImp">중요</span>투두리스트 제목</h4>
+            <span class="todoSchedule">PM 3:00 ~ 5:30 예정</span>
+          </a>
+          <div class="simulationTime">00:30:05</div>
+          <div class="todoContent">
+            투두 상세 내용입니다.투두 상세 내용입니다.투두 상세 내용입니다.투두 상세 내용입니다.투두 상세 내용...
+          </div>
+          <button class="btnEdit">수정</button>
+          <button class="btnDelete">삭제</button>
+          <div class="progress">
+            <div class="progressBar"></div>
+          </div>
+        </li>
+        <li class="blue ing">
+          <button class="btnStopWatch">정지</button>
+          <a class="todoTitSet">
+            <h4 class="todoTit"><span class="icoImp">중요</span>투두리스트 제목</h4>
+            <span class="todoSchedule">PM 3:00 ~ 5:30 예정</span>
+          </a>
+          <div class="simulationTime">00:30:05</div>
+          <div class="todoContent">
+            투두 상세 내용입니다.투두 상세 내용입니다.투두 상세 내용입니다.투두 상세 내용입니다.투두 상세 내용...
+          </div>
+          <button class="btnEdit">수정</button>
+          <button class="btnDelete">삭제</button>
+          <div class="progress">
+            <div class="progressBar"></div>
+          </div>
+        </li>
+        <li class="purple ing">
+          <button class="btnStopWatch">정지</button>
+          <a class="todoTitSet">
+            <h4 class="todoTit"><span class="icoImp">중요</span>투두리스트 제목</h4>
+            <span class="todoSchedule">PM 3:00 ~ 5:30 예정</span>
+          </a>
+          <div class="simulationTime">00:30:05</div>
+          <div class="todoContent">
+            투두 상세 내용입니다.투두 상세 내용입니다.투두 상세 내용입니다.투두 상세 내용입니다.투두 상세 내용...
+          </div>
+          <button class="btnEdit">수정</button>
+          <button class="btnDelete">삭제</button>
+          <div class="progress">
+            <div class="progressBar"></div>
+          </div>
+        </li>
       </ul>
     </div>
   </main>
-  <!-- 타이머 팝업 -->
-  <div class="timer popup active">
-    <a class="todoTitSet">
-      <h4 class="todoTit">투두리스트 제목</h4>
-      <span class="todoSchedule">PM 3:00 ~ 5:30 예정</span>
-    </a>
-    <div class="stopTimer red ing">
-      <button class="btnStopWatch">일시정지</button>
-      <div class="simulationTime">00:30:05</div>
-    </div>
-    <button class="btnRegister">종료</button>
-  </div>
-  <div class="dimd"></div>
-
-
 
   <!-- 할일 추가 popup -->
   <div class="addTodos popup">

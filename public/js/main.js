@@ -6,7 +6,8 @@ const $categorySelect = document.querySelector('.categorySelect');
 const $totalTime = document.querySelector('.todayInformation > .totalTime');
 // const $btnStopWatch = document.querySelector('.todoList > li > .btnStopWatch');
 const $timerPopup = document.querySelector('div.timer');
-const $simulationTime = document.querySelector('.simulationTime');
+// const $popupSimulationTime = document.querySelector('div.timer > .stopTimer > .simulationTime');
+// const $popupStopBtn = document.querySelector('.timer > .stopTimer > .btnStopWatch');
 
 // console.log($popupStopBtn, $timerPopup);
 
@@ -48,6 +49,7 @@ const render = () => {
 };
 
 
+
 const getTodos = () => {
 
   fetch('/goals')
@@ -81,9 +83,18 @@ const removeActive = () => {
 
 
 const timerClosure = (() => {
+  let count = 0;
   const countTime = (elementName, [_hour, _min, _sec]) => {
+    console.log(3, elementName);
     let [hour, min, sec] = [_hour, _min, _sec];
-    sec++;
+
+    if (!elementName.matches('.simulationTime') && !elementName.matches('.totalTime')) return;
+
+    count++;
+    if (count > 9) {
+      count = 0;
+      sec++;
+    }
     if (sec > 59) {
       sec = 0;
       min++;
@@ -102,20 +113,30 @@ const timerClosure = (() => {
     hour = hour.length > 1 || hour > 9 ? hour : '0' + hour;
     min = min.length > 1 || min > 9 ? min : '0' + min;
     sec = sec.length > 1 || sec > 9 ? sec : '0' + sec;
+   
+    console.log(4, elementName);
+
     elementName.textContent = `${hour}:${min}:${sec}`;
   };
 
   return {
     name(elementName) {
+      console.log(1, elementName);
       const timeArray = [...elementName.textContent].filter(num => num !== ':');
       const times = [timeArray[0] + timeArray[1], timeArray[2] + timeArray[3], timeArray[4] + timeArray[5]];
+      console.log(2, elementName);
       countTime(elementName, times);
     }
   };
 })();
 
 // 스탑워치 시작
-const startStopWatch = ($popupStopBtn, $popupSimulationTime) => {
+const startStopWatch = () => {
+  const $popupSimulationTime = document.querySelector('div.timer > .stopTimer > .simulationTime');
+  const $popupStopBtn = document.querySelector('.timer > .stopTimer > .btnStopWatch');
+  // $popupStopBtn.classList.remove('play');
+  if ($popupStopBtn.classList.contains('play')) return;
+
   const timer = setInterval(() => {
 
     if ($popupStopBtn.classList.contains('play')) {
@@ -130,7 +151,7 @@ const startStopWatch = ($popupStopBtn, $popupSimulationTime) => {
     timerClosure.name($popupSimulationTime);
     timerClosure.name($totalTime);
     // timerClosure.name($simulationTime); // --
-  }, 1000);
+  }, 100);
 };
 
 const renderPopup = target => {
@@ -149,11 +170,9 @@ const renderPopup = target => {
         <button class="btnRegister">종료</button>`;
     }
   });
-  const $popupStopBtn = document.querySelector('.timer > .stopTimer > .btnStopWatch');
-  const $popupSimulationTime = document.querySelector('div.timer > .stopTimer > .simulationTime');
-  $popupStopBtn.classList.remove('play');
-  startStopWatch($popupStopBtn, $popupSimulationTime);
+  startStopWatch();
 };
+
 // popupStopBtn 일시정지
 // const matchTargetColor = target => {
 //   const colorClass = ['red', 'yellow', 'green', 'blue', 'purple'];
@@ -169,7 +188,7 @@ $todoList.onclick = e => {
     // addActive();
     renderPopup(e.target);
     // startStopWatch();
-    // $popupStopBtn.classList.remove('play');
+    // e.target.classList.remove('play');
     // matchTargetColor(e.target);
   }
 };
@@ -178,7 +197,7 @@ $todoList.onclick = e => {
 $timerPopup.onclick = e => {
   if (e.target.matches('.timer > .btnRegister')) {
     removeActive();
-    $simulationTime.textContent = $popupSimulationTime.textContent; // --
+    // $simulationTime.textContent = $popupSimulationTime.textContent; // --
   }
   if (e.target.matches('.timer > .stopTimer > .btnStopWatch')) {
     e.target.classList.toggle('play');

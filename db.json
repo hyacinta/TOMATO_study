@@ -44,23 +44,23 @@
   }],
 
   "goals" : [{
-    "id" : 0,
+    "id" : 1,
     "content" : "project tomato",
     "dDay" : "2020-04-24",
     "color" : "red",
-    "todos" : [0, 1, 2, 4, 5]
+    "todos" : [1, 2, 3, 5, 6]
   },{
-    "id" : 1,
+    "id" : 2,
     "content" : "react",
     "dDay" : "2020-04-28",
     "color" : "green",
-    "todos" : [3]
+    "todos" : [4]
   }],
 
   "todos" : [{
-    "id" : 0,
+    "id" : 1,
     "content" : "HTML",
-    "goal": 0,
+    "goal": 1,
     "date" : "2020-04-21",
     "day" : "MON",
     "important" : true,
@@ -69,9 +69,9 @@
     "detail" : "프로젝트 tomato HTML 제작",
     "done" : "02:05:38"
   },{
-    "id" : 1,
+    "id" : 2,
     "content" : "HTML",
-    "goal": 0,
+    "goal": 1,
     "date" : "2020-04-22",
     "day" : "TUE",
     "important" : true,
@@ -81,9 +81,9 @@
     "done" : "00:00:00"
   },
   {
-    "id" : 2,
+    "id" : 3,
     "content" : "CSS",
-    "goal": 0,
+    "goal": 1,
     "date" : "2020-04-22",
     "day" : "TUE",
     "important" : false,
@@ -93,9 +93,9 @@
     "done" : "00:00:00"
   },
   {
-    "id" : 3,
+    "id" : 4,
     "content" : "인강",
-    "goal": 1,
+    "goal": 2,
     "date" : "2020-04-21",
     "day" : "MON",
     "important" : false,
@@ -105,9 +105,9 @@
     "done" : "05:32:18"
   },
   {
-    "id" : 4,
+    "id" : 5,
     "content" : "javascript",
-    "goal": 0,
+    "goal": 1,
     "date" : "2020-04-23",
     "day" : "WED",
     "important" : false,
@@ -117,9 +117,9 @@
     "done" : "00:00:00"
   },
   {
-    "id" : 5,
+    "id" : 6,
     "content" : "debug",
-    "goal": 0,
+    "goal": 1,
     "date" : "2020-04-23",
     "day" : "WED",
     "important" : true,

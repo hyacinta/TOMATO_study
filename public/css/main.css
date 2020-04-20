@@ -6,7 +6,7 @@
 }
 .totalTime {
   margin-top: 4px;
-  font-size: 48px;
+  font-size: 4.8rem;
   line-height: 1;
 }
 .goalPercent, .todayGoal, .todayPercent {
@@ -54,9 +54,9 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  flex-wrap: wrap;
   width: 100%;
   padding-top: 20px;
-  flex-wrap: wrap;
 }
 .btnStopWatch {
   width: 48px;
@@ -70,15 +70,15 @@
   overflow: hidden;
 }
 .todoList .red .btnStopWatch {background-image: url('../img/ico_start_red.png');}
-.todoList .red.ing .btnStopWatch {background-image: url('../img/ico_stop_red.png');}
+.todoList .red.ing .btnStopWatch, .timer .stopTimer.red .btnStopWatch {background-image: url('../img/ico_stop_red.png');}
 .todoList .yellow .btnStopWatch {background-image: url('../img/ico_start_yellow.png');}
-.todoList .yellow.ing .btnStopWatch {background-image: url('../img/ico_stop_yellow.png');}
+.todoList .yellow.ing .btnStopWatch, .timer .stopTimer.yellow .btnStopWatch {background-image: url('../img/ico_stop_yellow.png');}
 .todoList .green .btnStopWatch {background-image: url('../img/ico_start_green.png');}
-.todoList .green.ing .btnStopWatch {background-image: url('../img/ico_stop_green.png');}
+.todoList .green.ing .btnStopWatch, .timer .stopTimer.green .btnStopWatch {background-image: url('../img/ico_stop_green.png');}
 .todoList .blue .btnStopWatch {background-image: url('../img/ico_start_blue.png');}
-.todoList .blue.ing .btnStopWatch {background-image: url('../img/ico_stop_blue.png');}
+.todoList .blue.ing .btnStopWatch, .timer .stopTimer.blue .btnStopWatch {background-image: url('../img/ico_stop_blue.png');}
 .todoList .purple .btnStopWatch {background-image: url('../img/ico_start_purple.png');}
-.todoList .purple.ing .btnStopWatch {background-image: url('../img/ico_stop_purple.png');}
+.todoList .purple.ing .btnStopWatch, .timer .stopTimer.purple .btnStopWatch {background-image: url('../img/ico_stop_purple.png');}
 .todoTitSet {
   flex-grow: 1;
   cursor: pointer;
@@ -95,12 +95,12 @@
   overflow: hidden;
   vertical-align: top;
 }
-.todoList .icoImp {background-image: url('../img/ico_imp_off.png');}
-.todoList .red .icoImp.impCheck {background-image: url('../img/ico_imp_on_red.png');}
-.todoList .yellow .icoImp.impCheck {background-image: url('../img/ico_imp_on_yellow.png');}
-.todoList .green .icoImp.impCheck {background-image: url('../img/ico_imp_on_green.png');}
-.todoList .blue .icoImp.impCheck {background-image: url('../img/ico_imp_on_blue.png');}
-.todoList .purple .icoImp.impCheck {background-image: url('../img/ico_imp_on_purple.png');}
+.todoList .icoImp, .timer .icoImp {background-image: url('../img/ico_imp_off.png');}
+.todoList .red .icoImp.impCheck, .timer .red .icoImp.icoCheck {background-image: url('../img/ico_imp_on_red.png');}
+.todoList .yellow .icoImp.impCheck, .timer .yellow .icoImp.icoCheck {background-image: url('../img/ico_imp_on_yellow.png');}
+.todoList .green .icoImp.impCheck, .timer .green .icoImp.icoCheck {background-image: url('../img/ico_imp_on_green.png');}
+.todoList .blue .icoImp.impCheck, .timer .blue .icoImp.icoCheck {background-image: url('../img/ico_imp_on_blue.png');}
+.todoList .purple .icoImp.impCheck, .timer .purple .icoImp.icoCheck {background-image: url('../img/ico_imp_on_purple.png');}
 .todoTit {font-size: 1.6rem;}
 .todoSchedule {
   font-size: 1.2rem;
@@ -130,3 +130,49 @@
 .todoList .green .progressBar {background-color: #5fc47c;}
 .todoList .blue .progressBar {background-color: #5CAFC1;}
 .todoList .purple .progressBar {background-color: #A98DD7;}
+
+/* timer popup */
+
+
+.timer {
+  padding: 40px 24px;
+}
+.timer .btnClosed {
+  top: 16px;
+  right: 16px;
+}
+.timer .todoTitSet {
+  margin-bottom: 16px;
+}
+.timer .todoTit {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 0;
+  font-size: 2rem;
+  text-align: center;
+}
+.timer .todoSchedule {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+.timer .stopTimer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.timer .simulationTime {
+  width: 190px;
+  margin: 0;
+  font-size: 4.8rem;
+  text-align: center;
+  color: #FF551F;
+}
+.timer .btnStopWatch {
+  margin: 0 12px 0 0;
+}
+.timer .btnRegister {
+  width: 100%;
+  border-bottom-left-radius: 16px;
+}

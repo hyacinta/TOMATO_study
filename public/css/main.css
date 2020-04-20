@@ -1,0 +1,178 @@
+.todayInformation {
+  padding: 32px 24px 24px;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(123.75deg, #FF551F 50%, #FF3543 115%);
+}
+.totalTime {
+  margin-top: 4px;
+  font-size: 4.8rem;
+  line-height: 1;
+}
+.goalPercent, .todayGoal, .todayPercent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.goalPercent {
+  height: 40px;
+  margin-top: 32px;
+  font-weight: 400;
+  border: 1px solid #fff;
+  border-radius: 20px;
+}
+.goalPercent h4 {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 300;
+  color: #fff;
+}
+.goalPercent p {
+  padding: 0 8px;
+  font-size: 20px;
+}
+.todayGoal, .todayPercent {margin: 0 4px;}
+
+.categoryTit {
+  border-bottom: 2px solid #eee;
+  text-align: center;
+}
+.categoryTit .categorySelect {
+  width: auto;
+  height: 40px;
+  margin: 8px auto;
+  padding: 0 36px  0 10px;
+  font-size: 2rem;
+  border-bottom: none;
+}
+.categorySelect .dDay {
+  font-size: 1.6rem;
+  color: #707070;
+}
+
+.todoList li {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  width: 100%;
+  padding-top: 20px;
+}
+.btnStopWatch {
+  width: 48px;
+  height: 48px;
+  padding-top: 48px;
+  margin-left: 20px;
+  margin-right: 16px;
+  background-repeat: no-repeat;
+  background-size: 48px;
+  background-position: center;
+  overflow: hidden;
+}
+.todoList .red .btnStopWatch {background-image: url('../img/ico_start_red.png');}
+.todoList .red.ing .btnStopWatch, .timer .stopTimer.red .btnStopWatch {background-image: url('../img/ico_stop_red.png');}
+.todoList .yellow .btnStopWatch {background-image: url('../img/ico_start_yellow.png');}
+.todoList .yellow.ing .btnStopWatch, .timer .stopTimer.yellow .btnStopWatch {background-image: url('../img/ico_stop_yellow.png');}
+.todoList .green .btnStopWatch {background-image: url('../img/ico_start_green.png');}
+.todoList .green.ing .btnStopWatch, .timer .stopTimer.green .btnStopWatch {background-image: url('../img/ico_stop_green.png');}
+.todoList .blue .btnStopWatch {background-image: url('../img/ico_start_blue.png');}
+.todoList .blue.ing .btnStopWatch, .timer .stopTimer.blue .btnStopWatch {background-image: url('../img/ico_stop_blue.png');}
+.todoList .purple .btnStopWatch {background-image: url('../img/ico_start_purple.png');}
+.todoList .purple.ing .btnStopWatch, .timer .stopTimer.purple .btnStopWatch {background-image: url('../img/ico_stop_purple.png');}
+.todoTitSet {
+  flex-grow: 1;
+  cursor: pointer;
+}
+.todoTit .icoImp {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  padding-top: 24px;
+  margin-right: 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 24px 24px;
+  overflow: hidden;
+  vertical-align: top;
+}
+.todoList .icoImp, .timer .icoImp {background-image: url('../img/ico_imp_off.png');}
+.todoList .red .icoImp.impCheck, .timer .red .icoImp.icoCheck {background-image: url('../img/ico_imp_on_red.png');}
+.todoList .yellow .icoImp.impCheck, .timer .yellow .icoImp.icoCheck {background-image: url('../img/ico_imp_on_yellow.png');}
+.todoList .green .icoImp.impCheck, .timer .green .icoImp.icoCheck {background-image: url('../img/ico_imp_on_green.png');}
+.todoList .blue .icoImp.impCheck, .timer .blue .icoImp.icoCheck {background-image: url('../img/ico_imp_on_blue.png');}
+.todoList .purple .icoImp.impCheck, .timer .purple .icoImp.icoCheck {background-image: url('../img/ico_imp_on_purple.png');}
+.todoTit {font-size: 1.6rem;}
+.todoSchedule {
+  font-size: 1.2rem;
+  color: #707070;
+}
+.simulationTime {
+  width: 88px;
+  margin-right: 20px;
+  font-size: 2rem;
+  text-align: right;
+}
+.ing .simulationTime {color: #FF551F;}
+.todoContent {
+  width: 100%;
+  margin: 16px 20px 8px;
+}
+.todoList .todoContent, .todoList .btnDelete, .todoList .btnEdit {display: none;}
+.todoList .ing .todoContent, .todoList .ing .btnDelete, .todoList .ing .btnEdit {display: block;}
+.todoList .btnDelete {margin-right: 20px;}
+.todoList .progress {
+  height: 4px;
+  margin-top: 24px;
+}
+.todoList .ing .progress {margin-top: 8px;}
+.todoList .red .progressBar {background-color: #FFA98E;}
+.todoList .yellow .progressBar {background-color: #F4C753;}
+.todoList .green .progressBar {background-color: #5fc47c;}
+.todoList .blue .progressBar {background-color: #5CAFC1;}
+.todoList .purple .progressBar {background-color: #A98DD7;}
+
+/* timer popup */
+
+
+.timer {
+  padding: 40px 24px;
+}
+.timer .btnClosed {
+  top: 16px;
+  right: 16px;
+}
+.timer .todoTitSet {
+  margin-bottom: 16px;
+}
+.timer .todoTit {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 0;
+  font-size: 2rem;
+  text-align: center;
+}
+.timer .todoSchedule {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+.timer .stopTimer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.timer .simulationTime {
+  width: 190px;
+  margin: 0;
+  font-size: 4.8rem;
+  text-align: center;
+  color: #FF551F;
+}
+.timer .btnStopWatch {
+  margin: 0 12px 0 0;
+}
+.timer .btnRegister {
+  width: 100%;
+  border-bottom-left-radius: 16px;
+}

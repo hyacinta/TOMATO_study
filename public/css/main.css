@@ -172,3 +172,7 @@
 .timer .btnStopWatch {
   margin: 0 12px 0 0;
 }
+.timer .btnRegister {
+  width: 100%;
+  border-bottom-left-radius: 16px;
+}

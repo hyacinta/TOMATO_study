@@ -47,13 +47,13 @@
     "id" : 0,
     "content" : "project tomato",
     "dDay" : "2020-04-24",
-    "color" : "#FFA98E",
+    "color" : "red",
     "todos" : [0, 1, 2, 4, 5]
   },{
     "id" : 1,
     "content" : "react",
     "dDay" : "2020-04-28",
-    "color" : "#5fc47c",
+    "color" : "green",
     "todos" : [3]
   }],
 

@@ -17,7 +17,7 @@
   },{
     "date" : "2020-04-22",
     "day" : 3,
-    "todos" : [2, 3]
+    "todos" : [2, 3, 7, 8, 9]
   },{
     "date" : "2020-04-23",
     "day" : 4,
@@ -48,12 +48,31 @@
     "dDay" : "2020-04-28",
     "color" : "green",
     "todos" : [4]
+  },{
+    "id" : 3,
+    "content" : "취업",
+    "dDay" : "2020-05-15",
+    "color" : "yellow",
+    "todos" : [7]
+  },{
+    "id" : 4,
+    "content" : "알바",
+    "dDay" : "2020-07-10",
+    "color" : "blue",
+    "todos" : [8]
+  },{
+    "id" : 5,
+    "content" : "창업",
+    "dDay" : "2020-08-01",
+    "color" : "purple",
+    "todos" : [9]
   }],
 
   "todos" : [{
     "id" : 1,
     "content" : "HTML",
     "goal": 1,
+    "color" : "red",
     "date" : "2020-04-21",
     "day" : "MON",
     "important" : true,
@@ -65,6 +84,7 @@
     "id" : 2,
     "content" : "HTML",
     "goal": 1,
+    "color": "green",
     "date" : "2020-04-22",
     "day" : "TUE",
     "important" : true,
@@ -77,6 +97,7 @@
     "id" : 3,
     "content" : "CSS",
     "goal": 1,
+    "color": "red",
     "date" : "2020-04-22",
     "day" : "TUE",
     "important" : false,
@@ -89,6 +110,7 @@
     "id" : 4,
     "content" : "인강",
     "goal": 2,
+    "color": "green",
     "date" : "2020-04-21",
     "day" : "MON",
     "important" : false,
@@ -101,6 +123,7 @@
     "id" : 5,
     "content" : "javascript",
     "goal": 1,
+    "color": "red",
     "date" : "2020-04-23",
     "day" : "WED",
     "important" : false,
@@ -113,11 +136,51 @@
     "id" : 6,
     "content" : "debug",
     "goal": 1,
+    "color": "red",
     "date" : "2020-04-23",
     "day" : "WED",
-    "important" : true,
+    "important" : false,
     "startTime" : "13:00",
     "goalTime" : "5:00",
+    "detail" : "프로젝트 toamto 디버깅",
+    "done" : "00:00:00"
+  },
+  {
+    "id" : 7,
+    "content" : "면접 준비",
+    "goal": 3,
+    "color": "yellow",
+    "date" : "2020-04-22",
+    "day" : "TUE",
+    "important" : true,
+    "startTime" : "13:00",
+    "goalTime" : "3:00",
+    "detail" : "프로젝트 toamto 디버깅",
+    "done" : "00:00:00"
+  },
+  {
+    "id" : 8,
+    "content" : "이력서 쓰기",
+    "goal": 4,
+    "color": "blue",
+    "date" : "2020-04-22",
+    "day" : "TUE",
+    "important" : false,
+    "startTime" : "17:00",
+    "goalTime" : "1:00",
+    "detail" : "프로젝트 toamto 디버깅",
+    "done" : "00:00:00"
+  },
+  {
+    "id" : 9,
+    "content" : "고용 사이트 조사",
+    "goal": 5,
+    "color": "purple",
+    "date" : "2020-04-22",
+    "day" : "TUE",
+    "important" : true,
+    "startTime" : "20:00",
+    "goalTime" : "2:00",
     "detail" : "프로젝트 toamto 디버깅",
     "done" : "00:00:00"
   }

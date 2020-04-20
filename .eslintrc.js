@@ -27,6 +27,14 @@ module.exports = {
     "max-classes-per-file": 0,
     "arrow-parens": ["error", "as-needed"], // a => {}
     "no-restricted-syntax": [0, "ForOfStatement"],
-    "no-param-reassign": ["error", { "props": false }]
+    "no-param-reassign": ["error", { "props": false }],
+    "no-multiple-empty-lines": 0,
+    "no-var": 0,
+    "eol-last":0,
+    "padded-blocks": 0,
+    "space-in-parens": 0,
+    "no-trailing-spaces": 0,
+    "arrow-body-style": 0,
+    "no-return-assign": 0,
   }
 };

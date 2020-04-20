@@ -1,1 +1,77 @@
-{}
+{
+  "today" : {
+    "date" : "yy-mm-dd",
+    "day" : 0,
+    "todos" : [{"todoId" : 0, "goal" : 0}],
+    "timer" : false
+  },
+  
+  "week" : [{
+    "date" : "yy-mm-dd",
+    "day" : 0,
+    "todos" : [],
+    "done" : false
+  },{
+    "date" : "yy-mm-dd",
+    "day" : 1,
+    "todos" : [0],
+    "done" : false
+  },{
+    "date" : "yy-mm-dd",
+    "day" : 2,
+    "todos" : [],
+    "done" : false
+  },{
+    "date" : "yy-mm-dd",
+    "day" : 3,
+    "todos" : [],
+    "done" : false
+  },{
+    "date" : "yy-mm-dd",
+    "day" : 4,
+    "todos" : [],
+    "done" : false
+  },{
+    "date" : "yy-mm-dd",
+    "day" : 5,
+    "todos" : [],
+    "done" : false
+  },{
+    "date" : "yy-mm-dd",
+    "day" : 6,
+    "todos" : [],
+    "done" : false
+  }],
+
+  "goals" : [{
+    "id" : 0,
+    "content" : "",
+    "dDay" : "yy-mm-dd",
+    "color" : "",
+    "todos" : [0, 1]
+  }],
+
+  "todos" : [{
+    "id" : 0,
+    "content" : "",
+    "goal": 0,
+    "date" : "yy-mm-dd",
+    "important" : false,
+    "startTime" : "hh:mm",
+    "goalTime" : "hh:mm",
+    "detail" : "",
+    "done" : "00:00:00"
+  },
+  {
+    "id" : 1,
+    "content" : "",
+    "goal": 0,
+    "date" : "yy-mm-dd",
+    "important" : false,
+    "startTime" : "hh:mm",
+    "goalTime" : "hh:mm",
+    "detail" : "",
+    "done" : "00:00:00"
+  }
+]
+}

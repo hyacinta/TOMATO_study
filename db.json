@@ -45,32 +45,81 @@
 
   "goals" : [{
     "id" : 0,
-    "content" : "",
-    "dDay" : "yy-mm-dd",
-    "color" : "",
-    "todos" : [0, 1]
+    "content" : "project tomato",
+    "dDay" : "20-04-24",
+    "color" : "#FFA98E",
+    "todos" : [0, 1, 2, 4, 5]
+  },{
+    "id" : 1,
+    "content" : "react",
+    "dDay" : "20-04-28",
+    "color" : "#5fc47c",
+    "todos" : [3]
   }],
 
   "todos" : [{
     "id" : 0,
-    "content" : "",
+    "content" : "HTML",
     "goal": 0,
-    "date" : "yy-mm-dd",
-    "important" : false,
-    "startTime" : "hh:mm",
-    "goalTime" : "hh:mm",
-    "detail" : "",
+    "date" : "20-04-21",
+    "important" : true,
+    "startTime" : "07:00",
+    "goalTime" : "2:00",
+    "detail" : "프로젝트 tomato HTML 제작",
+    "done" : "02:05:38"
+  },{
+    "id" : 1,
+    "content" : "HTML",
+    "goal": 0,
+    "date" : "20-04-22",
+    "important" : true,
+    "startTime" : "07:00",
+    "goalTime" : "2:00",
+    "detail" : "프로젝트 tomato HTML 제작",
     "done" : "00:00:00"
   },
   {
-    "id" : 1,
-    "content" : "",
+    "id" : 2,
+    "content" : "CSS",
     "goal": 0,
-    "date" : "yy-mm-dd",
+    "date" : "20-04-22",
     "important" : false,
-    "startTime" : "hh:mm",
-    "goalTime" : "hh:mm",
-    "detail" : "",
+    "startTime" : "10:30",
+    "goalTime" : "1:30",
+    "detail" : "프로젝트 tomato CSS 제작",
+    "done" : "00:00:00"
+  },
+  {
+    "id" : 3,
+    "content" : "인강",
+    "goal": 1,
+    "date" : "20-04-21",
+    "important" : false,
+    "startTime" : "13:00",
+    "goalTime" : "5:00",
+    "detail" : "react 인강 1강에서 20강까지",
+    "done" : "05:32:18"
+  },
+  {
+    "id" : 4,
+    "content" : "javascript",
+    "goal": 0,
+    "date" : "20-04-23",
+    "important" : false,
+    "startTime" : "08:00",
+    "goalTime" : "4:00",
+    "detail" : "프로젝트 tomato javascript 제작",
+    "done" : "00:00:00"
+  },
+  {
+    "id" : 5,
+    "content" : "debug",
+    "goal": 0,
+    "date" : "20-04-23",
+    "important" : true,
+    "startTime" : "13:00",
+    "goalTime" : "5:00",
+    "detail" : "프로젝트 toamto 디버깅",
     "done" : "00:00:00"
   }
 ]

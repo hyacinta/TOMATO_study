@@ -24,44 +24,64 @@
       <h3 class="a11yHidden">내비게이션</h3>
       <button class="btnAddTodo">투두 추가하기</button>
       <ul class="navLink">
-        <li><a href="index.html">투두</a></li>
-        <li><a href="goal.html">목표</a></li>
-        <li class="active"><a href="statistics.html">통계</a></li>
-        <li><a href="schedule.html">스케줄</a></li>
+        <li><a href="../index.html">투두</a></li>
+        <li><a href="html/goal.html">목표</a></li>
+        <li class="active"><a href="html/statistics.html">통계</a></li>
+        <li><a href="html/schedule.html">스케줄</a></li>
       </ul>
     </nav>
   </header>
   <main id="statistics">
     <h3 class="a11yHidden">챌린지</h3>
     <dl class="weeklyChallenge">
+<!-- 
       <div class="monDay perfect off">
         <dt>월</dt>
-        <dd>19</dd>
+        <dd>
+          <button class="stamp"></button>
+          19
+        </dd>
       </div>
       <div class="tuesDay seccess off">
         <dt>화</dt>
-        <dd>20</dd>
+        <dd>
+          <button class="stamp"></button>
+          20
+        </dd>
       </div>
       <div class="wednesDay fail off">
         <dt>수</dt>
-        <dd>21</dd>
+        <dd>
+          <button class="stamp"></button>
+          21
+        </dd>
       </div>
       <div class="thursDay perfect">
         <dt>목</dt>
-        <dd>22</dd>
+        <dd>
+          <button class="stamp"></button>
+          22
+        </dd>
       </div>
       <div class="friDay today">
         <dt>금</dt>
-        <dd>23</dd>
+        <dd>
+          23
+        </dd>
       </div>
       <div class="saturDay">
         <dt>토</dt>
-        <dd>24</dd>
+        <dd>
+          24
+        </dd>
       </div>
       <div class="sunDay">
         <dt>일</dt>
-        <dd>25</dd>
+        <dd>
+          25
+        </dd>
       </div>
+       -->
     </dl>
     <div class="statsContent">
       <div class="daily active">
@@ -178,7 +198,7 @@
     </div>
   </main>
     <!-- 할일 추가 popup -->
-    <div class="addTodos popup active">
+    <div class="addTodos popup">
       <h3>할일 추가</h3>
       <button class="btnClosed">닫기</button>
       <ul class="addInput">
@@ -240,5 +260,7 @@
     </div>
     <div class="dimd"></div>
 </div>
+
+<script src="../js/statistics.js"></script>
 </body> 
 </html>

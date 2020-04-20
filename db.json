@@ -1,46 +1,39 @@
 {
   "today" : {
-    "date" : "yy-mm-dd",
+    "date" : "yyyy-mm-dd",
     "day" : 0,
     "todos" : [{"todoId" : 0, "goal" : 0}],
     "timer" : false
   },
   
   "week" : [{
-    "date" : "yy-mm-dd",
-    "day" : 0,
-    "todos" : [],
-    "done" : false
-  },{
-    "date" : "yy-mm-dd",
+    "date" : "2020-04-20",
     "day" : 1,
-    "todos" : [0],
-    "done" : false
+    "todos" : []
   },{
-    "date" : "yy-mm-dd",
+    "date" : "2020-04-21",
     "day" : 2,
-    "todos" : [],
-    "done" : false
+    "todos" : [1, 4]
   },{
-    "date" : "yy-mm-dd",
+    "date" : "2020-04-22",
     "day" : 3,
-    "todos" : [],
-    "done" : false
+    "todos" : [2, 3]
   },{
-    "date" : "yy-mm-dd",
+    "date" : "2020-04-23",
     "day" : 4,
-    "todos" : [],
-    "done" : false
+    "todos" : [5, 6]
   },{
-    "date" : "yy-mm-dd",
+    "date" : "2020-04-24",
     "day" : 5,
-    "todos" : [],
-    "done" : false
+    "todos" : []
   },{
-    "date" : "yy-mm-dd",
+    "date" : "2020-04-25",
     "day" : 6,
-    "todos" : [],
-    "done" : false
+    "todos" : []
+  },{
+    "date" : "2020-04-26",
+    "day" : 0,
+    "todos" : []
   }],
 
   "goals" : [{

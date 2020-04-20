@@ -1,77 +1,72 @@
 {
   "today" : {
-    "date" : "yy-mm-dd",
+    "date" : "yyyy-mm-dd",
     "day" : 0,
     "todos" : [{"todoId" : 0, "goal" : 0}],
     "timer" : false
   },
   
   "week" : [{
-    "date" : "yy-mm-dd",
-    "day" : 0,
-    "todos" : [],
-    "done" : false
-  },{
-    "date" : "yy-mm-dd",
+    "date" : "2020-04-20",
     "day" : 1,
-    "todos" : [0],
-    "done" : false
+    "todos" : []
   },{
-    "date" : "yy-mm-dd",
+    "date" : "2020-04-21",
     "day" : 2,
-    "todos" : [],
-    "done" : false
+    "todos" : [1, 4]
   },{
-    "date" : "yy-mm-dd",
+    "date" : "2020-04-22",
     "day" : 3,
-    "todos" : [],
-    "done" : false
+    "todos" : [2, 3]
   },{
-    "date" : "yy-mm-dd",
+    "date" : "2020-04-23",
     "day" : 4,
-    "todos" : [],
-    "done" : false
+    "todos" : [5, 6]
   },{
-    "date" : "yy-mm-dd",
+    "date" : "2020-04-24",
     "day" : 5,
-    "todos" : [],
-    "done" : false
+    "todos" : []
   },{
-    "date" : "yy-mm-dd",
+    "date" : "2020-04-25",
     "day" : 6,
-    "todos" : [],
-    "done" : false
+    "todos" : []
+  },{
+    "date" : "2020-04-26",
+    "day" : 0,
+    "todos" : []
   }],
 
   "goals" : [{
-    "id" : 0,
-    "content" : "project tomato",
-    "dDay" : "20-04-24",
-    "color" : "#FFA98E",
-    "todos" : [0, 1, 2, 4, 5]
-  },{
     "id" : 1,
+    "content" : "project tomato",
+    "dDay" : "2020-04-24",
+    "color" : "red",
+    "todos" : [1, 2, 3, 5, 6]
+  },{
+    "id" : 2,
     "content" : "react",
-    "dDay" : "20-04-28",
-    "color" : "#5fc47c",
-    "todos" : [3]
+    "dDay" : "2020-04-28",
+    "color" : "green",
+    "todos" : [4]
   }],
 
   "todos" : [{
-    "id" : 0,
+    "id" : 1,
     "content" : "HTML",
-    "goal": 0,
-    "date" : "20-04-21",
+    "goal": 1,
+    "date" : "2020-04-21",
+    "day" : "MON",
     "important" : true,
     "startTime" : "07:00",
     "goalTime" : "2:00",
     "detail" : "프로젝트 tomato HTML 제작",
     "done" : "02:05:38"
   },{
-    "id" : 1,
+    "id" : 2,
     "content" : "HTML",
-    "goal": 0,
-    "date" : "20-04-22",
+    "goal": 1,
+    "date" : "2020-04-22",
+    "day" : "TUE",
     "important" : true,
     "startTime" : "07:00",
     "goalTime" : "2:00",
@@ -79,10 +74,11 @@
     "done" : "00:00:00"
   },
   {
-    "id" : 2,
+    "id" : 3,
     "content" : "CSS",
-    "goal": 0,
-    "date" : "20-04-22",
+    "goal": 1,
+    "date" : "2020-04-22",
+    "day" : "TUE",
     "important" : false,
     "startTime" : "10:30",
     "goalTime" : "1:30",
@@ -90,10 +86,11 @@
     "done" : "00:00:00"
   },
   {
-    "id" : 3,
+    "id" : 4,
     "content" : "인강",
-    "goal": 1,
-    "date" : "20-04-21",
+    "goal": 2,
+    "date" : "2020-04-21",
+    "day" : "MON",
     "important" : false,
     "startTime" : "13:00",
     "goalTime" : "5:00",
@@ -101,10 +98,11 @@
     "done" : "05:32:18"
   },
   {
-    "id" : 4,
+    "id" : 5,
     "content" : "javascript",
-    "goal": 0,
-    "date" : "20-04-23",
+    "goal": 1,
+    "date" : "2020-04-23",
+    "day" : "WED",
     "important" : false,
     "startTime" : "08:00",
     "goalTime" : "4:00",
@@ -112,10 +110,11 @@
     "done" : "00:00:00"
   },
   {
-    "id" : 5,
+    "id" : 6,
     "content" : "debug",
-    "goal": 0,
-    "date" : "20-04-23",
+    "goal": 1,
+    "date" : "2020-04-23",
+    "day" : "WED",
     "important" : true,
     "startTime" : "13:00",
     "goalTime" : "5:00",

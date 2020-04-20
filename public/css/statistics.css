@@ -34,9 +34,11 @@
   height: 36px;
   margin-top: -18px;
   margin-left: -18px;
+  padding-top: 36px;
   background-size: 36px 36px;
   background-repeat: no-repeat;
   background-position: center;
+  overflow: hidden;
 }
 
 .weeklyChallenge .perfect button.stamp {background-image: url('../img/stamp_perfact_on.png');}

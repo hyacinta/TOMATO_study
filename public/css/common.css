@@ -268,16 +268,16 @@ nav {
 }
 
 .addTodos.popup {height: 572px;}
-.addGoal.popup {height: 362px;}
+.addGoal.popup, .editGoal.popup {height: 362px;}
 .timer.popup {height: 250px;}
 
-.addInput {
+.addInput, .editInput {
   display: flex;
   flex-wrap: wrap;
 }
-.addInput li {margin-bottom: 16px;}
+.addInput li, .editInput li {margin-bottom: 16px;}
 .category {width: 100%;}
-.addInput .categorySelect {
+.addInput .categorySelect, .editInput .categorySelect {
   width: 100%;
   font-size: 1.4rem;
   font-weight: 400;

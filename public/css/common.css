@@ -104,7 +104,7 @@ img {vertical-align: top;}
 
 
 
-button, input[type="checkbox"], select, a {cursor: pointer;}
+button, input[type="checkbox"], select, a, .indexInput label,.indexInput input[type="radio"] {cursor: pointer;}
 input[type="text"], input[type="date"], input[type="number"], textarea {
   width: 100%;
   border-width: 0 0 1px 0;
@@ -236,7 +236,7 @@ nav {
   top: 28px;
   right: 24px;
 }
-.popup .btnCancel, .popup .btnRegister {
+.popup .btnCancel, .popup .btnRegister, .popup .btnRemove {
   position: absolute;
   bottom: 0;
   width: 50%;
@@ -250,7 +250,7 @@ nav {
   color: #FF551F;
   border-bottom-left-radius: 16px;
 }
-.popup .btnRegister {
+.popup .btnRegister, .popup .btnRemove {
   right: 0;
   color: #fff;
   background-color: #FF551F;

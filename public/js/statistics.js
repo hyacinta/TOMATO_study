@@ -86,7 +86,6 @@ window.onload = weeklyRender;
 // 1. todos를 돌면서 같은 날짜의 목표시간을 합한다
 // 2. todos를 돌면서 같은 날짜의 실제 공부시간을 합한다.
 // 1/2를 해서 퍼센트를 구한다.
-// 타겟의 부모요소의 id값을 week의 day의 id값과 비교하여 같을 경우 day의 date값과 todos의 date값을 비교해서 오늘 데이터를 구한다.
 
 // 1. todos를 돌면서 같은 날짜의 goal이 같은 데이터의 목표시간을 합한다.
 // 2. todos를 돌면서 같은 날짜의 goal이 같은 데이터의 실제 공부시간을 합한다.

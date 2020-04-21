@@ -1,109 +1,127 @@
 {
-  "week" : [{
-    "date" : "",
-    "day" : 1
-  },{
-    "date" : "",
-    "day" : 2
-  },{
-    "date" : "",
-    "day" : 3
-  },{
-    "date" : "",
-    "day" : 4
-  },{
-    "date" : "",
-    "day" : 5
-  },{
-    "date" : "",
-    "day" : 6
-  },{
-    "date" : "",
-    "day" : 0
-  }],
-
-  "goals" : [{
-    "id" : 1,
-    "content" : "project tomato",
-    "dDay" : "2020-04-24",
-    "color" : "red"
-  },{
-    "id" : 2,
-    "content" : "react",
-    "dDay" : "2020-04-28",
-    "color" : "green"
-  }],
-
-  "todos" : [{
-    "id" : 1,
-    "content" : "HTML",
-    "goal": 1,
-    "date" : "2020-04-21",
-    "day" : 1,
-    "important" : true,
-    "startTime" : "07:00",
-    "goalTime" : "2:00",
-    "detail" : "프로젝트 tomato HTML 제작",
-    "done" : "02:05:38"
-  },{
-    "id" : 2,
-    "content" : "HTML",
-    "goal": 1,
-    "date" : "2020-04-22",
-    "day" : 2,
-    "important" : true,
-    "startTime" : "07:00",
-    "goalTime" : "2:00",
-    "detail" : "프로젝트 tomato HTML 제작",
-    "done" : "00:00:00"
-  },
-  {
-    "id" : 3,
-    "content" : "CSS",
-    "goal": 1,
-    "date" : "2020-04-22",
-    "day" : 2,
-    "important" : false,
-    "startTime" : "10:30",
-    "goalTime" : "1:30",
-    "detail" : "프로젝트 tomato CSS 제작",
-    "done" : "00:00:00"
-  },
-  {
-    "id" : 4,
-    "content" : "인강",
-    "goal": 2,
-    "date" : "2020-04-21",
-    "day" : 1,
-    "important" : false,
-    "startTime" : "13:00",
-    "goalTime" : "5:00",
-    "detail" : "react 인강 1강에서 20강까지",
-    "done" : "05:32:18"
-  },
-  {
-    "id" : 5,
-    "content" : "javascript",
-    "goal": 1,
-    "date" : "2020-04-23",
-    "day" : 3,
-    "important" : false,
-    "startTime" : "08:00",
-    "goalTime" : "4:00",
-    "detail" : "프로젝트 tomato javascript 제작",
-    "done" : "00:00:00"
-  },
-  {
-    "id" : 6,
-    "content" : "debug",
-    "goal": 1,
-    "date" : "2020-04-23",
-    "day" : 3,
-    "important" : true,
-    "startTime" : "13:00",
-    "goalTime" : "5:00",
-    "detail" : "프로젝트 toamto 디버깅",
-    "done" : "00:00:00"
-  }
-]
+  "week": [
+    {
+      "date": "",
+      "day": 1
+    },
+    {
+      "date": "",
+      "day": 2
+    },
+    {
+      "date": "",
+      "day": 3
+    },
+    {
+      "date": "",
+      "day": 4
+    },
+    {
+      "date": "",
+      "day": 5
+    },
+    {
+      "date": "",
+      "day": 6
+    },
+    {
+      "date": "",
+      "day": 0
+    }
+  ],
+  "goals": [
+    {
+      "id": 1,
+      "content": "project tomato",
+      "dDay": "2020-04-24",
+      "color": "red"
+    },
+    {
+      "id": 2,
+      "content": "react",
+      "dDay": "2020-04-28",
+      "color": "green"
+    },
+    {
+      "id": 3,
+      "content": "test0",
+      "dDay": "2020-04-15",
+      "color": "purple"
+    }
+  ],
+  "todos": [
+    {
+      "id": 1,
+      "content": "HTML",
+      "goal": 1,
+      "color": "red",
+      "date": "2020-04-21",
+      "day": 1,
+      "important": true,
+      "startTime": "07:00",
+      "goalTime": "2:00",
+      "detail": "프로젝트 tomato HTML 제작",
+      "done": "02:05:38"
+    },
+    {
+      "id": 2,
+      "content": "HTML",
+      "goal": 1,
+      "date": "2020-04-22",
+      "day": 2,
+      "important": true,
+      "startTime": "07:00",
+      "goalTime": "2:00",
+      "detail": "프로젝트 tomato HTML 제작",
+      "done": "00:00:00"
+    },
+    {
+      "id": 3,
+      "content": "CSS",
+      "goal": 1,
+      "date": "2020-04-22",
+      "day": 2,
+      "important": false,
+      "startTime": "10:30",
+      "goalTime": "1:30",
+      "detail": "프로젝트 tomato CSS 제작",
+      "done": "00:00:00"
+    },
+    {
+      "id": 4,
+      "content": "인강",
+      "goal": 2,
+      "date": "2020-04-21",
+      "day": 1,
+      "important": false,
+      "startTime": "13:00",
+      "goalTime": "5:00",
+      "detail": "react 인강 1강에서 20강까지",
+      "done": "05:32:18"
+    },
+    {
+      "id": 5,
+      "content": "javascript",
+      "goal": 1,
+      "date": "2020-04-23",
+      "day": 3,
+      "important": false,
+      "startTime": "08:00",
+      "goalTime": "4:00",
+      "detail": "프로젝트 tomato javascript 제작",
+      "done": "00:00:00"
+    },
+    {
+      "id": 6,
+      "content": "debug",
+      "goal": 1,
+      "date": "2020-04-23",
+      "day": 3,
+      "important": true,
+      "startTime": "13:00",
+      "goalTime": "5:00",
+      "detail": "프로젝트 toamto 디버깅",
+      "done": "00:00:00"
+    }
+  ]
 }

@@ -96,11 +96,11 @@
   vertical-align: top;
 }
 .todoList .icoImp, .timer .icoImp {background-image: url('../img/ico_imp_off.png');}
-.todoList .red .icoImp.impCheck, .timer .red .icoImp.icoCheck {background-image: url('../img/ico_imp_on_red.png');}
-.todoList .yellow .icoImp.impCheck, .timer .yellow .icoImp.icoCheck {background-image: url('../img/ico_imp_on_yellow.png');}
-.todoList .green .icoImp.impCheck, .timer .green .icoImp.icoCheck {background-image: url('../img/ico_imp_on_green.png');}
-.todoList .blue .icoImp.impCheck, .timer .blue .icoImp.icoCheck {background-image: url('../img/ico_imp_on_blue.png');}
-.todoList .purple .icoImp.impCheck, .timer .purple .icoImp.icoCheck {background-image: url('../img/ico_imp_on_purple.png');}
+.todoList .red .icoImp.impCheck, .timer .red .icoImp.icoCheck , .addTodos .red.impCheck {background-image: url('../img/ico_imp_on_red.png');}
+.todoList .yellow .icoImp.impCheck, .timer .yellow .icoImp.icoCheck, .addTodos .yellow.impCheck {background-image: url('../img/ico_imp_on_yellow.png');}
+.todoList .green .icoImp.impCheck, .timer .green .icoImp.icoCheck, .addTodos .green.impCheck {background-image: url('../img/ico_imp_on_green.png');}
+.todoList .blue .icoImp.impCheck, .timer .blue .icoImp.icoCheck, .addTodos .blue.impCheck {background-image: url('../img/ico_imp_on_blue.png');}
+.todoList .purple .icoImp.impCheck, .timer .purple .icoImp.icoCheck, .addTodos .purple.impCheck {background-image: url('../img/ico_imp_on_purple.png');}
 .todoTit {font-size: 1.6rem;}
 .todoSchedule {
   font-size: 1.2rem;

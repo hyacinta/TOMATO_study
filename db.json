@@ -1,25 +1,37 @@
 {
-  "today" : {
-    "date" : "yy-mm-dd",
-    "day" : 0,
-    "todos" : [{"todoId" : 0, "goal" : 0}],
-    "timer" : false
-  },
-  
-  "week" : [],
+  "week" : [{
+    "date" : "",
+    "day" : 1
+  },{
+    "date" : "",
+    "day" : 2
+  },{
+    "date" : "",
+    "day" : 3
+  },{
+    "date" : "",
+    "day" : 4
+  },{
+    "date" : "",
+    "day" : 5
+  },{
+    "date" : "",
+    "day" : 6
+  },{
+    "date" : "",
+    "day" : 0
+  }],
 
   "goals" : [{
     "id" : 1,
     "content" : "project tomato",
     "dDay" : "2020-04-24",
-    "color" : "red",
-    "todos" : [1, 2, 3, 5, 6]
+    "color" : "red"
   },{
     "id" : 2,
     "content" : "react",
     "dDay" : "2020-04-28",
-    "color" : "green",
-    "todos" : [4]
+    "color" : "green"
   }],
 
   "todos" : [{
@@ -27,7 +39,7 @@
     "content" : "HTML",
     "goal": 1,
     "date" : "2020-04-21",
-    "day" : "MON",
+    "day" : 1,
     "important" : true,
     "startTime" : "07:00",
     "goalTime" : "2:00",
@@ -38,7 +50,7 @@
     "content" : "HTML",
     "goal": 1,
     "date" : "2020-04-22",
-    "day" : "TUE",
+    "day" : 2,
     "important" : true,
     "startTime" : "07:00",
     "goalTime" : "2:00",
@@ -50,7 +62,7 @@
     "content" : "CSS",
     "goal": 1,
     "date" : "2020-04-22",
-    "day" : "TUE",
+    "day" : 2,
     "important" : false,
     "startTime" : "10:30",
     "goalTime" : "1:30",
@@ -62,7 +74,7 @@
     "content" : "인강",
     "goal": 2,
     "date" : "2020-04-21",
-    "day" : "MON",
+    "day" : 1,
     "important" : false,
     "startTime" : "13:00",
     "goalTime" : "5:00",
@@ -74,7 +86,7 @@
     "content" : "javascript",
     "goal": 1,
     "date" : "2020-04-23",
-    "day" : "WED",
+    "day" : 3,
     "important" : false,
     "startTime" : "08:00",
     "goalTime" : "4:00",
@@ -86,7 +98,7 @@
     "content" : "debug",
     "goal": 1,
     "date" : "2020-04-23",
-    "day" : "WED",
+    "day" : 3,
     "important" : true,
     "startTime" : "13:00",
     "goalTime" : "5:00",

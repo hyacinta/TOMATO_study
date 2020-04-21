@@ -16,6 +16,7 @@
   background-color: #f6f6f6;
 }
 .weeklyChallenge dd {
+  position: relative;
   height: 54px;
   padding: 12px;
   font-size: 2rem;
@@ -24,18 +25,28 @@
   overflow: hidden;
 }
 .weeklyChallenge .today dd {color: #202020;}
-.weeklyChallenge .perfect dd, .weeklyChallenge .seccess dd, .weeklyChallenge .fail dd {
-  padding: 53px 12px 0 12px;
+
+.weeklyChallenge button.stamp {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 36px;
+  height: 36px;
+  margin-top: -18px;
+  margin-left: -18px;
+  padding-top: 36px;
   background-size: 36px 36px;
   background-repeat: no-repeat;
   background-position: center;
+  overflow: hidden;
 }
-.weeklyChallenge .perfect dd {background-image: url('../img/stamp_perfact_on.png');}
-.weeklyChallenge .perfect.off dd {background-image: url('../img/stamp_perfact_off.png');}
-.weeklyChallenge .seccess dd {background-image: url('../img/stamp_seccess_on.png');}
-.weeklyChallenge .seccess.off dd {background-image: url('../img/stamp_seccess_off.png');}
-.weeklyChallenge .fail dd {background-image: url('../img/stamp_fail_on.png');}
-.weeklyChallenge .fail.off dd {background-image: url('../img/stamp_fail_off.png');}
+
+.weeklyChallenge .perfect button.stamp {background-image: url('../img/stamp_perfact_on.png');}
+.weeklyChallenge .perfect.off button.stamp {background-image: url('../img/stamp_perfact_off.png');}
+.weeklyChallenge .seccess button.stamp {background-image: url('../img/stamp_seccess_on.png');}
+.weeklyChallenge .seccess.off button.stamp {background-image: url('../img/stamp_seccess_off.png');}
+.weeklyChallenge .fail button.stamp {background-image: url('../img/stamp_fail_on.png');}
+.weeklyChallenge .fail.off button.stamp {background-image: url('../img/stamp_fail_off.png');}
 
 .statsContent {
   position: relative;

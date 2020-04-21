@@ -20,6 +20,7 @@ const renderGoals = () => {
 };
 
 const render = () => {
+  console.log(123);
   let html = '';
 
   const _todos = todos.filter(todo => {
@@ -50,9 +51,9 @@ const render = () => {
 
 
 
-const getTodos = () => {
+const getTodos = async () => {
 
-  fetch('/goals')
+  await fetch('/goals')
     .then(res => res.json())
     .then(data => goals = data)
     .then(renderGoals)
@@ -83,18 +84,17 @@ const removeActive = () => {
 
 
 const timerClosure = (() => {
-  let count = 0;
+  // let count = 0;
   const countTime = (elementName, [_hour, _min, _sec]) => {
-    console.log(3, elementName);
     let [hour, min, sec] = [_hour, _min, _sec];
 
     if (!elementName.matches('.simulationTime') && !elementName.matches('.totalTime')) return;
-
-    count++;
-    if (count > 9) {
-      count = 0;
-      sec++;
-    }
+    sec++;
+    // count++;
+    // if (count > 9) {
+    //   count = 0;
+    //   sec++;
+    // }
     if (sec > 59) {
       sec = 0;
       min++;
@@ -113,33 +113,50 @@ const timerClosure = (() => {
     hour = hour.length > 1 || hour > 9 ? hour : '0' + hour;
     min = min.length > 1 || min > 9 ? min : '0' + min;
     sec = sec.length > 1 || sec > 9 ? sec : '0' + sec;
-   
-    console.log(4, elementName);
-
     elementName.textContent = `${hour}:${min}:${sec}`;
   };
 
   return {
     name(elementName) {
-      console.log(1, elementName);
       const timeArray = [...elementName.textContent].filter(num => num !== ':');
       const times = [timeArray[0] + timeArray[1], timeArray[2] + timeArray[3], timeArray[4] + timeArray[5]];
-      console.log(2, elementName);
-      countTime(elementName, times);
+      if (elementName.matches('.simulationTime')) countTime(elementName, times);
+      if (elementName.matches('.totalTime')) countTime(elementName, times);
+    }
+  };
+})();
+
+// const popupStopBtn = (() => {
+const popupControl = (() => {
+  return { 
+    Btn() { 
+      return document.querySelector('.timer > .stopTimer > .btnStopWatch');
+    }, 
+    containPlay() { 
+      const $popupStopBtn = document.querySelector('.timer > .stopTimer > .btnStopWatch');
+      return $popupStopBtn.classList.contains('play'); 
+    },
+    removePlay() { 
+      const $popupStopBtn = document.querySelector('.timer > .stopTimer > .btnStopWatch');
+      return $popupStopBtn.classList.remove('play'); 
+    },
+    simulationTime() {
+      return document.querySelector('div.timer > .stopTimer > .simulationTime');
     }
   };
 })();
 
 // 스탑워치 시작
 const startStopWatch = () => {
-  const $popupSimulationTime = document.querySelector('div.timer > .stopTimer > .simulationTime');
-  const $popupStopBtn = document.querySelector('.timer > .stopTimer > .btnStopWatch');
+  // const $popupSimulationTime = document.querySelector('div.timer > .stopTimer > .simulationTime');
+  // const $popupStopBtn = document.querySelector('.timer > .stopTimer > .btnStopWatch');
   // $popupStopBtn.classList.remove('play');
-  if ($popupStopBtn.classList.contains('play')) return;
-
+  if (popupControl.containPlay()) return;
+  
   const timer = setInterval(() => {
+    console.log(popupControl.containPlay());
 
-    if ($popupStopBtn.classList.contains('play')) {
+    if (popupControl.containPlay()) {
       clearInterval(timer);
       return;
     }
@@ -148,10 +165,13 @@ const startStopWatch = () => {
       return;
     }
 
-    timerClosure.name($popupSimulationTime);
+    // (async () => {
+    //   timerClosure.name($totalTime);
+    //   await timerClosure.name($popupSimulationTime);
+    // })();
     timerClosure.name($totalTime);
-    // timerClosure.name($simulationTime); // --
-  }, 100);
+    timerClosure.name(popupControl.simulationTime());
+  }, 1000);
 };
 
 const renderPopup = target => {
@@ -159,7 +179,7 @@ const renderPopup = target => {
   todos.forEach(todo => {
     if (+target.parentNode.id === todo.id) {
       $timerPopup.innerHTML = `
-        <a class="todoTitSet">
+        <a id="${todo.id}" class="todoTitSet">
           <h4 class="todoTit">${todo.content}</h4>
           <span class="todoSchedule">PM ${todo.startTime} ~ ${todo.goalTime} 예정</span>
         </a>
@@ -170,6 +190,7 @@ const renderPopup = target => {
         <button class="btnRegister">종료</button>`;
     }
   });
+  // if (document.querySelector('.btnStopWatch')) startStopWatch();
   startStopWatch();
 };
 
@@ -182,26 +203,67 @@ const renderPopup = target => {
 //   });
 // };
 
+const toggleCheck = target => {
+  const matchId = +target.parentNode.parentNode.parentNode.id;
+  const important = !todos.filter(todo => todo.id === matchId).important;
+  fetch(`todos/${matchId}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ important }),
+    headers: { 'Content-Type': 'application/json' },
+  })
+    .then(res => res.json())
+    .then(data => todos = todos.map(todo => (todo.id === +matchId ? data : todo)))
+    .then(render)
+    .catch(error => console.error('Error:', error));
+};
+
 // 투두리스트 클릭 > 1.스탑워치 시작 버튼
 $todoList.onclick = e => {
+
   if (e.target.matches('.todoList > li > .btnStopWatch')) {
-    // addActive();
+    // removePlay();
+
+    console.log('test', popupControl.containPlay());
+
     renderPopup(e.target);
+    // if ($popupStopBtn.classList.contains('play')) return;
+    // addActive();
     // startStopWatch();
     // e.target.classList.remove('play');
     // matchTargetColor(e.target);
   }
+
+  if (e.target.matches('.todoList > li > a > h4 > .icoImp')) {
+    toggleCheck(e.target);
+  }
+};
+
+
+
+const patchTimer = target => {
+  const matchId = +target.parentNode.firstElementChild.id;
+  console.log(matchId, popupControl.simulationTime().textContent);
+  fetch(`todos/${matchId}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ done: `${popupControl.simulationTime().textContent}` }),
+    headers: { 'Content-Type': 'application/json' },
+  })
+    .then(res => res.json())
+    .then(data => todos = todos.map(todo => (todo.id === +matchId ? data : todo)))
+    .then(render)
+    .catch(error => console.error('Error:', error));
 };
 
 // 타이머 팝업창 클릭 > 1. 종료 버튼 2. 일시정지 버튼
 $timerPopup.onclick = e => {
   if (e.target.matches('.timer > .btnRegister')) {
     removeActive();
+    patchTimer(e.target);
     // $simulationTime.textContent = $popupSimulationTime.textContent; // --
   }
   if (e.target.matches('.timer > .stopTimer > .btnStopWatch')) {
     e.target.classList.toggle('play');
-    startStopWatch();
+    if (!popupControl.containPlay()) startStopWatch();
     // e.target.classList.toggle('btnStopWatch');
   } // --
 };

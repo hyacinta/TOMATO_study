@@ -1,188 +1,232 @@
 {
-  "today" : {
-    "date" : "yyyy-mm-dd",
-    "day" : 0,
-    "todos" : [{"todoId" : 0, "goal" : 0}],
-    "timer" : false
+  "today": {
+    "date": "yyyy-mm-dd",
+    "day": 0,
+    "todos": [
+      {
+        "todoId": 0,
+        "goal": 0
+      }
+    ],
+    "timer": false
   },
-  
-  "week" : [{
-    "date" : "2020-04-20",
-    "day" : 1,
-    "todos" : []
-  },{
-    "date" : "2020-04-21",
-    "day" : 2,
-    "todos" : [1, 4]
-  },{
-    "date" : "2020-04-22",
-    "day" : 3,
-    "todos" : [2, 3, 7, 8, 9]
-  },{
-    "date" : "2020-04-23",
-    "day" : 4,
-    "todos" : [5, 6]
-  },{
-    "date" : "2020-04-24",
-    "day" : 5,
-    "todos" : []
-  },{
-    "date" : "2020-04-25",
-    "day" : 6,
-    "todos" : []
-  },{
-    "date" : "2020-04-26",
-    "day" : 0,
-    "todos" : []
-  }],
-
-  "goals" : [{
-    "id" : 1,
-    "content" : "project",
-    "dDay" : "2020-04-24",
-    "color" : "red",
-    "todos" : [1, 2, 3, 5, 6]
-  },{
-    "id" : 2,
-    "content" : "react",
-    "dDay" : "2020-04-28",
-    "color" : "green",
-    "todos" : [4]
-  },{
-    "id" : 3,
-    "content" : "취업",
-    "dDay" : "2020-05-15",
-    "color" : "yellow",
-    "todos" : [7]
-  },{
-    "id" : 4,
-    "content" : "알바",
-    "dDay" : "2020-07-10",
-    "color" : "blue",
-    "todos" : [8]
-  },{
-    "id" : 5,
-    "content" : "창업",
-    "dDay" : "2020-08-01",
-    "color" : "purple",
-    "todos" : [9]
-  }],
-
-  "todos" : [{
-    "id" : 1,
-    "content" : "HTML",
-    "goal": 1,
-    "color" : "red",
-    "date" : "2020-04-21",
-    "day" : "MON",
-    "important" : true,
-    "startTime" : "07:00",
-    "goalTime" : "2:00",
-    "detail" : "프로젝트 tomato HTML 제작",
-    "done" : "02:05:38"
-  },{
-    "id" : 2,
-    "content" : "HTML",
-    "goal": 2,
-    "color": "green",
-    "date" : "2020-04-22",
-    "day" : "TUE",
-    "important" : true,
-    "startTime" : "07:00",
-    "goalTime" : "2:00",
-    "detail" : "프로젝트 tomato HTML 제작",
-    "done" : "00:00:00"
-  },
-  {
-    "id" : 3,
-    "content" : "CSS",
-    "goal": 1,
-    "color": "red",
-    "date" : "2020-04-22",
-    "day" : "TUE",
-    "important" : false,
-    "startTime" : "10:30",
-    "goalTime" : "1:30",
-    "detail" : "프로젝트 tomato CSS 제작",
-    "done" : "00:00:00"
-  },
-  {
-    "id" : 4,
-    "content" : "인강",
-    "goal": 2,
-    "color": "green",
-    "date" : "2020-04-21",
-    "day" : "MON",
-    "important" : false,
-    "startTime" : "13:00",
-    "goalTime" : "5:00",
-    "detail" : "react 인강 1강에서 20강까지",
-    "done" : "05:32:18"
-  },
-  {
-    "id" : 5,
-    "content" : "javascript",
-    "goal": 1,
-    "color": "red",
-    "date" : "2020-04-23",
-    "day" : "WED",
-    "important" : false,
-    "startTime" : "08:00",
-    "goalTime" : "4:00",
-    "detail" : "프로젝트 tomato javascript 제작",
-    "done" : "00:00:00"
-  },
-  {
-    "id" : 6,
-    "content" : "debug",
-    "goal": 1,
-    "color": "red",
-    "date" : "2020-04-23",
-    "day" : "WED",
-    "important" : false,
-    "startTime" : "13:00",
-    "goalTime" : "5:00",
-    "detail" : "프로젝트 toamto 디버깅",
-    "done" : "00:00:00"
-  },
-  {
-    "id" : 7,
-    "content" : "면접 준비",
-    "goal": 3,
-    "color": "yellow",
-    "date" : "2020-04-22",
-    "day" : "TUE",
-    "important" : true,
-    "startTime" : "13:00",
-    "goalTime" : "3:00",
-    "detail" : "프로젝트 toamto 디버깅",
-    "done" : "00:00:00"
-  },
-  {
-    "id" : 8,
-    "content" : "이력서 쓰기",
-    "goal": 4,
-    "color": "blue",
-    "date" : "2020-04-22",
-    "day" : "TUE",
-    "important" : false,
-    "startTime" : "17:00",
-    "goalTime" : "1:00",
-    "detail" : "프로젝트 toamto 디버깅",
-    "done" : "00:00:00"
-  },
-  {
-    "id" : 9,
-    "content" : "고용 사이트 조사",
-    "goal": 5,
-    "color": "purple",
-    "date" : "2020-04-22",
-    "day" : "TUE",
-    "important" : true,
-    "startTime" : "20:00",
-    "goalTime" : "2:00",
-    "detail" : "프로젝트 toamto 디버깅",
-    "done" : "00:00:00"
-  }
-]
+  "week": [
+    {
+      "date": "2020-04-20",
+      "day": 1,
+      "todos": []
+    },
+    {
+      "date": "2020-04-21",
+      "day": 2,
+      "todos": [
+        1,
+        4
+      ]
+    },
+    {
+      "date": "2020-04-22",
+      "day": 3,
+      "todos": [
+        2,
+        3,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "date": "2020-04-23",
+      "day": 4,
+      "todos": [
+        5,
+        6
+      ]
+    },
+    {
+      "date": "2020-04-24",
+      "day": 5,
+      "todos": []
+    },
+    {
+      "date": "2020-04-25",
+      "day": 6,
+      "todos": []
+    },
+    {
+      "date": "2020-04-26",
+      "day": 0,
+      "todos": []
+    }
+  ],
+  "goals": [
+    {
+      "id": 1,
+      "content": "project",
+      "dDay": "2020-04-24",
+      "color": "red",
+      "todos": [
+        1,
+        2,
+        3,
+        5,
+        6
+      ]
+    },
+    {
+      "id": 2,
+      "content": "react",
+      "dDay": "2020-04-28",
+      "color": "green",
+      "todos": [
+        4
+      ]
+    },
+    {
+      "id": 3,
+      "content": "취업",
+      "dDay": "2020-05-15",
+      "color": "yellow",
+      "todos": [
+        7
+      ]
+    },
+    {
+      "id": 4,
+      "content": "알바",
+      "dDay": "2020-07-10",
+      "color": "blue",
+      "todos": [
+        8
+      ]
+    },
+    {
+      "id": 5,
+      "content": "창업",
+      "dDay": "2020-08-01",
+      "color": "purple",
+      "todos": [
+        9
+      ]
+    }
+  ],
+  "todos": [
+    {
+      "id": 1,
+      "content": "HTML",
+      "goal": 1,
+      "color": "red",
+      "date": "2020-04-21",
+      "day": "MON",
+      "important": true,
+      "startTime": "07:00",
+      "goalTime": "2:00",
+      "detail": "프로젝트 tomato HTML 제작",
+      "done": "02:05:38"
+    },
+    {
+      "id": 2,
+      "content": "HTML",
+      "goal": 2,
+      "color": "green",
+      "date": "2020-04-22",
+      "day": "TUE",
+      "important": true,
+      "startTime": "07:00",
+      "goalTime": "2:00",
+      "detail": "프로젝트 tomato HTML 제작",
+      "done": "00:00:10"
+    },
+    {
+      "id": 3,
+      "content": "CSS",
+      "goal": 1,
+      "color": "red",
+      "date": "2020-04-22",
+      "day": "TUE",
+      "important": true,
+      "startTime": "10:30",
+      "goalTime": "1:30",
+      "detail": "프로젝트 tomato CSS 제작",
+      "done": "00:00:04"
+    },
+    {
+      "id": 4,
+      "content": "인강",
+      "goal": 2,
+      "color": "green",
+      "date": "2020-04-21",
+      "day": "MON",
+      "important": false,
+      "startTime": "13:00",
+      "goalTime": "5:00",
+      "detail": "react 인강 1강에서 20강까지",
+      "done": "05:32:18"
+    },
+    {
+      "id": 5,
+      "content": "javascript",
+      "goal": 1,
+      "color": "red",
+      "date": "2020-04-23",
+      "day": "WED",
+      "important": false,
+      "startTime": "08:00",
+      "goalTime": "4:00",
+      "detail": "프로젝트 tomato javascript 제작",
+      "done": "00:00:00"
+    },
+    {
+      "id": 6,
+      "content": "debug",
+      "goal": 1,
+      "color": "red",
+      "date": "2020-04-23",
+      "day": "WED",
+      "important": false,
+      "startTime": "13:00",
+      "goalTime": "5:00",
+      "detail": "프로젝트 toamto 디버깅",
+      "done": "00:00:00"
+    },
+    {
+      "id": 7,
+      "content": "면접 준비",
+      "goal": 3,
+      "color": "yellow",
+      "date": "2020-04-22",
+      "day": "TUE",
+      "important": true,
+      "startTime": "13:00",
+      "goalTime": "3:00",
+      "detail": "프로젝트 toamto 디버깅",
+      "done": "00:00:15"
+    },
+    {
+      "id": 8,
+      "content": "이력서 쓰기",
+      "goal": 4,
+      "color": "blue",
+      "date": "2020-04-22",
+      "day": "TUE",
+      "important": true,
+      "startTime": "17:00",
+      "goalTime": "1:00",
+      "detail": "프로젝트 toamto 디버깅",
+      "done": "00:00:12"
+    },
+    {
+      "id": 9,
+      "content": "고용 사이트 조사",
+      "goal": 5,
+      "color": "purple",
+      "date": "2020-04-22",
+      "day": "TUE",
+      "important": true,
+      "startTime": "20:00",
+      "goalTime": "2:00",
+      "detail": "프로젝트 toamto 디버깅",
+      "done": "00:00:16"
+    }
+  ]
 }

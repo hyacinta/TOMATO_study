@@ -69,16 +69,16 @@
   background-position: center;
   overflow: hidden;
 }
-.todoList .red .btnStopWatch {background-image: url('../img/ico_start_red.png');}
-.todoList .red.ing .btnStopWatch, .timer .stopTimer.red .btnStopWatch {background-image: url('../img/ico_stop_red.png');}
-.todoList .yellow .btnStopWatch {background-image: url('../img/ico_start_yellow.png');}
-.todoList .yellow.ing .btnStopWatch, .timer .stopTimer.yellow .btnStopWatch {background-image: url('../img/ico_stop_yellow.png');}
-.todoList .green .btnStopWatch {background-image: url('../img/ico_start_green.png');}
-.todoList .green.ing .btnStopWatch, .timer .stopTimer.green .btnStopWatch {background-image: url('../img/ico_stop_green.png');}
-.todoList .blue .btnStopWatch {background-image: url('../img/ico_start_blue.png');}
-.todoList .blue.ing .btnStopWatch, .timer .stopTimer.blue .btnStopWatch {background-image: url('../img/ico_stop_blue.png');}
-.todoList .purple .btnStopWatch {background-image: url('../img/ico_start_purple.png');}
-.todoList .purple.ing .btnStopWatch, .timer .stopTimer.purple .btnStopWatch {background-image: url('../img/ico_stop_purple.png');}
+.todoList .red .btnStopWatch, .timer .stopTimer.red .btnStopWatch.play {background-image: url('../img/ico_start_red.png');}
+.timer .stopTimer.red .btnStopWatch {background-image: url('../img/ico_stop_red.png');}
+.todoList .yellow .btnStopWatch, .timer .stopTimer.yellow .btnStopWatch.play {background-image: url('../img/ico_start_yellow.png');}
+.timer .stopTimer.yellow .btnStopWatch {background-image: url('../img/ico_stop_yellow.png');}
+.todoList .green .btnStopWatch, .timer .stopTimer.green .btnStopWatch.play {background-image: url('../img/ico_start_green.png');}
+.timer .stopTimer.green .btnStopWatch {background-image: url('../img/ico_stop_green.png');}
+.todoList .blue .btnStopWatch, .timer .stopTimer.blue .btnStopWatch.play {background-image: url('../img/ico_start_blue.png');}
+.timer .stopTimer.blue .btnStopWatch {background-image: url('../img/ico_stop_blue.png');}
+.todoList .purple .btnStopWatch, .timer .stopTimer.purple .btnStopWatch.play {background-image: url('../img/ico_start_purple.png');}
+.timer .stopTimer.purple .btnStopWatch {background-image: url('../img/ico_stop_purple.png');}
 .todoTitSet {
   flex-grow: 1;
   cursor: pointer;
@@ -112,7 +112,6 @@
   font-size: 2rem;
   text-align: right;
 }
-.ing .simulationTime {color: #FF551F;}
 .todoContent {
   width: 100%;
   margin: 16px 20px 8px;

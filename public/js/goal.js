@@ -1,19 +1,19 @@
 // goal.js
 import { 
+  generateId,
   openPopup,
-  closePopup,
   popup
 } from './common.js';
-// 변수]
-// initGoals : db.json/goals 데이터 
 // 함수]
+// generateId(배열) : 배열에 생성될 요소의 아이디를 생성
 // openPopup(popup요소) : 팝업 열기
 // closePopup(popup요소) : 팝업 닫기
-// popup(event.target, popup요소, 실행할 콜백 함수) : 해당 팝업의 기능 수행
+// popup(event.target, popup요소, popup 기능 버튼 실행할 함수, popup 닫을 떄 실행할 함수) : 해당 팝업의 기능 수행
 
 // 상태
 let targetId = null;
 let goals = [];
+let todos = [];
 
 // 시간 변수
 const now = new Date();
@@ -30,14 +30,28 @@ const generateDate = time => `${
 // Dom //////////
 // 버튼
 const $btnAddGoal = document.querySelector('.btnAddGoal');
+const $btnAddTodo = document.querySelector('.btnAddTodo');
+
 // popup
-// 목표 추가
+// 할일 추가 popup
+const $addTodos = document.querySelector('.createTodos');
+const $addTodoGoal = $addTodos.querySelector('.category #categorySelect');
+const $addTodoCont = $addTodos.querySelector('.todoInput #todoContent');
+const $addTodoImp = $addTodos.querySelector('.impSelect input');
+const $addTodoDate = $addTodos.querySelector('#dateStart');
+const $addTodoStart = {
+  hour: $addTodos.querySelector('.startTime #startTime'),
+  minute: $addTodos.querySelector('.startTime #countrySelectBox')
+};
+const $addTodoGTime = $addTodos.querySelector('.goalTime #countrySelectBox');
+const $addTodoDetail = $addTodos.querySelector('.contentInput #todoDetail');
+// 목표 추가 popup
 const $addGoal = document.querySelector('.addGoal');
-// 목표 수정
+// 목표 수정 popup
 const $editGoal = document.querySelector('.editGoal');
 const $editGoalContent = $editGoal.querySelector('.goalInput input');
 const $editGoalDday = $editGoal.querySelector('.dDayInput input');
-// 목표 삭제
+// 목표 삭제 popup
 const $deleteGoal = document.querySelector('.deleteGoal');
 
 // 목표 페이지 ul
@@ -47,13 +61,10 @@ const $goalList = document.querySelector('.goalList');
 // 숫자 생성
 // 현재 날짜부터 남은 날짜 구하는 함수
 const generateDday = date => Math.ceil((date - now) / oneDay);
-// id 제너레이트
-const generateId = target => Math.max(...target.map(ele => +ele.id)) + 1;
 
 // 목표 페이지 랜더 함수
 const goalRender = () => {
   let html = '';
-  console.log(goals);
   goals.forEach(goal => {
     const goalDday = goal.dDay.split('-');
     html += `<li id="${goal.id}" class="${goal.color}">
@@ -68,9 +79,50 @@ const goalRender = () => {
   $goalList.innerHTML = html;
 };
 
-//   if (targetId) targetId = null;
-
+// 목표 시간 옵션 만드는 함수
+const todoGoalOption = (hour, minute) => {
+  if (hour < 19 || (hour === 19 && !minute)) {
+    $addTodoGTime.innerHTML = `<option value="0:30">30분</option>
+    <option value="1:00">1시간</option>
+    <option value="1:30">1시간 30분</option>
+    <option value="2:00">2시간</option>
+    <option value="2:30">2시간 30분</option>
+    <option value="3:00">3시간</option>
+    <option value="3:30">3시간 30분</option>
+    <option value="4:00">4시간</option>
+    <option value="4:30">4시간 30분</option>
+    <option value="5:00">5시간</option>`;
+  }
+};
 // 통신
+// 할일 추가 함수
+const addTodos = async () => {
+  console.log('할일 전 체크 할 것들');
+  const hour = $addTodoStart.hour.value;
+  try {
+    const _todo = await fetch('/todos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: generateId(todos),
+        content: $addTodoCont.value,
+        goal: +$addTodoGoal.value,
+        color: goals.find(({ id }) => id === +$addTodoGoal.value).color,
+        date: $addTodoDate.value,
+        day: new Date($addTodoDate.value).getDay(),
+        important: $addTodoImp.checked,
+        startTime: `${hour < 10 ? '0' + hour : hour}:${$addTodoStart.minute.value}`,
+        goalTime: $addTodoGTime.value,
+        detail: $addTodoDetail.value,
+      })
+    });
+    const todo = await _todo.json();
+    todos = [...todos, todo];
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 // 목표 추가 함수
 const addGoalFn = async () => {
   // input
@@ -83,6 +135,7 @@ const addGoalFn = async () => {
   // const goalColor = $indexInput.querySelector('input[check]');
   
   if (goalContent && goalDday && 'purple') {
+    // 통신 - post -
     try {
       let _goals = await fetch('/goals', {
         method: 'POST',
@@ -109,6 +162,7 @@ const addGoalFn = async () => {
 };
 // 목표 제거 함수
 const deleteGoalFn = async id => {
+  // 통신 - delete - 
   try {
     await fetch(`/goals/${id}`, { method: 'delete' });
     goals = goals.filter(goal => goal.id !== id);
@@ -168,6 +222,45 @@ const editGoalFn = async id => {
 
 // 이벤트 핸들러 ////////////////////////////////////////////////////////
 // 버튼
+// 할일 추가 버튼 클릭 이벤트
+$btnAddTodo.onclick = () => {
+  let html = '<option value="" selected>목표를 선택하세요</option>';
+  goals.forEach(goal => {
+    html += `<option value="${goal.id}">${goal.content}</option>`;
+  });
+  $addTodoGoal.innerHTML = html;
+  openPopup($addTodos);
+};
+
+// popup
+// 할일 추가 popup 클릭 이벤트
+$addTodos.onclick = ({ target }) => {
+  popup(target, $addTodos, addTodos);
+};
+// 할일 선택 이벤트
+$addTodos.onchange = ({ target }) => {
+  if (target.matches('#important')) return;
+  // 목표 선택 시 날짜 데이터 Dday 이전만 선택 가능하게 만드는 식
+  if (target === $addTodoGoal && $addTodoGoal.value !== '') {
+    const targetGoal = goals.find(({ id }) => id === +$addTodoGoal.value);
+    $addTodoDate.max = targetGoal.dDay;
+  }
+  if (target === $addTodoStart.hour) {
+    $addTodoStart.minute.innerHTML = target.value === '23' ? `
+    <option value="00">00분</option>
+    <option value="10">10분</option>
+    <option value="20">20분</option>
+    <option value="30">30분</option>` : `
+    <option value="00">00분</option>
+    <option value="10">10분</option>
+    <option value="20">20분</option>
+    <option value="30">30분</option>
+    <option value="40">40분</option>
+    <option value="50">50분</option>`;
+    todoGoalOption(+$addTodoStart.hour.value, 0);
+  }
+};
+
 // 목표 추가 버튼 클릭 이벤트
 $btnAddGoal.onclick = () => {
   if (goals.length >= 5) {
@@ -199,24 +292,48 @@ $addGoal.onclick = ({ target }) => {
 };
 // 목표 수정 popup 클릭 이벤트
 $editGoal.onclick = ({ target }) => {
-  popup(target, $editGoal, () => {
-    editGoalFn(targetId);
-  });
+  popup(
+    target, 
+    $editGoal, 
+    () => {
+      editGoalFn(targetId);
+    },
+    () => {
+      targetId = null;
+    }
+  );
 };
 // 삭제 확인 popup 클릭 이벤트
 $deleteGoal.onclick = ({ target }) => {
   if (!target.matches('button')) return;
-  popup(target, $deleteGoal, () => {
-    deleteGoalFn(targetId);
-  });
+  popup(
+    target, 
+    $deleteGoal, 
+    () => {
+      deleteGoalFn(targetId);
+    },
+    () => {
+      targetId = null;
+    }
+  );
 };
 // 로드 이벤트
 window.onload = async () => {
   // 날짜 선택 최소 값 설정
   document.querySelectorAll('input[type="date"]').forEach(input => input.min = generateDate(now));
+  // 시간 선택 최소 최대 값 설정
+  $addTodoStart.hour.max = 23;
+  $addTodoStart.hour.min = 6;
+
   try {
-    const test = await fetch('/goals');
-    goals = await test.json();
+    const _goals = await fetch('/goals');
+    goals = await _goals.json();
+  } catch (e) {
+    console.error(e);
+  }
+  try {
+    const _todos = await fetch('/todos');
+    todos = await _todos.json();
   } catch (e) {
     console.error(e);
   }

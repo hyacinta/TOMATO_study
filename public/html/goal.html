@@ -51,15 +51,14 @@
   </main>
 
   <!-- 할일 추가 popup -->
-  <div class="addTodos popup">
+  <div class="addTodos popup createTodos">
     <h3>할일 추가</h3>
     <button class="btnClosed">닫기</button>
     <ul class="addInput">
       <li class="category">
         <label for="categorySelect" class="a11yHidden">목표 선택</label>
         <select id="categorySelect" class="categorySelect">
-          <option value="" selected>목표를 선택하세요</option>
-          <option value="">test1</option>
+          <!-- <option value="" selected>목표를 선택하세요</option> -->
         </select>
       </li>
       <li class="todoInput">
@@ -82,27 +81,29 @@
         <label for="startTime">공부 시작시간</label>
         <input type="number" name="startTime" id="startTime" placeholder="시">
         <select name="country" id="countrySelectBox">
-          <option value="">00분</option>
-          <option value="">10분</option>
-          <option value="">20분</option>
-          <option value="">30분</option>
-          <option value="">40분</option>
-          <option value="">50분</option>
+          <option value=""> 분 </option>
+          <!-- <option value="00">00분</option>
+          <option value="10">10분</option>
+          <option value="20">20분</option>
+          <option value="30">30분</option>
+          <option value="40">40분</option>
+          <option value="50">50분</option> -->
         </select>
       </li>
       <li class="goalTime">
         <label for="countrySelectBox">목표 공부시간</label>
         <select name="country" id="countrySelectBox">
-          <option value="">30분</option>
-          <option value="">1시간</option>
-          <option value="">1시간 30분</option>
-          <option value="">2시간</option>
-          <option value="">2시간 30분</option>
-          <option value="">3시간</option>
-          <option value="">3시간 30분</option>
-          <option value="">4시간</option>
-          <option value="">4시간 30분</option>
-          <option value="">5시간</option>
+          <option value=""> - </option>
+          <!-- <option value="0:30">30분</option>
+          <option value="1:00">1시간</option>
+          <option value="1:30">1시간 30분</option>
+          <option value="2:00">2시간</option>
+          <option value="2:30">2시간 30분</option>
+          <option value="3:00">3시간</option>
+          <option value="3:30">3시간 30분</option>
+          <option value="4:00">4시간</option>
+          <option value="4:30">4시간 30분</option>
+          <option value="5:00">5시간</option> -->
         </select>
       </li>
       <li class="contentInput">

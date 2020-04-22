@@ -166,6 +166,7 @@
   right: -4px;
   display: block;
   content: '100%';
-  width: 100%;
+  width: 26px;
   font-size: 10px;
+  text-align: center;
 }

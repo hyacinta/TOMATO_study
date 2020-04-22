@@ -7,7 +7,7 @@ const $todayPercent = document.querySelector('.todayPercent > p');
 const $categorySelect = document.querySelector('.categorySelect');
 const $totalTime = document.querySelector('.todayInformation > .totalTime');
 const $timerPopup = document.querySelector('div.timer');
-const $addTodosPopup = document.querySelector('.addTodos');
+const $addTodosPopup = document.querySelector('.editTodos');
 
 const renderGoals = () => {
   let html = '<option value="All">목표 전체보기</option>';
@@ -127,13 +127,14 @@ const getToday = _todos => {
   todos = _todos.filter(todo => {
     const today = new Date();
     const month = today.getMonth() + 1 > 9 ? today.getMonth() + 1 : `0${today.getMonth() + 1}`;
-    return todo.date === `${today.getFullYear()}-${month}-${today.getDate()}`; // --
+    const date = today.getDate() + 1 > 9 ? today.getDate() : `0${today.getDate()}`;
+    return todo.date === `${today.getFullYear()}-${month}-${date}`; // --
   });
 };
 
 const getData = async () => {
   try {
-    console.log(fetch('/goals').then(res => res.json()));
+    // console.log(fetch('/goals').then(res => res.json()));
     goals = await fetch('/goals').then(res => res.json());
     renderGoals();
 
@@ -287,7 +288,7 @@ const deleteTodo = target => {
 };
 
 const selectGoals = todo => {
-  const $selectGoals = document.querySelector('.addTodos .addInput .category select');
+  const $selectGoals = document.querySelector('.editTodos .addInput .category select');
   let html = `<option value="${todo.goal}">${goals.find(goal => goal.id === +todo.goal).content}</option>`;
   goals.forEach(goal => {
     if (goal.id === todo.goal) return;
@@ -310,13 +311,13 @@ const getGoalTime = ({ goalTime }) => {
 };
 
 const giveValue = todo => {
-  const $startMin = document.querySelector('.addTodos .startTime select');
-  const $startHour = document.querySelector('.addTodos .startTime input');
-  const $goalTime = document.querySelector('.addTodos .goalTime select');
-  const $startDate = document.querySelector('.addTodos li.startDate input');
-  const $todoInput = document.querySelector('.addInput > .todoInput input');
+  const $startMin = document.querySelector('.editTodos .startTime select');
+  const $startHour = document.querySelector('.editTodos .startTime input');
+  const $goalTime = document.querySelector('.editTodos .goalTime select');
+  const $startDate = document.querySelector('.editTodos li.startDate input');
+  const $todoInput = document.querySelector('.editTodos .addInput > .todoInput input');
 
-  // const $endDate = document.querySelector('.addTodos li.endDate input');
+  // const $endDate = document.querySelector('.editTodos li.endDate input');
 
   $startMin.value = +todo.startTime[3] + 1;
   $startHour.value = todo.startTime[0] + todo.startTime[1];
@@ -409,12 +410,12 @@ const addZero = num => {
 };
 
 const getContent = () => {
-  const $todoInput = document.querySelector('.addInput > .todoInput input');
+  const $todoInput = document.querySelector('.editTodos .addInput > .todoInput input');
   return $todoInput.value;
 };
 
 const getGoal = () => {
-  const $selectGoals = document.querySelector('.addTodos .addInput .category select');
+  const $selectGoals = document.querySelector('.editTodos .addInput .category select');
   return +$selectGoals.value;
 };
 
@@ -423,7 +424,7 @@ const getColor = () => {
 };
 
 const getDate = () => {
-  const $startDate = document.querySelector('.addTodos li.startDate input');
+  const $startDate = document.querySelector('.editTodos li.startDate input');
   return $startDate.value;
 };
 
@@ -434,23 +435,23 @@ const getDayNum = () => {
 };
 
 const getStart = () => {
-  const $startHour = document.querySelector('.addTodos .startTime input');
-  const $startMin = document.querySelector('.addTodos .startTime select');
+  const $startHour = document.querySelector('.editTodos .startTime input');
+  const $startMin = document.querySelector('.editTodos .startTime select');
   return `${addZero($startHour.value)}:${addZero(($startMin.value - 1) * 10)}`;
 };
 
 const getImp = () => {
-  const $btnImp = document.querySelector('.addTodos li.impSelect .btnImp');
+  const $btnImp = document.querySelector('.editTodos li.impSelect .btnImp');
   return $btnImp.classList.contains('impCheck');
 };
 
 const getDetail = () => {
-  const $detail = document.querySelector('.addTodos li.contentInput > textarea');
+  const $detail = document.querySelector('.editTodos li.contentInput > textarea');
   return $detail.value;
 };
 
 const getGoalTm = () => {
-  const $goalTime = +document.querySelector('.addTodos .goalTime select').value;
+  const $goalTime = +document.querySelector('.editTodos .goalTime select').value;
   console.log($goalTime);
   if ($goalTime === 1) return '0:30';
   if ($goalTime === 2) return '1:00';
@@ -491,10 +492,10 @@ const editTodo = target => {
 
 // 투두 수정 팝업창
 $addTodosPopup.onclick = e => {
-  if (e.target.matches('.addTodos > .btnCancel')) removeEdit();
-  if (e.target.matches('.addTodos > .btnClosed')) removeEdit();
-  if (e.target.matches('.addTodos > .btnRegister')) editTodo(e.target);
-  if (e.target.matches('.addInput > li.impSelect .btnImp')) e.target.classList.toggle('impCheck');
+  if (e.target.matches('.editTodos > .btnCancel')) removeEdit();
+  if (e.target.matches('.editTodos > .btnClosed')) removeEdit();
+  if (e.target.matches('.editTodos > .btnRegister')) editTodo(e.target);
+  if (e.target.matches('.editTodos .addInput > li.impSelect .btnImp')) e.target.classList.toggle('impCheck');
 };
 
 // 투두리스트 클릭 > 1.스탑워치 시작 버튼

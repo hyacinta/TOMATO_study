@@ -108,7 +108,6 @@
   text-align: center;
 }
 /* 스케줄 플래너 */
-.scheduleList {position: relative;}
 .hour {display: flex;}
 .timeTit {
   width: 36px;
@@ -123,6 +122,7 @@
 .timeTit span {display: block;}
 .time {flex-grow: 1;}
 .halfMinute {
+  position: relative;
   height: 30px;
   border-bottom: 1px solid #cecece;
   background-color: #fff;
@@ -134,6 +134,7 @@
   width: 100%;
   min-height: 29px;
   padding: 0 8px;
+  z-index: 10;
 }
 .todo h4 {margin-right: 4px;}
 .todo.red {background-color: #ffddd2;}

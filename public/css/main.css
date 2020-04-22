@@ -69,16 +69,18 @@
   background-position: center;
   overflow: hidden;
 }
-.todoList .red .btnStopWatch, .timer .stopTimer.red .btnStopWatch.play {background-image: url('../img/ico_start_red.png');}
-.timer .stopTimer.red .btnStopWatch {background-image: url('../img/ico_stop_red.png');}
-.todoList .yellow .btnStopWatch, .timer .stopTimer.yellow .btnStopWatch.play {background-image: url('../img/ico_start_yellow.png');}
-.timer .stopTimer.yellow .btnStopWatch {background-image: url('../img/ico_stop_yellow.png');}
-.todoList .green .btnStopWatch, .timer .stopTimer.green .btnStopWatch.play {background-image: url('../img/ico_start_green.png');}
-.timer .stopTimer.green .btnStopWatch {background-image: url('../img/ico_stop_green.png');}
-.todoList .blue .btnStopWatch, .timer .stopTimer.blue .btnStopWatch.play {background-image: url('../img/ico_start_blue.png');}
-.timer .stopTimer.blue .btnStopWatch {background-image: url('../img/ico_stop_blue.png');}
-.todoList .purple .btnStopWatch, .timer .stopTimer.purple .btnStopWatch.play {background-image: url('../img/ico_start_purple.png');}
-.timer .stopTimer.purple .btnStopWatch {background-image: url('../img/ico_stop_purple.png');}
+.timer .stopTimer .btnStopWatch.play {background-image: url('../img/ico_start_main.png');}
+.timer .stopTimer .btnStopWatch {background-image: url('../img/ico_stop_main.png');}
+.todoList .red .btnStopWatch {background-image: url('../img/ico_start_red.png');}
+/* .timer .stopTimer .btnStopWatch {background-image: url('../img/ico_stop_red.png');} */
+.todoList .yellow .btnStopWatch {background-image: url('../img/ico_start_yellow.png');}
+/* .timer .stopTimer.yellow .btnStopWatch {background-image: url('../img/ico_stop_yellow.png');} */
+.todoList .green .btnStopWatch {background-image: url('../img/ico_start_green.png');}
+/* .timer .stopTimer.green .btnStopWatch {background-image: url('../img/ico_stop_green.png');} */
+.todoList .blue .btnStopWatch {background-image: url('../img/ico_start_blue.png');}
+/* .timer .stopTimer.blue .btnStopWatch {background-image: url('../img/ico_stop_blue.png');} */
+.todoList .purple .btnStopWatch {background-image: url('../img/ico_start_purple.png');}
+/* .timer .stopTimer.purple .btnStopWatch {background-image: url('../img/ico_stop_purple.png');} */
 .todoTitSet {
   flex-grow: 1;
   cursor: pointer;
@@ -96,11 +98,12 @@
   vertical-align: top;
 }
 .todoList .icoImp, .timer .icoImp {background-image: url('../img/ico_imp_off.png');}
-.todoList .red .icoImp.impCheck, .timer .red .icoImp.icoCheck , .addTodos .red.impCheck {background-image: url('../img/ico_imp_on_red.png');}
-.todoList .yellow .icoImp.impCheck, .timer .yellow .icoImp.icoCheck, .addTodos .yellow.impCheck {background-image: url('../img/ico_imp_on_yellow.png');}
-.todoList .green .icoImp.impCheck, .timer .green .icoImp.icoCheck, .addTodos .green.impCheck {background-image: url('../img/ico_imp_on_green.png');}
-.todoList .blue .icoImp.impCheck, .timer .blue .icoImp.icoCheck, .addTodos .blue.impCheck {background-image: url('../img/ico_imp_on_blue.png');}
-.todoList .purple .icoImp.impCheck, .timer .purple .icoImp.icoCheck, .addTodos .purple.impCheck {background-image: url('../img/ico_imp_on_purple.png');}
+.todoList .red .icoImp.impCheck, .timer .red .icoImp.icoCheck {background-image: url('../img/ico_imp_on_red.png');}
+.todoList .yellow .icoImp.impCheck, .timer .yellow .icoImp.icoCheck {background-image: url('../img/ico_imp_on_yellow.png');}
+.todoList .green .icoImp.impCheck, .timer .green .icoImp.icoCheck {background-image: url('../img/ico_imp_on_green.png');}
+.todoList .blue .icoImp.impCheck, .timer .blue .icoImp.icoCheck {background-image: url('../img/ico_imp_on_blue.png');}
+.todoList .purple .icoImp.impCheck, .timer .purple .icoImp.icoCheck {background-image: url('../img/ico_imp_on_purple.png');}
+.addTodos .impCheck {background-image: url('../img/ico_imp_on.png');}
 .todoTit {font-size: 1.6rem;}
 .todoSchedule {
   font-size: 1.2rem;

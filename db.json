@@ -126,16 +126,16 @@
     },
     {
       "id": 2,
-      "content": "HTML",
-      "goal": 5,
-      "color": "purple",
+      "content": "HTMLlll",
+      "goal": 1,
+      "color": "red",
       "date": "2020-04-22",
       "day": 3,
       "important": true,
-      "startTime": "07:00",
-      "goalTime": "2:00",
-      "detail": "프로젝트 tomato HTML 제작하기",
-      "done": "01:06:16"
+      "startTime": "05:30",
+      "goalTime": "3:00",
+      "detail": "프로젝트 tomato HTML 제작하기!!!!!!",
+      "done": "01:07:28"
     },
     {
       "id": 3,
@@ -148,7 +148,7 @@
       "startTime": "10:50",
       "goalTime": "2:30",
       "detail": "프로젝트 tomato CSS 제작",
-      "done": "00:41:32"
+      "done": "00:42:07"
     },
     {
       "id": 4,
@@ -196,11 +196,11 @@
       "color": "yellow",
       "date": "2020-04-22",
       "day": 3,
-      "important": true,
+      "important": false,
       "startTime": "11:00",
       "goalTime": "3:00",
       "detail": "프로젝트 toamto 디버깅하기",
-      "done": "02:02:02"
+      "done": "02:02:22"
     },
     {
       "id": 8,
@@ -213,7 +213,7 @@
       "startTime": "17:00",
       "goalTime": "1:00",
       "detail": "프로젝트 toamto 디버깅 과제",
-      "done": "00:51:07"
+      "done": "00:52:47"
     },
     {
       "id": 9,
@@ -226,7 +226,7 @@
       "startTime": "20:00",
       "goalTime": "4:30",
       "detail": "프로젝트 toamto 디버깅",
-      "done": "01:04:46"
+      "done": "01:05:12"
     }
   ]
 }

@@ -31,7 +31,7 @@ const goalRender = () => {
 
 // 이벤트 핸들러
 $goalList.onclick = target => {
-  if (target)
+  // if (target)
 };
 
 window.onload = () => {

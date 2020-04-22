@@ -29,6 +29,16 @@ const progressBar = (done, goal) => {
   return percent = percent > 100 ? 101 : percent;
 };
 
+const changePm = textArr => {
+  return textArr[0] > 12 ? (textArr[0] - 12) + ':' + textArr[1] : textArr[0] + ':' + textArr[1];
+};
+
+const changeText = goalTime => {
+  const [hour, min] = goalTime.split(':', 2);
+  return `${min === '00' ? hour + '시간' : hour + '시간' + min + '분'}`;
+
+};
+
 const render = () => {
   let html = '';
 
@@ -38,11 +48,12 @@ const render = () => {
   });
 
   _todos.forEach(todo => {
+    const startTimeArr = todo.startTime.split(':', 2);
     html += `<li id="${todo.id}" class="${todo.color}">
     <button class="btnStopWatch">정지</button>
     <a class="todoTitSet">
       <h4 class="todoTit"><span class="icoImp${todo.important ? ' impCheck' : ''}">중요</span>${todo.content}</h4>
-      <span class="todoSchedule">PM ${todo.startTime} ~ ${todo.goalTime} 예정</span>
+      <span class="todoSchedule">${startTimeArr[0] > 12 ? 'PM' : 'AM'} ${changePm(startTimeArr)} ~ ${changeText(todo.goalTime)}</span>
     </a>
     <div class="simulationTime">${todo.done}</div>
     <div class="todoContent">
@@ -120,7 +131,7 @@ const getToday = _todos => {
   });
 };
 
-const getTodos = async () => {
+const getData = async () => {
   try {
     console.log(fetch('/goals').then(res => res.json()));
     goals = await fetch('/goals').then(res => res.json());
@@ -135,19 +146,9 @@ const getTodos = async () => {
   } catch (e) {
     console.error('Error:', e);
   }
-
-  // await fetch('/todos')
-  //   .then(res => res.json())
-  //   .then(data => getToday(data))
-  //   .then(_todos => todos = _todos)
-  //   .then(getTodayDone)
-  //   .then(render)
-  //   .then(getTodayGoalTIme)
-  //   .then(getTodayPersent)
-  //   .catch(error => console.error('Error:', error));
 };
 
-window.onload = getTodos;
+window.onload = getData;
 
 const removeActive = () => {
   $timerPopup.classList.remove('active');
@@ -329,14 +330,13 @@ const giveValue = todo => {
   };
 };
 
-// <button class="btnImp ${todo.important ? ' impCheck' : ''}" id="test">중요</button>
 const renderEditTodo = target => {
   $addTodosPopup.classList.add('active');
 
   todos.forEach(todo => {
     if (todo.id !== +target.parentNode.id) return;
     $addTodosPopup.innerHTML = `
-      <h3 id="${todo.id}">할일 추가</h3>
+      <h3 id="${todo.id}">할일 수정</h3>
       <button class="btnClosed">닫기</button>
       <ul class="addInput">
         <li class="category">
@@ -466,7 +466,6 @@ const getGoalTm = () => {
 
 const editTodo = target => {
   // 인풋이 비어있으면 리턴하기 추가
-  getGoalTm();
   const id = +target.parentNode.firstElementChild.id;
   fetch(`/todos/${id}`, {
     method: 'PATCH',

@@ -1,4 +1,4 @@
-// 가상데이터
+// 가상 데이터
 const week = [
   { id: 1, dayName: '월', date: '' },
   { id: 2, dayName: '화', date: '' },

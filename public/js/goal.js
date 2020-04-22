@@ -145,7 +145,6 @@ const editGoalFn = async id => {
 
   // 수정한 내용이 있는지 없는지 확인
   if (!checkInputs.length) return;
-
   // payload 생성
   const payload = {};
   checkInputs.datas.forEach(data => {
@@ -158,7 +157,8 @@ const editGoalFn = async id => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    goals = goals.map(goal => (goal.id === id ? await _goal.json() : goal));
+    const goalRes = await _goal.json();
+    goals = goals.map(goal => (goal.id === id ? goalRes : goal));
   } catch (e) {
     console.error(e);
   }

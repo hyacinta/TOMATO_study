@@ -168,7 +168,16 @@ const addTodos = async () => {
     });
     const todo = await _todo.json();
     todos = [...todos, todo];
+    window.alert('할일이 추가되었습니다.');
     closePopup($addTodos);
+    $addTodoCont.value = '';
+    $addTodoImp.checked = false;
+    $addTodoDate.value = '';
+    $addTodoDate.max = null;
+    $addTodoStart.hour.value = '';
+    $addTodoStart.minute.innerHTML = '<option value=""> 분 </option>';
+    $addTodoGTime.innerHTML = '<option value=""> - </option>';
+    $addTodoDetail.value = '';
   } catch (e) {
     console.error(e);
   }
@@ -219,7 +228,14 @@ const deleteGoalFn = async id => {
   } catch (e) {
     console.error(e);
   }
-  console.log('목표에 관련된 할일 삭제 이벤트');
+  
+  const deleteTodos = todos.filter(todo => todo.goal === id);
+  console.log('목표에 관련된 할일 삭제 이벤트', deleteTodos);
+  // try {
+  //   await fetch('/todos/12,13', { method: 'delete' });
+  // } catch (e) {
+  //   console.error(e);
+  // }
   goalRender();
   closePopup($deleteGoal);
 };

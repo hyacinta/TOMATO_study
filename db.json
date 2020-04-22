@@ -40,19 +40,13 @@
       "id": 2,
       "content": "react",
       "dDay": "2020-04-29",
-      "color": "green"
+      "color": "blue"
     },
     {
-      "id": 4,
+      "id": 3,
       "content": "test1",
-      "dDay": "2020-04-23",
-      "color": "purple"
-    },
-    {
-      "id": 5,
-      "content": "test2",
-      "dDay": "2020-12-29",
-      "color": "purple"
+      "dDay": "2020-05-01",
+      "color": "yellow"
     }
   ],
   "todos": [

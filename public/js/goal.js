@@ -2,6 +2,7 @@
 import { 
   generateId,
   openPopup,
+  closePopup,
   popup
 } from './common.js';
 // 함수]
@@ -24,7 +25,7 @@ const generateDate = time => `${
 }-${
   time.getMonth() > 9 ? time.getMonth() + 1 : '0' + (time.getMonth() + 1)
 }-${
-  time.getDate()
+  time.getDate() > 9 ? time.getDate() : '0' + time.getDate()
 }`;
 
 // Dom //////////
@@ -47,10 +48,14 @@ const $addTodoGTime = $addTodos.querySelector('.goalTime #countrySelectBox');
 const $addTodoDetail = $addTodos.querySelector('.contentInput #todoDetail');
 // 목표 추가 popup
 const $addGoal = document.querySelector('.addGoal');
+const $addGoalCont = $addGoal.querySelector('.goalInput');
+const $addGoalDday = $addGoal.querySelector('.dDayInput');
+const $addGoalColor = $addGoal.querySelector('.indexInput');
 // 목표 수정 popup
 const $editGoal = document.querySelector('.editGoal');
 const $editGoalContent = $editGoal.querySelector('.goalInput input');
 const $editGoalDday = $editGoal.querySelector('.dDayInput input');
+const $editGoalColor = $editGoal.querySelector('.indexInput');
 // 목표 삭제 popup
 const $deleteGoal = document.querySelector('.deleteGoal');
 
@@ -61,6 +66,14 @@ const $goalList = document.querySelector('.goalList');
 // 숫자 생성
 // 현재 날짜부터 남은 날짜 구하는 함수
 const generateDday = date => Math.ceil((date - now) / oneDay);
+// 시간을 초단위 숫자로 변환하는 함수
+const transSecond = (hh = 0, mm = 0, ss = 0) => {
+  let count = 0;
+  count += +hh * 3600;
+  count += +mm * 60;
+  count += +ss;
+  return count;
+};
 
 // 목표 페이지 랜더 함수
 const goalRender = () => {
@@ -79,26 +92,63 @@ const goalRender = () => {
   $goalList.innerHTML = html;
 };
 
+// popup에 빈 input 있는지 확인하는 함수
+const checkValue = popupTarget => {
+  const inputAll = popupTarget.querySelectorAll('input:not(#dateEnd)');
+  const selectAll = popupTarget.querySelectorAll('select');
+  const inputCk = inputAll.length ? [...inputAll].every(input => input.value.trim()) : true;
+  const selectCk = selectAll.length ? [...selectAll].every(select => select.value) : true;
+  return inputCk && selectCk;
+};
+// 시간이 중복되는지 확인하는 함수
+const checkTime = (date, time, goalTime) => {
+  const filterDate = todos.filter(todo => todo.date === date);
+  const todosTime = filterDate.map(todo => [transSecond(...todo.startTime.split(':')), transSecond(...todo.goalTime.split(':'))]);
+  const targetTime = transSecond(...time.split(':'));
+  const targetGoal = transSecond(...goalTime.split(':'));
+  
+  return (todosTime.every(timeArr => {
+    const check = timeArr[0] - targetTime;
+    return check > 0 ? check - targetGoal >= 0 : check + timeArr[1] <= 0;
+  }));
+};
+
 // 목표 시간 옵션 만드는 함수
 const todoGoalOption = (hour, minute) => {
-  if (hour < 19 || (hour === 19 && !minute)) {
-    $addTodoGTime.innerHTML = `<option value="0:30">30분</option>
-    <option value="1:00">1시간</option>
-    <option value="1:30">1시간 30분</option>
-    <option value="2:00">2시간</option>
-    <option value="2:30">2시간 30분</option>
-    <option value="3:00">3시간</option>
-    <option value="3:30">3시간 30분</option>
-    <option value="4:00">4시간</option>
-    <option value="4:30">4시간 30분</option>
-    <option value="5:00">5시간</option>`;
-  }
+  let html = '';
+  // if (hour < 19 || (hour === 19 && !minute)) {
+    
+  // }
+  html = `
+  <option value="0:30">30분</option>
+  <option value="1:00">1시간</option>
+  <option value="1:30">1시간 30분</option>
+  <option value="2:00">2시간</option>
+  <option value="2:30">2시간 30분</option>
+  <option value="3:00">3시간</option>
+  <option value="3:30">3시간 30분</option>
+  <option value="4:00">4시간</option>
+  <option value="4:30">4시간 30분</option>
+  <option value="5:00">5시간</option>`;
+  console.log('시간에 따라 옵션 수 줄이기', hour, minute);
+  $addTodoGTime.innerHTML = html;
 };
+
 // 통신
 // 할일 추가 함수
 const addTodos = async () => {
-  console.log('할일 전 체크 할 것들');
+  // 입력란 확인
+  if (!checkValue($addTodos)) {
+    window.alert('필수 입력란이 전부 채워지지 않았습니다.');
+    return;
+  }
   const hour = $addTodoStart.hour.value;
+  const minute = $addTodoStart.minute.value;
+  // 중복 예정 확인
+  if (!checkTime($addTodoDate.value, `${hour}:${minute}`, $addTodoGTime.value)) {
+    window.alert('할일 예정이 다른 예정과 겹칩니다.');
+    return;
+  }
   try {
     const _todo = await fetch('/todos', {
       method: 'POST',
@@ -118,6 +168,7 @@ const addTodos = async () => {
     });
     const todo = await _todo.json();
     todos = [...todos, todo];
+    closePopup($addTodos);
   } catch (e) {
     console.error(e);
   }
@@ -125,40 +176,39 @@ const addTodos = async () => {
 
 // 목표 추가 함수
 const addGoalFn = async () => {
-  // input
-  const $goalInput = $addGoal.querySelector('.addInput .goalInput');
-  const $dDayInput = $addGoal.querySelector('.addInput .dDayInput');
-  // const $indexInput = $addGoal.querySelector('.addInput .indexInput');
   // data
-  const goalContent = $goalInput.querySelector('input').value.trim();
-  const goalDday = $dDayInput.querySelector('input').value;
-  // const goalColor = $indexInput.querySelector('input[check]');
+  const goalContent = $addGoalCont.querySelector('input').value.trim();
+  const goalDday = $addGoalDday.querySelector('input').value;
+  const $goalColor = $addGoalColor.querySelector('input:checked');
   
-  if (goalContent && goalDday && 'purple') {
-    // 통신 - post -
-    try {
-      let _goals = await fetch('/goals', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          id: generateId(goals),
-          content: goalContent,
-          dDay: goalDday,
-          color: 'purple'
-        })
-      });
-      _goals = await _goals.json();
-      goals = [...goals, _goals];
-    } catch (e) {
-      console.error(e);
-    }
-    $goalInput.querySelector('input').value = '';
-    $dDayInput.querySelector('input').value = '';
-
-    goalRender();
-  } else {
-    console.log('input 확인 후 해당 input 아래에 경고문구 출력');
+  // 입력란 확인
+  if (!goalContent || !goalDday || !$goalColor) {
+    window.alert('입력란이 전부 채워지지 않았습니다.');
+    return;
   }
+  const goalColor = $goalColor.value;
+  // 통신 - post -
+  try {
+    let _goals = await fetch('/goals', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: generateId(goals),
+        content: goalContent,
+        dDay: goalDday,
+        color: goalColor
+      })
+    });
+    _goals = await _goals.json();
+    goals = [...goals, _goals];
+  } catch (e) {
+    console.error(e);
+  }
+  $addGoalCont.querySelector('input').value = '';
+  $addGoalDday.querySelector('input').value = '';
+  $goalColor.checked = false;
+  goalRender();
+  closePopup($addGoal);
 };
 // 목표 제거 함수
 const deleteGoalFn = async id => {
@@ -171,6 +221,7 @@ const deleteGoalFn = async id => {
   }
   console.log('목표에 관련된 할일 삭제 이벤트');
   goalRender();
+  closePopup($deleteGoal);
 };
 // 목표 수정 함수
 const editGoalFn = async id => {
@@ -179,45 +230,53 @@ const editGoalFn = async id => {
   // 바뀐 goal data 객체 반환 함수
   const checkInputs = (() => {
     const check = { length: 0, datas: [] };
-    if (!($editGoalContent.value === content)) {
+    if ($editGoalContent.value !== content) {
       check.length += 1;
       check.datas.push({
         key: 'content',
         value: $editGoalContent.value
       });
     }
-    if (!($editGoalDday.value === dDay)) {
+    if ($editGoalDday.value !== dDay) {
       check.length += 1;
       check.datas.push({
         key: 'dDay',
         value: $editGoalDday.value
       });
     }
-    console.log('color 체크 함수 해야함');
+    if ($editGoalColor.querySelector('input:checked').value !== color) {
+      check.length += 1;
+      check.datas.push({
+        key: 'color',
+        value: $editGoalColor.querySelector('input:checked').value
+      });
+    }
     return check;
   })();
 
   // 수정한 내용이 있는지 없는지 확인
-  if (!checkInputs.length) return;
-  // payload 생성
-  const payload = {};
-  checkInputs.datas.forEach(data => {
-    payload[data.key] = data.value;
-  });
-  // 통신 -patch-
-  try {
-    const _goal = await fetch(`/goals/${id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+  if (checkInputs.length) {
+    // payload 생성
+    const payload = {};
+    checkInputs.datas.forEach(data => {
+      payload[data.key] = data.value;
     });
-    const goalRes = await _goal.json();
-    goals = goals.map(goal => (goal.id === id ? goalRes : goal));
-  } catch (e) {
-    console.error(e);
+    // 통신 -patch-
+    try {
+      const _goal = await fetch(`/goals/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const goalRes = await _goal.json();
+      goals = goals.map(goal => (goal.id === id ? goalRes : goal));
+    } catch (e) {
+      console.error(e);
+    }
+    goalRender();
+    targetId = null;
   }
-  goalRender();
-  targetId = null;
+  closePopup($editGoal);
 };
 
 // 이벤트 핸들러 ////////////////////////////////////////////////////////
@@ -230,6 +289,29 @@ $btnAddTodo.onclick = () => {
   });
   $addTodoGoal.innerHTML = html;
   openPopup($addTodos);
+};
+// 목표 추가 버튼 클릭 이벤트
+$btnAddGoal.onclick = () => {
+  if (goals.length >= 5) {
+    window.alert('목표는 최대 5개까지 입니다.');
+    return;
+  }
+  openPopup($addGoal);
+};
+// 목표 요소 안 수정/삭제 버튼 클릭 이벤트
+$goalList.onclick = ({ target }) => {
+  if (!(target.matches('.btnEdit') || target.matches('.btnDelete'))) return;
+  targetId = +target.parentNode.id;
+  if (target.matches('.btnEdit')) {
+    const targetGoal = goals.find(({ id }) => id === targetId);
+    
+    $editGoalContent.value = targetGoal.content;
+    $editGoalDday.value = targetGoal.dDay;
+    $editGoalColor.querySelector(`.${targetGoal.color} input`).checked = true;
+    openPopup($editGoal);
+  } else {
+    openPopup($deleteGoal);
+  }
 };
 
 // popup
@@ -260,32 +342,6 @@ $addTodos.onchange = ({ target }) => {
     todoGoalOption(+$addTodoStart.hour.value, 0);
   }
 };
-
-// 목표 추가 버튼 클릭 이벤트
-$btnAddGoal.onclick = () => {
-  if (goals.length >= 5) {
-    console.log('목표는 최대 5개 입니다.');
-    return;
-  }
-  openPopup($addGoal);
-};
-// 목표 요소 안 수정/삭제 버튼 클릭 이벤트
-$goalList.onclick = ({ target }) => {
-  if (!(target.matches('.btnEdit') || target.matches('.btnDelete'))) return;
-  targetId = +target.parentNode.id;
-  if (target.matches('.btnEdit')) {
-    openPopup($editGoal);
-    const targetGoal = goals.find(({ id }) => id === targetId);
-    
-    $editGoalContent.value = targetGoal.content;
-    $editGoalDday.value = targetGoal.dDay;
-    // $editGoal.querySelector('.editInput .indexInput input[checked]');
-  } else {
-    openPopup($deleteGoal);
-  }
-};
-
-// popup
 // 목표 추가 popup 클릭 이벤트
 $addGoal.onclick = ({ target }) => {
   popup(target, $addGoal, addGoalFn);

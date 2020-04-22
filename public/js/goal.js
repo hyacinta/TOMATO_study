@@ -1,5 +1,18 @@
 // goal.js
+import { 
+  openPopup,
+  closePopup,
+  popup
+} from './common.js';
+// 변수]
+// initGoals : db.json/goals 데이터 
+// 함수]
+// openPopup(popup요소) : 팝업 열기
+// closePopup(popup요소) : 팝업 닫기
+// popup(event.target, popup요소, 실행할 콜백 함수) : 해당 팝업의 기능 수행
+
 // 상태
+let targetId = null;
 let goals = [];
 
 // 시간 변수
@@ -14,21 +27,21 @@ const generateDate = time => `${
   time.getDate()
 }`;
 
-// Dom
-const $btnAddTodo = document.querySelector('.btnAddTodo');
-const $addTodos = document.querySelector('.addTodos');
+// Dom //////////
+// 버튼
 const $btnAddGoal = document.querySelector('.btnAddGoal');
+// popup
+// 목표 추가
 const $addGoal = document.querySelector('.addGoal');
+// 목표 수정
 const $editGoal = document.querySelector('.editGoal');
-const $editGoalContent = $editGoal.querySelector('.editInput .goalInput input');
-const $editGoalDday = $editGoal.querySelector('.editInput .dDayInput input');
+const $editGoalContent = $editGoal.querySelector('.goalInput input');
+const $editGoalDday = $editGoal.querySelector('.dDayInput input');
+// 목표 삭제
 const $deleteGoal = document.querySelector('.deleteGoal');
+
+// 목표 페이지 ul
 const $goalList = document.querySelector('.goalList');
-
-let targetId = null;
-
-// 날짜 선택 최소 값
-document.querySelectorAll('input[type="date"]').forEach(input => input.min = generateDate(now));
 
 // 함수 /////////////////////////////////////////////////////////////////
 // 숫자 생성
@@ -55,26 +68,7 @@ const goalRender = () => {
   $goalList.innerHTML = html;
 };
 
-// popup
-// popup 여는 함수
-const openPopup = target => {
-  target.classList.add('active');
-};
-// popup 닫는 함수
-const closePopup = target => {
-  target.classList.remove('active');
-  if (targetId) targetId = null;
-};
-// popup 이벤트 함수
-const popup = (target, $popup, callback) => {
-  if (!target.matches('button')) return;
-  if (target.matches('.btnCancel') || target.matches('.btnClosed')) {
-    closePopup($popup);
-  } else {
-    callback();
-    closePopup($popup);
-  }
-};
+//   if (targetId) targetId = null;
 
 // 통신
 // 목표 추가 함수
@@ -89,18 +83,22 @@ const addGoalFn = async () => {
   // const goalColor = $indexInput.querySelector('input[check]');
   
   if (goalContent && goalDday && 'purple') {
-    const _goals = await fetch('../../goals', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        id: generateId(goals),
-        content: goalContent,
-        dDay: goalDday,
-        color: 'purple'
-      })
-    }).then(res => res.json());
-
-    goals = [...goals, _goals];
+    try {
+      let _goals = await fetch('/goals', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: generateId(goals),
+          content: goalContent,
+          dDay: goalDday,
+          color: 'purple'
+        })
+      });
+      _goals = await _goals.json();
+      goals = [...goals, _goals];
+    } catch (e) {
+      console.error(e);
+    }
     $goalInput.querySelector('input').value = '';
     $dDayInput.querySelector('input').value = '';
 
@@ -111,8 +109,13 @@ const addGoalFn = async () => {
 };
 // 목표 제거 함수
 const deleteGoalFn = async id => {
-  await fetch(`../../goals/${id}`, { method: 'delete' });
-  goals = goals.filter(goal => goal.id !== id);
+  try {
+    await fetch(`/goals/${id}`, { method: 'delete' });
+    goals = goals.filter(goal => goal.id !== id);
+  } catch (e) {
+    console.error(e);
+  }
+  console.log('목표에 관련된 할일 삭제 이벤트');
   goalRender();
 };
 // 목표 수정 함수
@@ -148,22 +151,23 @@ const editGoalFn = async id => {
   checkInputs.datas.forEach(data => {
     payload[data.key] = data.value;
   });
-  // 통신 -수정-
-  const _goal = await fetch(`../../goals/${id}`, {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  }).then(res => res.json());
-  goals = goals.map(goal => (goal.id === id ? _goal : goal));
+  // 통신 -patch-
+  try {
+    const _goal = await fetch(`/goals/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    goals = goals.map(goal => (goal.id === id ? await _goal.json() : goal));
+  } catch (e) {
+    console.error(e);
+  }
   goalRender();
+  targetId = null;
 };
 
 // 이벤트 핸들러 ////////////////////////////////////////////////////////
 // 버튼
-// 할일 추가 버튼 클릭 이벤트
-$btnAddTodo.onclick = () => {
-  openPopup($addTodos);
-};
 // 목표 추가 버튼 클릭 이벤트
 $btnAddGoal.onclick = () => {
   if (goals.length >= 5) {
@@ -189,12 +193,6 @@ $goalList.onclick = ({ target }) => {
 };
 
 // popup
-// 할일 추가 popup 클릭 이벤트
-$addTodos.onclick = ({ target }) => {
-  popup(target, $addTodos, () => {
-    console.log('할일 추가 이벤트');
-  });
-};
 // 목표 추가 popup 클릭 이벤트
 $addGoal.onclick = ({ target }) => {
   popup(target, $addGoal, addGoalFn);
@@ -210,12 +208,17 @@ $deleteGoal.onclick = ({ target }) => {
   if (!target.matches('button')) return;
   popup(target, $deleteGoal, () => {
     deleteGoalFn(targetId);
-    console.log('목표에 관련된 할일 삭제 이벤트');
   });
 };
 // 로드 이벤트
 window.onload = async () => {
-  const _goals = await fetch('../../goals').then(res => res.json());
-  goals = _goals;
+  // 날짜 선택 최소 값 설정
+  document.querySelectorAll('input[type="date"]').forEach(input => input.min = generateDate(now));
+  try {
+    const test = await fetch('/goals');
+    goals = await test.json();
+  } catch (e) {
+    console.error(e);
+  }
   goalRender();
 };

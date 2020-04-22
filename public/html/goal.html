@@ -56,17 +56,19 @@
     <button class="btnClosed">닫기</button>
     <ul class="addInput">
       <li class="category">
-        <label for="" class="a11yHidden">목표 선택</label>
+        <label for="categorySelect" class="a11yHidden">목표 선택</label>
         <select id="categorySelect" class="categorySelect">
-          <option value="">목표를 선택하세요</option>
+          <option value="" selected>목표를 선택하세요</option>
+          <option value="">test1</option>
         </select>
       </li>
       <li class="todoInput">
         <label for="todoContent" class="a11yHidden">할일 입력</label>
         <input type="text" id="todoContent" placeholder="할일을 입력하세요">
       </li>
-      <li class="impSelect"><label for="test" class="a11yHidden">text</label>
-        <button class="btnImp" id="test">중요</button>
+      <li class="impSelect">
+        <input type="checkbox" id="important">
+        <label for="important" class="a11yHidden">중요함</label>
       </li>
       <li class="startDate">
         <label for="dateStart">시작 날짜</label>
@@ -209,6 +211,7 @@
     <button class="btnRegister">등록</button>
   </div>
   <div class="dimd"></div>
+  <script type="module" src="../js/common.js"></script>
   <script type="module" src="../js/goal.js"></script>
 </div>
 </body> 

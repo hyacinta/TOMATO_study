@@ -32,7 +32,7 @@
   "goals": [
     {
       "id": 1,
-      "content": "project tomato",
+      "content": "project",
       "dDay": "2020-04-24",
       "color": "red"
     },
@@ -44,8 +44,20 @@
     },
     {
       "id": 3,
-      "content": "test0",
-      "dDay": "2020-04-15",
+      "content": "취업",
+      "dDay": "2020-05-15",
+      "color": "yellow"
+    },
+    {
+      "id": 4,
+      "content": "알바",
+      "dDay": "2020-07-10",
+      "color": "blue"
+    },
+    {
+      "id": 5,
+      "content": "창업",
+      "dDay": "2020-08-01",
       "color": "purple"
     }
   ],
@@ -66,12 +78,12 @@
     {
       "id": 2,
       "content": "HTML",
-      "goal": 2,
-      "color": "green",
+      "goal": 3,
+      "color": "yellow",
       "date": "2020-04-22",
       "day": 3,
       "important": false,
-      "startTime": "07:00",
+      "startTime": "06:00",
       "goalTime": "2:00",
       "detail": "프로젝트 tomato HTML 제작하기",
       "done": "01:06:04"
@@ -79,10 +91,10 @@
     {
       "id": 3,
       "content": "CSS",
-      "goal": 1,
-      "color": "red",
+      "goal": 4,
+      "color": "blue",
       "date": "2020-04-22",
-      "day": 2,
+      "day": 3,
       "important": true,
       "startTime": "10:30",
       "goalTime": "1:30",
@@ -131,15 +143,15 @@
     {
       "id": 7,
       "content": "면접 준비",
-      "goal": 3,
-      "color": "yellow",
+      "goal": 2,
+      "color": "green",
       "date": "2020-04-22",
-      "day": 2,
+      "day": 3,
       "important": false,
-      "startTime": "13:00",
+      "startTime": "13:20",
       "goalTime": "3:00",
       "detail": "프로젝트 toamto 디버깅",
-      "done": "02:01:58"
+      "done": "02:02:12"
     },
     {
       "id": 8,
@@ -149,7 +161,7 @@
       "date": "2020-04-22",
       "day": 3,
       "important": true,
-      "startTime": "10:00",
+      "startTime": "08:30",
       "goalTime": "1:00",
       "detail": "프로젝트 toamto 디버깅",
       "done": "00:51:03"
@@ -160,9 +172,9 @@
       "goal": 5,
       "color": "purple",
       "date": "2020-04-22",
-      "day": 2,
+      "day": 3,
       "important": false,
-      "startTime": "20:00",
+      "startTime": "20:50",
       "goalTime": "2:00",
       "detail": "프로젝트 toamto 디버깅",
       "done": "01:04:46"

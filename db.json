@@ -1,33 +1,12 @@
 {
   "week": [
-    {
-      "date": "",
-      "day": 1
-    },
-    {
-      "date": "",
-      "day": 2
-    },
-    {
-      "date": "",
-      "day": 3
-    },
-    {
-      "date": "",
-      "day": 4
-    },
-    {
-      "date": "",
-      "day": 5
-    },
-    {
-      "date": "",
-      "day": 6
-    },
-    {
-      "date": "",
-      "day": 0
-    }
+    { "id": 0, "dayName": "일", "date": "" },
+    { "id": 1, "dayName": "월", "date": "" },
+    { "id": 2, "dayName": "화", "date": "" },
+    { "id": 3, "dayName": "수", "date": "" },
+    { "id": 4, "dayName": "목", "date": "" },
+    { "id": 5, "dayName": "금", "date": "" },
+    { "id": 6, "dayName": "토", "date": "" }
   ],
   "goals": [
     {

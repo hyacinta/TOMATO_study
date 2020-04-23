@@ -59,7 +59,7 @@
       "id": 4,
       "content": "알바",
       "dDay": "2020-07-10",
-      "color": "purple"
+      "color": "blue"
     }
   ],
   "todos": [
@@ -126,7 +126,7 @@
       "startTime": "08:00",
       "goalTime": "4:00",
       "detail": "프로젝트 tomato javascript 제작",
-      "done": "03:40:00"
+      "done": "03:40:11"
     },
     {
       "id": 6,
@@ -182,51 +182,16 @@
     },
     {
       "id": 10,
-      "content": "test1",
-      "goal": 4,
-      "color": "purple",
-      "date": "2020-04-22",
-      "day": 3,
-      "important": true,
-      "startTime": "06:00",
-      "goalTime": "0:30",
-      "detail": "테스트 할일"
-    },
-    {
-      "id": 11,
-      "content": "tesk1",
-      "goal": 3,
-      "color": "yellow",
-      "date": "2020-04-28",
-      "day": 2,
+      "content": "할일 입력 테스트",
+      "goal": 2,
+      "color": "green",
+      "date": "2020-04-24",
+      "day": 5,
       "important": true,
       "startTime": "08:00",
       "goalTime": "0:30",
-      "detail": "tesk1"
-    },
-    {
-      "id": 12,
-      "content": "tesk2",
-      "goal": 3,
-      "color": "yellow",
-      "date": "2020-04-30",
-      "day": 4,
-      "important": false,
-      "startTime": "08:00",
-      "goalTime": "0:30",
-      "detail": "tesk2"
-    },
-    {
-      "id": 13,
-      "content": "tesk3",
-      "goal": 3,
-      "color": "yellow",
-      "date": "2020-04-27",
-      "day": 1,
-      "important": true,
-      "startTime": "07:00",
-      "goalTime": "0:30",
-      "detail": "tesk3"
+      "detail": "세부내용",
+      "done": "00:00:00"
     }
   ]
 }

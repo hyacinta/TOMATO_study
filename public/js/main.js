@@ -7,8 +7,13 @@ import {
 
 let goals = [];
 let todos = [];
+let todayTodos = [];
 let targetId = null;
 let play = false;
+
+const now = new Date();
+const oneHour = 3600000;
+const oneDay = 86400000;
 
 const $todoList = document.querySelector('.todoList');
 const $todayGoal = document.querySelector('.todayGoal > p');
@@ -19,11 +24,23 @@ const $timerPopup = document.querySelector('div.timer');
 const $addTodosPopup = document.querySelector('.editTodos');
 const $deletePopup = document.querySelector('div.deleteTodo.popup');
 
+const filterTodayTodos = () => {
+  todayTodos = todos.filter(todo => {
+    const today = new Date();
+    const month = today.getMonth() + 1 > 9 ? today.getMonth() + 1 : `0${today.getMonth() + 1}`;
+    const date = today.getDate() + 1 > 9 ? today.getDate() : `0${today.getDate()}`;
+    return todo.date === `${today.getFullYear()}-${month}-${date}`; // --
+  });
+  console.log(todayTodos);
+};
+
+// 현재 날짜부터 남은 날짜 구하는 함수
+const generateDday = date => Math.ceil((date - now) / oneDay);
 
 const renderGoals = () => {
   let html = '<option value="All">목표 전체보기</option>';
   goals.forEach(goal => {
-    html += `<option value="${goal.id}">${goal.content} <span class="dDay" style="font-size: 1.6rem;">D-30</span></option>`;
+    html += `<option value="${goal.id}">${goal.content} <span class="dDay" style="font-size: 1.6rem;">D-${generateDday(new Date(goal.dDay) - (9 * oneHour))}</span></option>`;
   });
   $categorySelect.innerHTML = html;
 };
@@ -47,54 +64,9 @@ const changeText = goalTime => {
 
 };
 
-const render = () => {
-  let html = '';
-
-
-  
-  let _todos = todos.filter(todo => {
-    if ($categorySelect.value === 'All') return true;
-    return todo.goal === +$categorySelect.value;
-  });
-
-  // const getToday = _todos => {
-  _todos = _todos.filter(todo => {
-    const today = new Date();
-    const month = today.getMonth() + 1 > 9 ? today.getMonth() + 1 : `0${today.getMonth() + 1}`;
-    const date = today.getDate() + 1 > 9 ? today.getDate() : `0${today.getDate()}`;
-    return todo.date === `${today.getFullYear()}-${month}-${date}`; // --
-  });
-  // };
-
-  _todos.forEach(todo => {
-    const startTimeArr = todo.startTime.split(':', 2);
-    html += `<li id="${todo.id}" class="${todo.color}">
-    <button class="btnStopWatch">정지</button>
-    <a class="todoTitSet">
-      <h4 class="todoTit"><span class="icoImp${todo.important ? ' impCheck' : ''}">중요</span>${todo.content}</h4>
-      <span class="todoSchedule">${startTimeArr[0] > 12 ? 'PM' : 'AM'} ${changePm(startTimeArr)} ~ ${changeText(todo.goalTime)}</span>
-    </a>
-    <div class="simulationTime">${todo.done}</div>
-    <div class="todoContent">
-    ${todo.detail}
-    </div>
-    <button class="btnEdit">수정</button>
-    <button class="btnDelete">삭제</button>
-    <div class="progress">
-      <div class="progressBar" style="width : ${progressBar(todo.done, todo.goalTime)}%"></div>
-    </div>
-  </li>`;
-  });
-  $todoList.innerHTML = html;
-};
-
-$categorySelect.onchange = () => {
-  render();
-};
-
 const getTodayDone = () => {
   let [hour, min, sec] = [0, 0, 0];
-  todos.forEach(todo => {
+  todayTodos.forEach(todo => {
     const timeArray = [...todo.done].filter(num => num !== ':');
     
     hour += +(timeArray[0] + timeArray[1]);
@@ -122,11 +94,16 @@ const getTodayDone = () => {
 
 const getTodayGoalTIme = () => {
   let [hour, min] = [0, 0];
-  todos.forEach(todo => {
-    const timeArray = [...todo.goalTime].filter(num => num !== ':');
-    hour += +timeArray[0];
-    min += +(timeArray[1] + timeArray[2]);
+  todayTodos.forEach(todo => {
+    // const timeArray = [...todo.goalTime].filter(num => num !== ':');
+    // hour += +timeArray[0];
+    // min += +(timeArray[1] + timeArray[2]);
+    const [goalHour, goalMin] = todo.goalTime.split(':', 2);
+    hour += +goalHour;
+    min += +goalMin;
   });
+  hour += Math.floor(min / 60);
+  min %= 60;
   min = min.length > 1 || min > 9 ? min : '0' + min;
   $todayGoal.textContent = `${hour}시간 ${min}분`;
   return [hour, min];
@@ -136,10 +113,45 @@ const getTodayPersent = () => {
 
   const [goalHour, goalMin] = getTodayGoalTIme();
   const [nowHour, nowMin] = getTodayDone();
-  let percent = Math.round(((nowHour * 60 + nowMin) / (goalHour * 60 + goalMin)) * 100);
+  let percent = Math.round(((nowHour * 60 + +nowMin) / (goalHour * 60 + +goalMin)) * 100);
   percent = percent > 9 ? percent : '0' + percent;
-  percent = isNaN(percent) ? '00' : percent;
   $todayPercent.textContent = `${percent}%`;
+};
+
+const render = () => {
+  let html = '';
+  
+  const _todayTodos = todayTodos.filter(todo => {
+    if ($categorySelect.value === 'All') return true;
+    return todo.goal === +$categorySelect.value;
+  });
+
+  _todayTodos.forEach(todo => {
+    const startTimeArr = todo.startTime.split(':', 2);
+    html += `<li id="${todo.id}" class="${todo.color}">
+    <button class="btnStopWatch">정지</button>
+    <a class="todoTitSet">
+      <h4 class="todoTit"><span class="icoImp${todo.important ? ' impCheck' : ''}">중요</span>${todo.content}</h4>
+      <span class="todoSchedule">${startTimeArr[0] > 12 ? 'PM' : 'AM'} ${changePm(startTimeArr)} ~ ${changeText(todo.goalTime)}</span>
+    </a>
+    <div class="simulationTime">${todo.done}</div>
+    <div class="todoContent">
+    ${todo.detail}
+    </div>
+    <button class="btnEdit">수정</button>
+    <button class="btnDelete">삭제</button>
+    <div class="progress">
+      <div class="progressBar" style="width : ${progressBar(todo.done, todo.goalTime)}%"></div>
+    </div>
+  </li>`;
+  });
+  $todoList.innerHTML = html;
+  getTodayGoalTIme();
+  getTodayPersent();
+};
+
+$categorySelect.onchange = () => {
+  render();
 };
 
 // const getToday = _todos => {
@@ -158,11 +170,12 @@ const getData = async () => {
     renderGoals();
 
     todos = await fetch('/todos').then(res => res.json());
+    filterTodayTodos();
     // getToday(todos);
     getTodayDone();
     render();
-    getTodayGoalTIme();
-    getTodayPersent();
+    // getTodayGoalTIme();
+    // getTodayPersent();
   } catch (e) {
     console.error('Error:', e);
   }
@@ -262,7 +275,7 @@ const startStopWatch = () => {
 const renderPopup = target => {
   play = !play;
   $timerPopup.classList.add('active');
-  todos.forEach(todo => {
+  todayTodos.forEach(todo => {
     if (+target.parentNode.id === todo.id) {
       $timerPopup.innerHTML = `
         <a id="${todo.id}" class="todoTitSet">
@@ -285,7 +298,7 @@ const addDetail = target => {
 
 const toggleCheck = target => {
   const matchId = +target.parentNode.parentNode.parentNode.id;
-  const important = !todos.find(todo => todo.id === matchId).important;
+  const important = !todayTodos.find(todo => todo.id === matchId).important;
 
   fetch(`todos/${matchId}`, {
     method: 'PATCH',
@@ -293,7 +306,7 @@ const toggleCheck = target => {
     headers: { 'Content-Type': 'application/json' },
   })
     .then(res => res.json())
-    .then(data => todos = todos.map(todo => (todo.id === +matchId ? data : todo)))
+    .then(data => todayTodos = todayTodos.map(todo => (todo.id === +matchId ? data : todo)))
     .then(() => target.classList.toggle('impCheck'))
     // .then(render)
     .catch(error => console.error('Error:', error));
@@ -304,7 +317,7 @@ const selectGoals = todo => {
   let html = `<option value="${todo.goal}">${goals.find(goal => goal.id === +todo.goal).content}</option>`;
   goals.forEach(goal => {
     if (goal.id === todo.goal) return;
-    html += `<option value="${goal.id}">${goal.content} <span class="dDay" style="font-size: 1.6rem;">D-30</span></option>`;
+    html += `<option value="${goal.id}">${goal.content}</option>`;
   });
   $selectGoals.innerHTML = html;
 };
@@ -349,7 +362,7 @@ const minDate = () => {
 const renderEditTodo = target => {
   $addTodosPopup.classList.add('active');
 
-  todos.forEach(todo => {
+  todayTodos.forEach(todo => {
     if (todo.id !== +target.parentNode.id) return;
     $addTodosPopup.innerHTML = `
       <h3 id="${todo.id}">할일 수정</h3>
@@ -494,7 +507,7 @@ const editTodo = target => {
       detail: getDetail(),
     })
   }).then(res => res.json())
-    .then(data => todos = todos.map(todo => (todo.id === id ? data : todo)))
+    .then(data => todayTodos = todayTodos.map(todo => (todo.id === id ? data : todo)))
     // .then(getToday) 
     .then(render)
     .then(removeEdit) 
@@ -528,13 +541,16 @@ $todoList.onclick = e => {
   // if (e.target.matches('.todoList > li > .btnDelete')) deleteTodo(e.target);
   if (e.target.matches('.todoList > li > .btnEdit')) renderEditTodo(e.target);
 };
-
+// getTodayGoalTIme();
+// getTodayPersent();
 const deleteTodo = () => {
 
   fetch(`/todos/${targetId}`, { method: 'DELETE' })
     .then(res => res.json())
-    .then(() => todos = todos.filter(todo => todo.id !== targetId))
+    .then(() => todayTodos = todayTodos.filter(todo => todo.id !== targetId))
     .then(render)
+    // .then(getTodayGoalTIme)
+    // .then(getTodayPersent)
     .catch(error => console.error('Error:', error));
   $deletePopup.classList.remove('active');
 };
@@ -552,8 +568,10 @@ const patchTimer = target => {
     headers: { 'Content-Type': 'application/json' },
   })
     .then(res => res.json())
-    .then(data => todos = todos.map(todo => (todo.id === +matchId ? data : todo)))
+    .then(data => todayTodos = todayTodos.map(todo => (todo.id === +matchId ? data : todo)))
     .then(render)
+    // .then(getTodayGoalTIme)
+    // .then(getTodayPersent)
     .catch(error => console.error('Error:', error));
 };
 
@@ -573,7 +591,6 @@ $timerPopup.onclick = e => {
 
 // import
 /* 치원님 할일 추가 code 시작 */
-const now = new Date();
 const $btnAddTodo = document.querySelector('.btnAddTodo');
 // popup
 // 할일 추가 popup

@@ -55,11 +55,7 @@ const getToday = _todos => {
   });
 };
 
-const filterTodos = () => {
-  return todos.filter(todo => {
-    return todo.date === $selectDate.value;
-  });
-};
+const filterTodos = () => todos.filter(todo => todo.date === $selectDate.value);
 
 // timeArr를 돌면서 todos와 매칭하는것만 필터 후 요소로 i를 주고 스케줄[i]에innerHtml 한다. 
 // innerHtml이라서 시작시간이 겹치는 구간은 덮어쓴다. 고로 랜더링이 안된다.

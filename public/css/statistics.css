@@ -181,6 +181,7 @@
   bottom: 0;
   width: 20px;
   height: 140px;
+  max-height: 100%;
   margin: auto;
   border-radius: 4px 4px 0 0;
   border-width: 1px 1px 0 1px;

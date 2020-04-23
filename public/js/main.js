@@ -389,12 +389,12 @@ const renderEditTodo = target => {
           <input type="number" name="" id="" placeholder="입력하세요"><span>시</span>
           <select name="country" id="countrySelectBox">
             <option value="">선택하세요</option>
-            <option value="1">00분</option>
-            <option value="2">10분</option>
-            <option value="3">20분</option>
-            <option value="4">30분</option>
-            <option value="5">40분</option>
-            <option value="6">50분</option>
+            <option value="1">00</option>
+            <option value="2">10</option>
+            <option value="3">20</option>
+            <option value="4">30</option>
+            <option value="5">40</option>
+            <option value="6">50</option>
           </select><span>분</span>
         </li>
         <li class="goalTime">
@@ -748,16 +748,16 @@ $addTodos.onchange = ({ target }) => {
   }
   if (target === $addTodoStart.hour) {
     $addTodoStart.minute.innerHTML = target.value === '23' ? `
-    <option value="00">00분</option>
-    <option value="10">10분</option>
-    <option value="20">20분</option>
-    <option value="30">30분</option>` : `
-    <option value="00">00분</option>
-    <option value="10">10분</option>
-    <option value="20">20분</option>
-    <option value="30">30분</option>
-    <option value="40">40분</option>
-    <option value="50">50분</option>`;
+    <option value="00">00</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="30">30</option>` : `
+    <option value="00">00</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="30">30</option>
+    <option value="40">40</option>
+    <option value="50">50</option>`;
     todoGoalOption(+$addTodoStart.hour.value, 0);
   }
 };

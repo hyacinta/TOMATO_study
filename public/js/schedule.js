@@ -271,16 +271,16 @@ $addTodos.onchange = ({ target }) => {
   }
   if (target === $addTodoStart.hour) {
     $addTodoStart.minute.innerHTML = target.value === '23' ? `
-    <option value="00">00분</option>
-    <option value="10">10분</option>
-    <option value="20">20분</option>
-    <option value="30">30분</option>` : `
-    <option value="00">00분</option>
-    <option value="10">10분</option>
-    <option value="20">20분</option>
-    <option value="30">30분</option>
-    <option value="40">40분</option>
-    <option value="50">50분</option>`;
+    <option value="00">00</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="30">30</option>` : `
+    <option value="00">00</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="30">30</option>
+    <option value="40">40</option>
+    <option value="50">50</option>`;
     todoGoalOption(+$addTodoStart.hour.value, 0);
   }
 };

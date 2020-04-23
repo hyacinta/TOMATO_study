@@ -41,7 +41,7 @@
       "id": 1,
       "content": "알바",
       "dDay": "2020-04-25",
-      "color": "blue"
+      "color": "purple"
     },
     {
       "id": 2,
@@ -87,7 +87,7 @@
       "startTime": "06:30",
       "goalTime": "1:00",
       "detail": "",
-      "done": "00:10:08"
+      "done": "00:10:21"
     },
     {
       "id": 3,
@@ -104,29 +104,16 @@
     },
     {
       "id": 4,
-      "content": "GUI 작업",
-      "goal": 2,
-      "color": "green",
-      "date": "2020-04-23",
-      "day": 4,
-      "important": true,
-      "startTime": "10:40",
+      "content": "GUI 작업 완료",
+      "goal": 4,
+      "color": "yellow",
+      "date": "2020-04-29",
+      "day": 3,
+      "important": false,
+      "startTime": "12:10",
       "goalTime": "1:30",
       "detail": "피그마 사용eeee",
       "done": "01:00:07"
-    },
-    {
-      "id": 5,
-      "content": "html 마크업",
-      "goal": 3,
-      "color": "red",
-      "date": "2020-04-23",
-      "day": 4,
-      "important": false,
-      "startTime": "13:00",
-      "goalTime": "3:00",
-      "detail": "코딩 컨벤션 조사 후 작성",
-      "done": "00:50:00"
     },
     {
       "id": 7,
@@ -166,6 +153,19 @@
       "goalTime": "0:30",
       "detail": "",
       "done": "00:03:00"
+    },
+    {
+      "id": 13,
+      "content": "ㄹㅇㅁㄴㅇㄹ",
+      "goal": 3,
+      "color": "red",
+      "date": "2020-04-27",
+      "day": 1,
+      "important": false,
+      "startTime": "07:10",
+      "goalTime": "0:30",
+      "detail": "ㄹㅇㄴㅁㄴㅇㄹ",
+      "done": "00:00:00"
     }
   ]
 }

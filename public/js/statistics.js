@@ -7,7 +7,7 @@ import {
 
 let week = [];
 let goals = [];
-let todos = [];
+let todos = []; 
 
 // DOMS
 const $period = document.querySelector('.period');
@@ -466,6 +466,17 @@ const todoGoalOption = (hour, minute) => {
   console.log('시간에 따라 옵션 수 줄이기', hour, minute);
   $addTodoGTime.innerHTML = html;
 };
+// addTodo popup 초기화 함수
+const resetAddtodo = () => {
+  $addTodoCont.value = '';
+  $addTodoImp.checked = false;
+  $addTodoDate.value = '';
+  $addTodoDate.max = null;
+  $addTodoStart.hour.value = '';
+  $addTodoStart.minute.innerHTML = '<option value=""> 분 </option>';
+  $addTodoGTime.innerHTML = '<option value=""> - </option>';
+  $addTodoDetail.value = '';
+};
 
 // 통신
 // 할일 추가 함수
@@ -504,14 +515,7 @@ const addTodos = async () => {
     todos = [...todos, todo];
     window.alert('할일이 추가되었습니다.');
     closePopup($addTodos);
-    $addTodoCont.value = '';
-    $addTodoImp.checked = false;
-    $addTodoDate.value = '';
-    $addTodoDate.max = null;
-    $addTodoStart.hour.value = '';
-    $addTodoStart.minute.innerHTML = '<option value=""> 분 </option>';
-    $addTodoGTime.innerHTML = '<option value=""> - </option>';
-    $addTodoDetail.value = '';
+    resetAddtodo();
     console.log('조건에 따라서 뷰 랜더');
   } catch (e) {
     console.error(e);
@@ -533,7 +537,7 @@ $btnAddTodo.onclick = () => {
 // popup
 // 할일 추가 popup 클릭 이벤트
 $addTodos.onclick = ({ target }) => {
-  popup(target, $addTodos, addTodos);
+  popup(target, $addTodos, addTodos, resetAddtodo);
 };
 // 할일 선택 이벤트
 $addTodos.onchange = ({ target }) => {
@@ -560,8 +564,6 @@ $addTodos.onchange = ({ target }) => {
 };
 
 /* 치원님 할일 추가 code 종료 */
-
-
 
 window.onload = () => {
   const now = new Date();

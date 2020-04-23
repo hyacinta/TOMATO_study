@@ -122,19 +122,6 @@
       "done": "05:32:18"
     },
     {
-      "id": 5,
-      "content": "javascpt",
-      "goal": 2,
-      "color": "green",
-      "date": "2020-04-23",
-      "day": 4,
-      "important": false,
-      "startTime": "18:50",
-      "goalTime": "1:00",
-      "detail": "프로젝트 tomato javascript 제작",
-      "done": "00:41:06"
-    },
-    {
       "id": 7,
       "content": "면접 준비",
       "goal": 2,
@@ -185,19 +172,6 @@
       "goalTime": "2:00",
       "detail": "프로젝트 tomato HTML 제작",
       "done": "02:05:38"
-    },
-    {
-      "id": 11,
-      "content": "HTML",
-      "goal": 3,
-      "color": "yellow",
-      "date": "2020-04-23",
-      "day": 4,
-      "important": false,
-      "startTime": "06:00",
-      "goalTime": "2:00",
-      "detail": "프로젝트 tomato HTML 제작하기",
-      "done": "01:08:14"
     },
     {
       "id": 12,

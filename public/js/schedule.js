@@ -2,7 +2,7 @@ let goals = [];
 let todos = [];
 
 const $scheduleList = document.querySelectorAll('main#schedule ul.scheduleList div.halfMinute');
-const $selectDate = document.querySelector('li.selectDate > input[type="date"]');
+const $selectDate = document.querySelector('.selectDate > input[type="date"]');
 
 const addZero = num => {
   return num.length > 1 || num > 9 ? num : '0' + num;
@@ -51,7 +51,6 @@ const getToday = _todos => {
 
 const filterTodos = () => {
   return todos.filter(todo => {
-    console.log(todo.date, $selectDate.value);
     return todo.date === $selectDate.value;
   });
 };
@@ -83,7 +82,6 @@ const getData = async () => {
     goals = await fetch('/goals').then(res => res.json());
     
     todos = await fetch('/todos').then(res => res.json());
-    console.log('getTodos', todos);
     renderSche();
   } catch (e) {
     console.error('Error:', e);

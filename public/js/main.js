@@ -12,7 +12,6 @@ const $timerPopup = document.querySelector('div.timer');
 const $addTodosPopup = document.querySelector('.editTodos');
 const $deletePopup = document.querySelector('div.deleteTodo.popup');
 
-console.log($deletePopup);
 
 const renderGoals = () => {
   let html = '<option value="All">목표 전체보기</option>';
@@ -193,7 +192,6 @@ const timerClosure = (() => {
   return {
     name(elementName) {
       const times = elementName.textContent.split(':', 3);
-      console.log(times);
       if (elementName.matches('.simulationTime')) countTime(elementName, times);
       if (elementName.matches('.totalTime')) countTime(elementName, times);
     }
@@ -267,7 +265,6 @@ const renderPopup = target => {
 
 const addDetail = target => {
   target.parentNode.classList.toggle('ing');
-  console.log(target);
 };
 
 const toggleCheck = target => {
@@ -340,7 +337,6 @@ const renderEditTodo = target => {
     if (todo.id !== +target.parentNode.id) return;
     $addTodosPopup.innerHTML = `
       <h3 id="${todo.id}">할일 수정</h3>
-      <button class="btnClosed">닫기</button>
       <ul class="addInput">
         <li class="category">
           <label for="" class="a11yHidden">목표 선택</label>
@@ -455,7 +451,6 @@ const getDetail = () => {
 
 const getGoalTm = () => {
   const $goalTime = +document.querySelector('.editTodos .goalTime select').value;
-  console.log($goalTime);
   if ($goalTime === 1) return '0:30';
   if ($goalTime === 2) return '1:00';
   if ($goalTime === 3) return '1:30';
@@ -496,7 +491,7 @@ const editTodo = target => {
 // 투두 수정 팝업창
 $addTodosPopup.onclick = e => {
   if (e.target.matches('.editTodos > .btnCancel')) removeEdit();
-  if (e.target.matches('.editTodos > .btnClosed')) removeEdit();
+  // if (e.target.matches('.editTodos > .btnClosed')) removeEdit();
   if (e.target.matches('.editTodos > .btnRegister')) editTodo(e.target);
   if (e.target.matches('.editTodos .addInput > li.impSelect .btnImp')) e.target.classList.toggle('impCheck');
 };
@@ -528,8 +523,6 @@ const deleteTodo = () => {
     .then(() => todos = todos.filter(todo => todo.id !== targetId))
     .then(render)
     .catch(error => console.error('Error:', error));
-    
-  console.log(targetId);
 };
 
 $deletePopup.onclick = e => {

@@ -1,5 +1,7 @@
 let goals = [];
 let todos = [];
+let targetId = null;
+let play = false;
 
 const $todoList = document.querySelector('.todoList');
 const $todayGoal = document.querySelector('.todayGoal > p');
@@ -8,6 +10,8 @@ const $categorySelect = document.querySelector('.categorySelect');
 const $totalTime = document.querySelector('.todayInformation > .totalTime');
 const $timerPopup = document.querySelector('div.timer');
 const $addTodosPopup = document.querySelector('.editTodos');
+const $deletePopup = document.querySelector('div.deleteTodo.popup');
+
 
 const renderGoals = () => {
   let html = '<option value="All">목표 전체보기</option>';
@@ -18,13 +22,10 @@ const renderGoals = () => {
 };
 
 const progressBar = (done, goal) => {
-  const doneArr = [...done].filter(num => num !== ':');
-  const goalArr = [...goal].filter(num => num !== ':');
+  const [doneHour, doneMin] = done.split(':');
+  const [goalHour, goalMin] = goal.split(':');
 
-  const [doneHour, doneMin] = [+(doneArr[0] + doneArr[1]), +(doneArr[2] + doneArr[3])];
-  const [goalHour, goalMin] = [+goalArr[0], +(goalArr[1] + goalArr[2])];
-
-  let percent = Math.round(((doneHour * 60 + doneMin) / (goalHour * 60 + goalMin)) * 100);
+  let percent = Math.round(((doneHour * 60 + +doneMin) / (goalHour * 60 + +goalMin)) * 100);
   if (isNaN(percent)) percent = 0; 
   return percent = percent > 100 ? 101 : percent;
 };
@@ -190,8 +191,7 @@ const timerClosure = (() => {
 
   return {
     name(elementName) {
-      const timeArray = [...elementName.textContent].filter(num => num !== ':');
-      const times = [timeArray[0] + timeArray[1], timeArray[2] + timeArray[3], timeArray[4] + timeArray[5]];
+      const times = elementName.textContent.split(':', 3);
       if (elementName.matches('.simulationTime')) countTime(elementName, times);
       if (elementName.matches('.totalTime')) countTime(elementName, times);
     }
@@ -219,9 +219,13 @@ const popupControl = (() => {
 
 // 스탑워치 시작
 const startStopWatch = () => {
-  if (popupControl.containPlay()) return;
+  if (!play) return;
   
   const timer = setInterval(() => {
+    if (!play) {
+      clearInterval(timer);
+      return;
+    }
     if (popupControl.containPlay()) {
       clearInterval(timer);
       return;
@@ -232,10 +236,15 @@ const startStopWatch = () => {
     }
     timerClosure.name($totalTime);
     timerClosure.name(popupControl.simulationTime());
+    // (async () => {
+    //   await timerClosure.name($totalTime);
+    //   await timerClosure.name(popupControl.simulationTime());
+    // })();
   }, 1000);
 };
 
 const renderPopup = target => {
+  play = !play;
   $timerPopup.classList.add('active');
   todos.forEach(todo => {
     if (+target.parentNode.id === todo.id) {
@@ -256,7 +265,6 @@ const renderPopup = target => {
 
 const addDetail = target => {
   target.parentNode.classList.toggle('ing');
-  console.log(target);
 };
 
 const toggleCheck = target => {
@@ -273,18 +281,6 @@ const toggleCheck = target => {
     .then(() => target.classList.toggle('impCheck'))
     // .then(render)
     .catch(error => console.error('Error:', error));
-};
-
-
-const deleteTodo = target => {
-
-  fetch(`/todos/${target.parentNode.id}`, { method: 'DELETE' })
-    .then(res => res.json())
-    .then(() => todos = todos.filter(todo => todo.id !== +target.parentNode.id))
-    .then(render)
-    .catch(error => console.error('Error:', error));
-    
-  console.log(target.parentNode);
 };
 
 const selectGoals = todo => {
@@ -316,7 +312,6 @@ const giveValue = todo => {
   const $goalTime = document.querySelector('.editTodos .goalTime select');
   const $startDate = document.querySelector('.editTodos li.startDate input');
   const $todoInput = document.querySelector('.editTodos .addInput > .todoInput input');
-
   // const $endDate = document.querySelector('.editTodos li.endDate input');
 
   $startMin.value = +todo.startTime[3] + 1;
@@ -330,6 +325,10 @@ const giveValue = todo => {
     $startMin, $startHour, $goalTime, $startDate 
   };
 };
+const generateDate = time => `${time.getFullYear()}-${time.getMonth() > 9 ? time.getMonth() + 1 : '0' + (time.getMonth() + 1)}-${time.getDate()}`;
+const minDate = () => {
+  [...document.querySelectorAll('input[type="date"]')].forEach(input => input.min = generateDate(new Date()));
+};
 
 const renderEditTodo = target => {
   $addTodosPopup.classList.add('active');
@@ -338,7 +337,6 @@ const renderEditTodo = target => {
     if (todo.id !== +target.parentNode.id) return;
     $addTodosPopup.innerHTML = `
       <h3 id="${todo.id}">할일 수정</h3>
-      <button class="btnClosed">닫기</button>
       <ul class="addInput">
         <li class="category">
           <label for="" class="a11yHidden">목표 선택</label>
@@ -398,6 +396,7 @@ const renderEditTodo = target => {
     
     giveValue(todo);
     selectGoals(todo);
+    minDate();
   });
 };
 
@@ -452,7 +451,6 @@ const getDetail = () => {
 
 const getGoalTm = () => {
   const $goalTime = +document.querySelector('.editTodos .goalTime select').value;
-  console.log($goalTime);
   if ($goalTime === 1) return '0:30';
   if ($goalTime === 2) return '1:00';
   if ($goalTime === 3) return '1:30';
@@ -493,9 +491,16 @@ const editTodo = target => {
 // 투두 수정 팝업창
 $addTodosPopup.onclick = e => {
   if (e.target.matches('.editTodos > .btnCancel')) removeEdit();
-  if (e.target.matches('.editTodos > .btnClosed')) removeEdit();
+  // if (e.target.matches('.editTodos > .btnClosed')) removeEdit();
   if (e.target.matches('.editTodos > .btnRegister')) editTodo(e.target);
   if (e.target.matches('.editTodos .addInput > li.impSelect .btnImp')) e.target.classList.toggle('impCheck');
+};
+
+
+
+const deletePopup = target => {
+  $deletePopup.classList.add('active');
+  targetId = +target.parentNode.id;
 };
 
 // 투두리스트 클릭 > 1.스탑워치 시작 버튼
@@ -505,8 +510,24 @@ $todoList.onclick = e => {
   if (e.target.matches('.todoList > li > .todoTitSet')) addDetail(e.target);
   if (e.target.matches('.todoList > li > .todoTitSet > *')) addDetail(e.target.parentNode);
   if (e.target.matches('.todoList > li')) e.target.classList.toggle('ing');
-  if (e.target.matches('.todoList > li > .btnDelete')) deleteTodo(e.target);
+  if (e.target.matches('.todoList > li > .btnDelete')) deletePopup(e.target);
+  // if (e.target.matches('.todoList > li > .btnDelete')) $deletePopup.classList.add('active');
+  // if (e.target.matches('.todoList > li > .btnDelete')) deleteTodo(e.target);
   if (e.target.matches('.todoList > li > .btnEdit')) renderEditTodo(e.target);
+};
+
+const deleteTodo = () => {
+
+  fetch(`/todos/${targetId}`, { method: 'DELETE' })
+    .then(res => res.json())
+    .then(() => todos = todos.filter(todo => todo.id !== targetId))
+    .then(render)
+    .catch(error => console.error('Error:', error));
+};
+
+$deletePopup.onclick = e => {
+  if (e.target.matches('.deleteTodo > button:not(.btnRemove)')) $deletePopup.classList.remove('active');
+  if (e.target.matches('.deleteTodo > button.btnRemove')) deleteTodo();
 };
 
 const patchTimer = target => {
@@ -524,6 +545,8 @@ const patchTimer = target => {
 
 // 타이머 팝업창 클릭 > 1. 종료 버튼 2. 일시정지 버튼
 $timerPopup.onclick = e => {
+  if (!e.target.matches('button')) return;
+  play = !play;
   if (e.target.matches('.timer > .btnRegister')) {
     removeActive();
     patchTimer(e.target);

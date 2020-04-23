@@ -164,6 +164,7 @@ const addTodos = async () => {
         startTime: `${hour < 10 ? '0' + hour : hour}:${$addTodoStart.minute.value}`,
         goalTime: $addTodoGTime.value,
         detail: $addTodoDetail.value,
+        done: '00:00:00'
       })
     });
     const todo = await _todo.json();

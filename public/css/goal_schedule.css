@@ -73,8 +73,22 @@
   justify-content: center;
   width: 240px;
   margin: 40px auto;
+  padding-right: 10px;
   font-size: 2rem;
   color: #707070;
+  animation-name: btnDissolve;
+  animation-duration: .5s;
+  animation-delay: .5s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+@keyframes btnDissolve {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
 }
 .btnAddGoal .icoPlusGray {
   display: inline-block;

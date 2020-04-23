@@ -97,13 +97,28 @@
   overflow: hidden;
   vertical-align: top;
 }
-.todoList .icoImp, .timer .icoImp {background-image: url('../img/ico_imp_off.png');}
+button.btnImp {
+  width: 40px;
+  height: 40px;
+  padding-top: 40px;
+  overflow: hidden;
+  background-size: 24px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.todoList .icoImp, .timer .icoImp, button.btnImp {background-image: url('../img/ico_imp_off.png');}
 .todoList .red .icoImp.impCheck, .timer .red .icoImp.icoCheck {background-image: url('../img/ico_imp_on_red.png');}
 .todoList .yellow .icoImp.impCheck, .timer .yellow .icoImp.icoCheck {background-image: url('../img/ico_imp_on_yellow.png');}
 .todoList .green .icoImp.impCheck, .timer .green .icoImp.icoCheck {background-image: url('../img/ico_imp_on_green.png');}
 .todoList .blue .icoImp.impCheck, .timer .blue .icoImp.icoCheck {background-image: url('../img/ico_imp_on_blue.png');}
 .todoList .purple .icoImp.impCheck, .timer .purple .icoImp.icoCheck {background-image: url('../img/ico_imp_on_purple.png');}
-.addTodos .impCheck {background-image: url('../img/ico_imp_on.png');}
+.addTodos .impCheck, button.btnImp.impCheck {background-image: url('../img/ico_imp_on.png');}
+button.btnImp.impCheck + label {
+  background-image: url('../img/ico_imp_on.png')
+}
+.impSelect label.btnImpLabel {background-image: none;}
+
+
 .todoTit {font-size: 1.6rem;}
 .todoSchedule {
   font-size: 1.2rem;

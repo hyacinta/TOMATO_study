@@ -364,28 +364,25 @@ const renderEditTodo = target => {
           <label for="" class="a11yHidden">할일 입력</label>
           <input type="text" placeholder="${todo.content}">
         </li>
-        <li class="impSelect"><label for="test" class="a11yHidden">text</label>
+        <li class="impSelect"><label for="test" class="a11yHidden btnImpLabel">text</label>
           <button class="btnImp ${todo.color}${todo.important ? ' impCheck' : ''}" id="test">중요</button>
         </li>
         <li class="startDate">
           <label for="">시작 날짜</label>
           <input type="date" name="" id="">
         </li>
-        <li class="endDate">
-          <label for="">종료 날짜</label>
-          <input type="date" name="" id="">
-        </li>
         <li class="startTime">
           <label for="">공부 시작시간</label>
-          <input type="number" name="" id="" placeholder="시">
+          <input type="number" name="" id="" placeholder="입력하세요"><span>시</span>
           <select name="country" id="countrySelectBox">
+            <option value="">선택하세요</option>
             <option value="1">00분</option>
             <option value="2">10분</option>
             <option value="3">20분</option>
             <option value="4">30분</option>
             <option value="5">40분</option>
             <option value="6">50분</option>
-          </select>
+          </select><span>분</span>
         </li>
         <li class="goalTime">
           <label for="">목표 공부시간</label>

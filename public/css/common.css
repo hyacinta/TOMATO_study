@@ -286,7 +286,7 @@ nav {
   z-index: 150;
 }
 
-.addTodos.popup {height: 572px;}
+.addTodos.popup {height: 666px;}
 .addGoal.popup, .editGoal.popup {height: 362px;}
 .timer.popup {height: 250px;}
 
@@ -327,9 +327,14 @@ nav {
   height: 20px;
   opacity: 0;
 }
-.startDate, .endDate, .startTime, .goalTime  {
-  width: 50%;
+.startDate, .startTime, .goalTime  {
+  width: 100%;
   text-align: center;
+} 
+.startTime span {
+  padding-top: 10px;
+  padding-right: 5px;
+  border-bottom: 1px solid #cecece;
 }
 .contentInput {width: 100%;}
 .contentInput textarea {height: 80px;}
@@ -344,9 +349,9 @@ nav {
   padding-left: 10px;
   text-align: left;
 }
-.startTime input {width: 56px;}
+.startTime input {width: 106px;}
 .startTime select {
-  width: 80px;
+  width: 130px;
   text-align: right;
   color: #707070;
 }

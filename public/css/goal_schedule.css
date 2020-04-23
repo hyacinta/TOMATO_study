@@ -1,9 +1,58 @@
-.goalList {background-color: #fff;}
+.goalList {
+  background-color: #fff;
+  animation-name: bgColorChange;
+  animation-duration: .5s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+@keyframes bgColorChange {
+  0% {
+    transform: translateY(-100%);
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .goalList li {
   display: flex;
   align-items: center;
   padding: 20px;
+  animation-name: indexInputLoad;
+  animation-duration: .2s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
 }
+@keyframes indexInputLoad {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.goalList li:nth-child(1) {
+  animation-delay: .2s;
+}
+.goalList li:nth-child(2) {
+  animation-delay: .25s;
+}
+.goalList li:nth-child(3) {
+  animation-delay: .3s;
+}
+.goalList li:nth-child(4) {
+  animation-delay: .35s;
+}
+.goalList li:nth-child(5) {
+  animation-delay: .4s;
+}
+
+
 .goalList li::before {
   display: block;
   content: '';
@@ -137,8 +186,20 @@
   min-height: 29px;
   padding: 0 8px;
   z-index: 10;
+  animation-name: todoRanding;
+  animation-duration: .4s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+  transform-origin: left center;
 }
-
+@keyframes todoRanding {
+  0% {
+      opacity: .5;
+  }
+  100% {
+      opacity: 1;
+  }
+}
 /* 하은 날짜 추가 */
 #schedule .selectDate {
   display: none;

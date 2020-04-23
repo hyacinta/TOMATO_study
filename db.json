@@ -114,7 +114,7 @@
       "startTime": "18:50",
       "goalTime": "1:00",
       "detail": "프로젝트 tomato javascript 제작",
-      "done": "00:41:18"
+      "done": "00:41:24"
     },
     {
       "id": 7,
@@ -192,7 +192,7 @@
       "startTime": "10:30",
       "goalTime": "1:30",
       "detail": "프로젝트 tomato CSS 제작",
-      "done": "00:41:56"
+      "done": "00:42:01"
     },
     {
       "id": 13,
@@ -348,6 +348,58 @@
       "startTime": "06:00",
       "goalTime": "0:30",
       "detail": "",
+      "done": "00:00:00"
+    },
+    {
+      "id": 25,
+      "content": "자바",
+      "goal": 2,
+      "color": "yellow",
+      "date": "2020-04-23",
+      "day": 4,
+      "important": false,
+      "startTime": "10:00",
+      "goalTime": "0:30",
+      "detail": "세부내용",
+      "done": "00:00:00"
+    },
+    {
+      "id": 26,
+      "content": "디버깅",
+      "goal": 1,
+      "color": "red",
+      "date": "2020-04-23",
+      "day": 4,
+      "important": false,
+      "startTime": "12:00",
+      "goalTime": "0:30",
+      "detail": "버그버그",
+      "done": "00:00:00"
+    },
+    {
+      "id": 27,
+      "content": "할일",
+      "goal": 2,
+      "color": "yellow",
+      "date": "2020-04-23",
+      "day": 4,
+      "important": false,
+      "startTime": "12:30",
+      "goalTime": "0:30",
+      "detail": "쉬기",
+      "done": "00:00:00"
+    },
+    {
+      "id": 28,
+      "content": "할일",
+      "goal": 2,
+      "color": "yellow",
+      "date": "2020-04-23",
+      "day": 4,
+      "important": false,
+      "startTime": "16:30",
+      "goalTime": "0:30",
+      "detail": "ㅇ",
       "done": "00:00:00"
     }
   ]

@@ -193,26 +193,28 @@ const addTodos = async () => {
     window.alert('필수 입력란이 전부 채워지지 않았습니다.');
     return;
   }
+
+  // 할일 일정이 오늘 이후인지 확인
+  if (new Date($addTodoDate.value) - new Date(generateDateCW(now)) < 0) {
+    window.alert('시작 날짜를 오늘 이후로 선택하십시요.');
+    return;
+  }
+
   const hour = $addTodoStart.hour.value;
   const minute = $addTodoStart.minute.value;
+  // 시작 시간이 6 - 23 인지 확인
+  if (hour < 6 || hour > 23) {
+    window.alert('시작 시간은 6시부터 23시까지 입니다.');
+    return;
+  }
+  
   // 중복 예정 확인
   if (!checkTime($addTodoDate.value, `${hour}:${minute}`, $addTodoGTime.value)) {
     window.alert('할일 예정이 다른 예정과 겹칩니다.');
     return;
   }
-  console.log({
-    id: generateId(todos),
-    content: $addTodoCont.value,
-    goal: +$addTodoGoal.value,
-    color: goals.find(({ id }) => id === +$addTodoGoal.value).color,
-    date: $addTodoDate.value,
-    day: new Date($addTodoDate.value).getDay(),
-    important: $addTodoImp.checked,
-    startTime: `${hour < 10 ? '0' + hour : hour}:${$addTodoStart.minute.value}`,
-    goalTime: $addTodoGTime.value,
-    detail: $addTodoDetail.value,
-    done: '00:00:00'
-  });
+
+  // 통신 - post -
   try {
     const _todo = await fetch('/todos', {
       method: 'POST',

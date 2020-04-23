@@ -196,6 +196,7 @@ nav {
   background: url('../img/ico_plus_white.png') no-repeat center;
   background-size: 24px 24px;
   background-color: #FF551F;
+  box-shadow: 0 0 12px 1px rgba(0,0,0,0.2);
   overflow: hidden;
 }
 .navLink {

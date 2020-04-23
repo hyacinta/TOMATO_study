@@ -45,27 +45,9 @@
     },
     {
       "id": 2,
-      "content": "react",
-      "dDay": "2020-04-29",
-      "color": "green"
-    },
-    {
-      "id": 3,
-      "content": "취직",
-      "dDay": "2020-05-15",
+      "content": "자바스크립트",
+      "dDay": "2020-04-25",
       "color": "yellow"
-    },
-    {
-      "id": 4,
-      "content": "알바",
-      "dDay": "2020-07-10",
-      "color": "blue"
-    },
-    {
-      "id": 5,
-      "content": "영어 공부",
-      "dDay": "2020-04-27",
-      "color": "purple"
     }
   ],
   "todos": [
@@ -132,7 +114,7 @@
       "startTime": "18:50",
       "goalTime": "1:00",
       "detail": "프로젝트 tomato javascript 제작",
-      "done": "00:41:06"
+      "done": "00:41:18"
     },
     {
       "id": 7,
@@ -197,7 +179,7 @@
       "startTime": "06:00",
       "goalTime": "2:00",
       "detail": "프로젝트 tomato HTML 제작하기",
-      "done": "01:08:14"
+      "done": "01:08:44"
     },
     {
       "id": 12,

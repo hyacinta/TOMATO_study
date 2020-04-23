@@ -25,7 +25,8 @@ const mkTimeArr = () => {
 };
 
 const getGoalContent = id => {
-  return goals.find(goal => goal.id === id).content;
+  console.log(goals);
+  return goals.find(goal => +goal.id === +id).content;
 };
 
 const getTimeCal = time => {
@@ -61,11 +62,13 @@ const renderSche = () => {
   const timeArr = mkTimeArr();
   const scheArr = [...$scheduleList];
 
+  todos = todos.filter(todo => goals.find(goal => goal.id === todo.goal));
   const _todos = $selectDate.value === '' ? getToday(todos) : filterTodos();
 
   scheArr.forEach(sche => sche.innerHTML = '');
 
   _todos.filter(todo => {
+    console.log(todo.goal);
     const timeLimit = getTimeCal(todo.startTime);
     if (timeLimit < 360 || timeLimit > 1439) return;
     const i = timeArr.findIndex(time => time === roundTime(todo.startTime));

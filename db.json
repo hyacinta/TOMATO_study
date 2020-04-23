@@ -1,32 +1,39 @@
 {
   "week": [
     {
-      "date": "",
-      "day": 1
+      "id": 0,
+      "dayName": "일",
+      "date": ""
     },
     {
-      "date": "",
-      "day": 2
+      "id": 1,
+      "dayName": "월",
+      "date": ""
     },
     {
-      "date": "",
-      "day": 3
+      "id": 2,
+      "dayName": "화",
+      "date": ""
     },
     {
-      "date": "",
-      "day": 4
+      "id": 3,
+      "dayName": "수",
+      "date": ""
     },
     {
-      "date": "",
-      "day": 5
+      "id": 4,
+      "dayName": "목",
+      "date": ""
     },
     {
-      "date": "",
-      "day": 6
+      "id": 5,
+      "dayName": "금",
+      "date": ""
     },
     {
-      "date": "",
-      "day": 0
+      "id": 6,
+      "dayName": "토",
+      "date": ""
     }
   ],
   "goals": [
@@ -39,7 +46,7 @@
     {
       "id": 2,
       "content": "react",
-      "dDay": "2020-04-28",
+      "dDay": "2020-04-29",
       "color": "green"
     },
     {
@@ -56,8 +63,8 @@
     },
     {
       "id": 5,
-      "content": "창업",
-      "dDay": "2020-08-01",
+      "content": "영어 공부",
+      "dDay": "2020-04-27",
       "color": "purple"
     }
   ],
@@ -308,6 +315,19 @@
       "goalTime": "2:00",
       "detail": "프로젝트 toamto 디버깅",
       "done": "01:04:46"
+    },
+    {
+      "id": 10,
+      "content": "할일 입력 테스트",
+      "goal": 2,
+      "color": "green",
+      "date": "2020-04-24",
+      "day": 5,
+      "important": true,
+      "startTime": "08:00",
+      "goalTime": "0:30",
+      "detail": "세부내용",
+      "done": "00:00:00"
     }
   ]
 }

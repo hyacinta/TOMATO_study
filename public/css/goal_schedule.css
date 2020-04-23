@@ -119,6 +119,12 @@
   position: relative;
   width: 20%;
 }
+.indexInput input[type="radio"] {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: -10;
+}
 .indexInput label {
   /* position: relative; */
   display: block;
@@ -166,12 +172,7 @@
 .indexInput .purple input[type="radio"]:checked + label {
   background-color: #a98dd7;
 }
-.indexInput input[type="radio"] {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  z-index: -10;
-}
+
 
 
 

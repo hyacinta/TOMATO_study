@@ -114,7 +114,7 @@
       "startTime": "18:50",
       "goalTime": "1:00",
       "detail": "프로젝트 tomato javascript 제작",
-      "done": "00:41:48"
+      "done": "00:41:56"
     },
     {
       "id": 7,
@@ -241,8 +241,8 @@
       "date": "2020-04-23",
       "day": 4,
       "important": true,
-      "startTime": "08:10",
-      "goalTime": "1:00",
+      "startTime": "09:40",
+      "goalTime": "4:30",
       "detail": "프로젝트 toamto 디버깅",
       "done": "00:51:17"
     },

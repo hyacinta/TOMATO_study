@@ -7,8 +7,6 @@ const $selectDate = document.querySelector('.selectDate > input[type="date"]');
 const addZero = num => {
   return num.length > 1 || num > 9 ? num : '0' + num;
 };
-// const generateDate = time => `${time.getFullYear()}-${time.getMonth() > 9 ? time.getMonth() + 1 : '0' + (time.getMonth() + 1)}-${time.getDate()}`;
-// document.querySelector('input[type="date"]').min = generateDate(new Date());
 
 const mkTimeArr = () => {
   const timeArr = [];
@@ -50,11 +48,7 @@ const getToday = _todos => {
   });
 };
 
-const filterTodos = () => {
-  return todos.filter(todo => {
-    return todo.date === $selectDate.value;
-  });
-};
+const filterTodos = () => todos.filter(todo => todo.date === $selectDate.value);
 
 // timeArr를 돌면서 todos와 매칭하는것만 필터 후 요소로 i를 주고 스케줄[i]에innerHtml 한다. 
 // innerHtml이라서 시작시간이 겹치는 구간은 덮어쓴다. 고로 랜더링이 안된다.
@@ -67,7 +61,7 @@ const renderSche = () => {
 
   scheArr.forEach(sche => sche.innerHTML = '');
 
-  _todos.filter(todo => {
+  _todos.forEach(todo => {
     console.log(todo.goal);
     const timeLimit = getTimeCal(todo.startTime);
     if (timeLimit < 360 || timeLimit > 1439) return;

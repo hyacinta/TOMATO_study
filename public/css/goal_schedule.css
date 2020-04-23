@@ -1,9 +1,58 @@
-.goalList {background-color: #fff;}
+.goalList {
+  background-color: #fff;
+  animation-name: bgColorChange;
+  animation-duration: .5s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+@keyframes bgColorChange {
+  0% {
+    transform: translateY(-100%);
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .goalList li {
   display: flex;
   align-items: center;
   padding: 20px;
+  animation-name: indexInputLoad;
+  animation-duration: .2s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
 }
+@keyframes indexInputLoad {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.goalList li:nth-child(1) {
+  animation-delay: .2s;
+}
+.goalList li:nth-child(2) {
+  animation-delay: .25s;
+}
+.goalList li:nth-child(3) {
+  animation-delay: .3s;
+}
+.goalList li:nth-child(4) {
+  animation-delay: .35s;
+}
+.goalList li:nth-child(5) {
+  animation-delay: .4s;
+}
+
+
 .goalList li::before {
   display: block;
   content: '';
@@ -57,6 +106,7 @@
   width: 20%;
 }
 .indexInput label {
+  /* position: relative; */
   display: block;
   width: 40px;
   height: 40px;
@@ -65,6 +115,7 @@
   border: 1px solid #cecece;
   border-radius: 20px;
   overflow: hidden;
+  z-index: 10;
 }
 .indexInput .red label {
   background-color: #ffddd2;
@@ -90,11 +141,24 @@
   position: absolute;
   top: 14px;
   left: 14px;
-  opacity: 0;
+}
+.indexInput input[type="radio"]:checked + label {
+  background-color: #ff551f;
+  border-color: #ff551f;
 }
 
+
+.deleteGoal.popup, .deleteTodo.popup {
+  padding-top: 64px;
+  height: 200px;
+  font-size: 1.4em;
+  text-align: center;
+}
+.deleteGoal.popup p {
+  font-size: 20px;
+  text-align: center;
+}
 /* 스케줄 플래너 */
-.scheduleList {position: relative;}
 .hour {display: flex;}
 .timeTit {
   width: 36px;
@@ -109,6 +173,7 @@
 .timeTit span {display: block;}
 .time {flex-grow: 1;}
 .halfMinute {
+  position: relative;
   height: 30px;
   border-bottom: 1px solid #cecece;
   background-color: #fff;
@@ -120,7 +185,45 @@
   width: 100%;
   min-height: 29px;
   padding: 0 8px;
+  z-index: 10;
+  animation-name: todoRanding;
+  animation-duration: .4s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+  transform-origin: left center;
 }
+@keyframes todoRanding {
+  0% {
+      opacity: .5;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+/* 하은 날짜 추가 */
+#schedule .selectDate {
+  display: none;
+  list-style: none;
+}
+
+header .selectDate {
+  position: relative;
+}
+
+header .selectDate input{
+  position: fixed;
+  top: 15px;
+  right: 17px;
+  width: 40%;
+  max-width: 175px;
+  height: 32px;
+  padding-right: 10px;
+  border: 1px solid #cecece;
+  /* background: url('../img/ico_arrow.png') no-repeat right; */
+  background-size: 24px 24px;
+  z-index: 100;
+}
+
 .todo h4 {margin-right: 4px;}
 .todo.red {background-color: #ffddd2;}
 .todo.yellow {background-color: #ffeec1;}

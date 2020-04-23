@@ -21,7 +21,7 @@
       <h3 class="a11yHidden">내비게이션</h3>
       <button class="btnAddTodo">투두 추가하기</button>
       <ul class="navLink">
-        <li><a href="index.html">투두</a></li>
+        <li><a href="../index.html">투두</a></li>
         <li class="active"><a href="goal.html">목표</a></li>
         <li><a href="statistics.html">통계</a></li>
         <li><a href="schedule.html">스케줄</a></li>
@@ -32,46 +32,14 @@
     <!-- content 작성영역 -->
     <h3 class="a11yHidden">목표리스트</h3>
     <ul class="goalList">
-      <li class="yellow">
+      <!-- <li class="yellow">
         <div class="goalTit">
           <h4>목표제목</h3>
           <span class="closingDate">2020.07.10 / D-30</span>
         </div>
         <button class="btnEdit">수정</button>
         <button class="btnDelete">삭제</button>
-      </li>
-      <li class="red">
-        <div class="goalTit">
-          <h4>목표제목</h3>
-          <span class="closingDate">2020.07.10 / D-30</span>
-        </div>
-        <button class="btnEdit">수정</button>
-        <button class="btnDelete">삭제</button>
-      </li>
-      <li class="green">
-        <div class="goalTit">
-          <h4>목표제목</h3>
-          <span class="closingDate">2020.07.10 / D-30</span>
-        </div>
-        <button class="btnEdit">수정</button>
-        <button class="btnDelete">삭제</button>
-      </li>
-      <li class="blue">
-        <div class="goalTit">
-          <h4>목표제목</h3>
-          <span class="closingDate">2020.07.10 / D-30</span>
-        </div>
-        <button class="btnEdit">수정</button>
-        <button class="btnDelete">삭제</button>
-      </li>
-      <li class="purple">
-        <div class="goalTit">
-          <h4>목표제목</h3>
-          <span class="closingDate">2020.07.10 / D-30</span>
-        </div>
-        <button class="btnEdit">수정</button>
-        <button class="btnDelete">삭제</button>
-      </li>
+      </li> -->
     </ul>
     <button class="btnAddGoal">
       <span class="icoPlusGray"></span>
@@ -83,61 +51,63 @@
   </main>
 
   <!-- 할일 추가 popup -->
-  <div class="addTodos popup active">
+  <div class="addTodos popup createTodos">
     <h3>할일 추가</h3>
-    <button class="btnClosed">닫기</button>
     <ul class="addInput">
       <li class="category">
-        <label for="" class="a11yHidden">목표 선택</label>
+        <label for="categorySelect" class="a11yHidden">목표 선택</label>
         <select id="categorySelect" class="categorySelect">
-          <option value="">목표를 선택하세요</option>
+          <!-- <option value="" selected>목표를 선택하세요</option> -->
         </select>
       </li>
       <li class="todoInput">
-        <label for="" class="a11yHidden">할일 입력</label>
-        <input type="text" placeholder="할일을 입력하세요">
+        <label for="todoContent" class="a11yHidden">할일 입력</label>
+        <input type="text" id="todoContent" placeholder="할일을 입력하세요">
       </li>
-      <li class="impSelect"><label for="test" class="a11yHidden">text</label>
-        <button class="btnImp" id="test">중요</button>
+      <li class="impSelect">
+        <input type="checkbox" id="important">
+        <label for="important" class="a11yHidden">중요함</label>
       </li>
       <li class="startDate">
-        <label for="">시작 날짜</label>
-        <input type="date" name="" id="">
+        <label for="dateStart">시작 날짜</label>
+        <input type="date" name="dateStart" id="dateStart">
       </li>
       <li class="endDate">
-        <label for="">종료 날짜</label>
-        <input type="date" name="" id="">
+        <label for="dateEnd">종료 날짜</label>
+        <input type="date" name="dateEnd" id="dateEnd">
       </li>
       <li class="startTime">
-        <label for="">공부 시작시간</label>
-        <input type="number" name="" id="" placeholder="시">
+        <label for="startTime">공부 시작시간</label>
+        <input type="number" name="startTime" id="startTime" placeholder="시">
         <select name="country" id="countrySelectBox">
-          <option value="">00분</option>
-          <option value="">10분</option>
-          <option value="">20분</option>
-          <option value="">30분</option>
-          <option value="">40분</option>
-          <option value="">50분</option>
+          <option value=""> 분 </option>
+          <!-- <option value="00">00분</option>
+          <option value="10">10분</option>
+          <option value="20">20분</option>
+          <option value="30">30분</option>
+          <option value="40">40분</option>
+          <option value="50">50분</option> -->
         </select>
       </li>
       <li class="goalTime">
-        <label for="">목표 공부시간</label>
+        <label for="countrySelectBox">목표 공부시간</label>
         <select name="country" id="countrySelectBox">
-          <option value="">30분</option>
-          <option value="">1시간</option>
-          <option value="">1시간 30분</option>
-          <option value="">2시간</option>
-          <option value="">2시간 30분</option>
-          <option value="">3시간</option>
-          <option value="">3시간 30분</option>
-          <option value="">4시간</option>
-          <option value="">4시간 30분</option>
-          <option value="">5시간</option>
+          <option value=""> - </option>
+          <!-- <option value="0:30">30분</option>
+          <option value="1:00">1시간</option>
+          <option value="1:30">1시간 30분</option>
+          <option value="2:00">2시간</option>
+          <option value="2:30">2시간 30분</option>
+          <option value="3:00">3시간</option>
+          <option value="3:30">3시간 30분</option>
+          <option value="4:00">4시간</option>
+          <option value="4:30">4시간 30분</option>
+          <option value="5:00">5시간</option> -->
         </select>
       </li>
       <li class="contentInput">
-        <label for="" class="a11yHidden">상세 내용 입력</label>
-        <textarea name="" id="" cols="30" rows="10" placeholder="상세 내용을 입력하세요"></textarea>
+        <label for="todoDetail" class="a11yHidden">상세 내용 입력</label>
+        <textarea name="detail" id="todoDetail" cols="30" rows="10" placeholder="상세 내용을 입력하세요"></textarea>
       </li>
     </ul>
     <button class="btnCancel">취소</button>
@@ -145,42 +115,91 @@
   </div>
   <div class="dimd"></div>
   
+  <!-- 삭제 확인 popup -->
+  <div class="deleteGoal popup">
+      <p>정말 삭제하시겠습니까?</p>
+    <button class="btnCancel">취소</button>
+    <button class="btnRemove">삭제</button>
+  </div>
+  <div class="dimd"></div>
   
   <!-- 목표 추가 popup -->
-  <div class="addGoal popup active">
+  <div class="addGoal popup">
     <h3>목표 추가</h3>
-    <button class="btnClosed">닫기</button>
     <ul class="addInput">
       <li class="goalInput">
-        <label for="" class="a11yHidden">목표 입력</label>
-        <input type="text" placeholder="목표를 입력하세요">
+        <label for="addGoalContent" class="a11yHidden">목표 입력</label>
+        <input type="text" id="addGoalContent"placeholder="목표를 입력하세요">
       </li>
       <li class="dDayInput">
-        <label for="" class="a11yHidden">D-day 입력</label>
-        <input type="date" placeholder="D-day 날짜를 입력하세요">
+        <label for="addGoalDday" class="a11yHidden">D-day 입력</label>
+        <input type="date" id="addGoalDday" placeholder="D-day 날짜를 입력하세요">
       </li>
       <li class="indexInput">
         <h4 class="a11yHidden">index 선택</h4>
         <ul>
           <li class="red">
-            <label for="">red</label>
-            <input type="radio" name="indexColor" id="indexRed">
+            <label for="indexRed">red</label>
+            <input type="radio" name="indexColor" id="indexRed" value="red">
           </li>
           <li class="yellow">
-            <label for="">yellow</label>
-            <input type="radio" name="indexColor" id="indexYellow">
+            <label for="indexYellow">yellow</label>
+            <input type="radio" name="indexColor" id="indexYellow" value="yellow">
           </li>
           <li class="green">
-            <label for="">green</label>
-            <input type="radio" name="indexColor" id="indexGreen">
+            <label for="indexGreen">green</label>
+            <input type="radio" name="indexColor" id="indexGreen" value="green">
           </li>
           <li class="blue">
-            <label for="">blue</label>
-            <input type="radio" name="indexColor" id="indexBlue">
+            <label for="indexBlue">blue</label>
+            <input type="radio" name="indexColor" id="indexBlue" value="blue">
           </li>
           <li class="purple">
-            <label for="">purple</label>
-            <input type="radio" name="indexColor" id="indexPurple">
+            <label for="indexPurple">purple</label>
+            <input type="radio" name="indexColor" id="indexPurple" value="purple">
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <button class="btnCancel">취소</button>
+    <button class="btnRegister">등록</button>
+  </div>
+  <div class="dimd"></div>
+
+  <!-- 목표 수정 popup -->
+  <div class="editGoal popup">
+    <h3>목표 수정</h3>
+    <ul class="editInput">
+      <li class="goalInput">
+        <label for="editGoalContent" class="a11yHidden">목표 입력</label>
+        <input type="text" id="editGoalContent" placeholder="목표를 입력하세요">
+      </li>
+      <li class="dDayInput">
+        <label for="editGoalDday" class="a11yHidden">D-day 입력</label>
+        <input type="date" id="editGoalDday" placeholder="D-day 날짜를 입력하세요">
+      </li>
+      <li class="indexInput">
+        <h4 class="a11yHidden">index 선택</h4>
+        <ul>
+          <li class="red">
+            <input type="radio" name="indexColor" id="indexRed" value="red">
+            <label for="indexRed">red</label>
+          </li>
+          <li class="yellow">
+            <input type="radio" name="indexColor" id="indexYellow" value="yellow">
+            <label for="indexYellow">yellow</label>
+          </li>
+          <li class="green">
+            <input type="radio" name="indexColor" id="indexGreen" value="green">
+            <label for="indexGreen">green</label>
+          </li>
+          <li class="blue">
+            <input type="radio" name="indexColor" id="indexBlue" value="blue">
+            <label for="indexBlue">blue</label>
+          </li>
+          <li class="purple">
+            <input type="radio" name="indexColor" id="indexPurple" value="purple">
+            <label for="indexPurple">purple</label>
           </li>
         </ul>
       </li>
@@ -190,5 +209,6 @@
   </div>
   <div class="dimd"></div>
 </div>
+<script type="module" src="../js/goal.js"></script>
 </body> 
 </html>

@@ -24,7 +24,7 @@
       <h3 class="a11yHidden">내비게이션</h3>
       <button class="btnAddTodo">투두 추가하기</button>
       <ul class="navLink">
-        <li><a href="index.html">투두</a></li>
+        <li><a href="../index.html">투두</a></li>
         <li><a href="goal.html">목표</a></li>
         <li class="active"><a href="statistics.html">통계</a></li>
         <li><a href="schedule.html">스케줄</a></li>
@@ -34,41 +34,61 @@
   <main id="statistics">
     <h3 class="a11yHidden">챌린지</h3>
     <dl class="weeklyChallenge">
+<!-- 
       <div class="monDay perfect off">
         <dt>월</dt>
-        <dd>19</dd>
+        <dd>
+          <button class="stamp"></button>
+          19
+        </dd>
       </div>
       <div class="tuesDay seccess off">
         <dt>화</dt>
-        <dd>20</dd>
+        <dd>
+          <button class="stamp"></button>
+          20
+        </dd>
       </div>
       <div class="wednesDay fail off">
         <dt>수</dt>
-        <dd>21</dd>
+        <dd>
+          <button class="stamp"></button>
+          21
+        </dd>
       </div>
       <div class="thursDay perfect">
         <dt>목</dt>
-        <dd>22</dd>
+        <dd>
+          <button class="stamp"></button>
+          22
+        </dd>
       </div>
       <div class="friDay today">
         <dt>금</dt>
-        <dd>23</dd>
+        <dd>
+          23
+        </dd>
       </div>
       <div class="saturDay">
         <dt>토</dt>
-        <dd>24</dd>
+        <dd>
+          24
+        </dd>
       </div>
       <div class="sunDay">
         <dt>일</dt>
-        <dd>25</dd>
+        <dd>
+          25
+        </dd>
       </div>
+       -->
     </dl>
     <div class="statsContent">
       <div class="daily active">
         <h3 class="a11yHidden">일간 통계</h3>
         <button class="btnTab">일간</button>
         <ul class="statsData">
-          <li class="dailyDate">
+          <!-- <li class="dailyDate">
             2020년 4월 22일 목요일
           </li>
           <li class="total">
@@ -116,30 +136,30 @@
                 </div>
               </li>
             </ul>
-          </li>
+          </li> -->
         </ul>
       </div>
       <div class="weekly">
         <h3 class="a11yHidden">주간 통계</h3>
         <button class="btnTab">주간</button>
         <ul class="statsData">
+          <li class="sum">
+            <h4>오늘까지 평균 공부시간</h4>
+            <p>27시간 05분 40초</p>
+          </li>
           <li class="total">
             <h4>총 공부 시간</h4>
             <p>27시간 05분 40초</p>
           </li>
-          <li class="sum">
-            <h4>일간 평균 시간</h4>
-            <p>27시간 05분 40초</p>
-          </li>
           <li class="achievement">
-            <h4>달성률 <span>목표시간 6시간 30분</span></h4>
+            <h4>달성률 <span>6시간 30분</span></h4>
             <p>75%</p>
             <div class="progress">
               <div class="progressBar"></div>
             </div>
           </li>
           <li class="category">
-            <h4>목표별 공부시간 <span>(%)</span></h4>
+            <h4>목표별 공부시간</h4>
             <ul class="graph">
               <li class="red">
                 <label>목표1</label>
@@ -177,68 +197,72 @@
       </div>
     </div>
   </main>
-    <!-- 할일 추가 popup -->
-    <div class="addTodos popup active">
-      <h3>할일 추가</h3>
-      <button class="btnClosed">닫기</button>
-      <ul class="addInput">
-        <li class="category">
-          <label for="" class="a11yHidden">목표 선택</label>
-          <select id="categorySelect" class="categorySelect">
-            <option value="">목표를 선택하세요</option>
-          </select>
-        </li>
-        <li class="todoInput">
-          <label for="" class="a11yHidden">할일 입력</label>
-          <input type="text" placeholder="할일을 입력하세요">
-        </li>
-        <li class="impSelect"><label for="test" class="a11yHidden">text</label>
-          <button class="btnImp" id="test">중요</button>
-        </li>
-        <li class="startDate">
-          <label for="">시작 날짜</label>
-          <input type="date" name="" id="">
-        </li>
-        <li class="endDate">
-          <label for="">종료 날짜</label>
-          <input type="date" name="" id="">
-        </li>
-        <li class="startTime">
-          <label for="">공부 시작시간</label>
-          <input type="number" name="" id="" placeholder="시">
-          <select name="country" id="countrySelectBox">
-            <option value="">00분</option>
-            <option value="">10분</option>
-            <option value="">20분</option>
-            <option value="">30분</option>
-            <option value="">40분</option>
-            <option value="">50분</option>
-          </select>
-        </li>
-        <li class="goalTime">
-          <label for="">목표 공부시간</label>
-          <select name="country" id="countrySelectBox">
-            <option value="">30분</option>
-            <option value="">1시간</option>
-            <option value="">1시간 30분</option>
-            <option value="">2시간</option>
-            <option value="">2시간 30분</option>
-            <option value="">3시간</option>
-            <option value="">3시간 30분</option>
-            <option value="">4시간</option>
-            <option value="">4시간 30분</option>
-            <option value="">5시간</option>
-          </select>
-        </li>
-        <li class="contentInput">
-          <label for="" class="a11yHidden">상세 내용 입력</label>
-          <textarea name="" id="" cols="30" rows="10" placeholder="상세 내용을 입력하세요"></textarea>
-        </li>
-      </ul>
-      <button class="btnCancel">취소</button>
-      <button class="btnRegister">등록</button>
-    </div>
-    <div class="dimd"></div>
+  <!-- 할일 추가 popup -->
+  <div class="addTodos popup createTodos">
+    <h3>할일 추가</h3>
+    <ul class="addInput">
+      <li class="category">
+        <label for="categorySelect" class="a11yHidden">목표 선택</label>
+        <select id="categorySelect" class="categorySelect">
+          <!-- <option value="" selected>목표를 선택하세요</option> -->
+        </select>
+      </li>
+      <li class="todoInput">
+        <label for="todoContent" class="a11yHidden">할일 입력</label>
+        <input type="text" id="todoContent" placeholder="할일을 입력하세요">
+      </li>
+      <li class="impSelect">
+        <input type="checkbox" id="important">
+        <label for="important" class="a11yHidden">중요함</label>
+      </li>
+      <li class="startDate">
+        <label for="dateStart">시작 날짜</label>
+        <input type="date" name="dateStart" id="dateStart">
+      </li>
+      <li class="endDate">
+        <label for="dateEnd">종료 날짜</label>
+        <input type="date" name="dateEnd" id="dateEnd">
+      </li>
+      <li class="startTime">
+        <label for="startTime">공부 시작시간</label>
+        <input type="number" name="startTime" id="startTime" placeholder="시">
+        <select name="country" id="countrySelectBox">
+          <option value=""> 분 </option>
+          <!-- <option value="00">00분</option>
+          <option value="10">10분</option>
+          <option value="20">20분</option>
+          <option value="30">30분</option>
+          <option value="40">40분</option>
+          <option value="50">50분</option> -->
+        </select>
+      </li>
+      <li class="goalTime">
+        <label for="countrySelectBox">목표 공부시간</label>
+        <select name="country" id="countrySelectBox">
+          <option value=""> - </option>
+          <!-- <option value="0:30">30분</option>
+          <option value="1:00">1시간</option>
+          <option value="1:30">1시간 30분</option>
+          <option value="2:00">2시간</option>
+          <option value="2:30">2시간 30분</option>
+          <option value="3:00">3시간</option>
+          <option value="3:30">3시간 30분</option>
+          <option value="4:00">4시간</option>
+          <option value="4:30">4시간 30분</option>
+          <option value="5:00">5시간</option> -->
+        </select>
+      </li>
+      <li class="contentInput">
+        <label for="todoDetail" class="a11yHidden">상세 내용 입력</label>
+        <textarea name="detail" id="todoDetail" cols="30" rows="10" placeholder="상세 내용을 입력하세요"></textarea>
+      </li>
+    </ul>
+    <button class="btnCancel">취소</button>
+    <button class="btnRegister">등록</button>
+  </div>
+  <div class="dimd"></div>
 </div>
+
+<script type="module" src="../js/statistics.js"></script>
 </body> 
 </html>

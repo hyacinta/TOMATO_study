@@ -133,6 +133,23 @@ const todoGoalOption = (hour, minute) => {
   console.log('시간에 따라 옵션 수 줄이기', hour, minute);
   $addTodoGTime.innerHTML = html;
 };
+// addTodo popup 초기화 함수
+const resetAddtodo = () => {
+  $addTodoCont.value = '';
+  $addTodoImp.checked = false;
+  $addTodoDate.value = '';
+  $addTodoDate.max = null;
+  $addTodoStart.hour.value = '';
+  $addTodoStart.minute.innerHTML = '<option value=""> 분 </option>';
+  $addTodoGTime.innerHTML = '<option value=""> - </option>';
+  $addTodoDetail.value = '';
+};
+// addGoal popup 초기화 함수
+const resetAddGoal = () => {
+  $addGoalCont.querySelector('input').value = '';
+  $addGoalDday.querySelector('input').value = '';
+  if ($addGoalColor.querySelector('input:checked')) $addGoalColor.querySelector('input:checked').checked = false;
+};
 
 // 통신
 // 할일 추가 함수
@@ -170,15 +187,8 @@ const addTodos = async () => {
     const todo = await _todo.json();
     todos = [...todos, todo];
     window.alert('할일이 추가되었습니다.');
+    resetAddtodo();
     closePopup($addTodos);
-    $addTodoCont.value = '';
-    $addTodoImp.checked = false;
-    $addTodoDate.value = '';
-    $addTodoDate.max = null;
-    $addTodoStart.hour.value = '';
-    $addTodoStart.minute.innerHTML = '<option value=""> 분 </option>';
-    $addTodoGTime.innerHTML = '<option value=""> - </option>';
-    $addTodoDetail.value = '';
   } catch (e) {
     console.error(e);
   }
@@ -197,6 +207,10 @@ const addGoalFn = async () => {
     return;
   }
   const goalColor = $goalColor.value;
+  if (goals.some(goal => goal.color === goalColor)) {
+    window.alert('추가하는 목표 색상이 중복됩니다.');
+    return;
+  }
   // 통신 - post -
   try {
     let _goals = await fetch('/goals', {
@@ -214,10 +228,8 @@ const addGoalFn = async () => {
   } catch (e) {
     console.error(e);
   }
-  $addGoalCont.querySelector('input').value = '';
-  $addGoalDday.querySelector('input').value = '';
-  $goalColor.checked = false;
   goalRender();
+  resetAddGoal();
   closePopup($addGoal);
 };
 // 목표 제거 함수
@@ -272,28 +284,37 @@ const editGoalFn = async id => {
   })();
 
   // 수정한 내용이 있는지 없는지 확인
-  if (checkInputs.length) {
-    // payload 생성
-    const payload = {};
-    checkInputs.datas.forEach(data => {
-      payload[data.key] = data.value;
-    });
-    // 통신 -patch-
-    try {
-      const _goal = await fetch(`/goals/${id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      const goalRes = await _goal.json();
-      goals = goals.map(goal => (goal.id === id ? goalRes : goal));
-    } catch (e) {
-      console.error(e);
-    }
-    goalRender();
-    targetId = null;
+  if (!checkInputs.length) {
+    closePopup($editGoal);
+    return;
   }
+
+  // 색상이 중복되는지 확인
+  if (goals.some(goal => goal.color === $editGoalColor.querySelector('input:checked').value)) {
+    window.alert('수정하는 목표 색상이 중복됩니다.');
+    return;
+  }
+  // payload 생성
+  const payload = {};
+  checkInputs.datas.forEach(data => {
+    payload[data.key] = data.value;
+  });
+  // 통신 -patch-
+  try {
+    const _goal = await fetch(`/goals/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const goalRes = await _goal.json();
+    goals = goals.map(goal => (goal.id === id ? goalRes : goal));
+  } catch (e) {
+    console.error(e);
+  }
+  console.log('todos 색상 데이터 변환');
+  goalRender();
   closePopup($editGoal);
+  targetId = null;
 };
 
 // 이벤트 핸들러 ////////////////////////////////////////////////////////
@@ -334,7 +355,7 @@ $goalList.onclick = ({ target }) => {
 // popup
 // 할일 추가 popup 클릭 이벤트
 $addTodos.onclick = ({ target }) => {
-  popup(target, $addTodos, addTodos);
+  popup(target, $addTodos, addTodos, resetAddtodo);
 };
 // 할일 선택 이벤트
 $addTodos.onchange = ({ target }) => {
@@ -361,7 +382,7 @@ $addTodos.onchange = ({ target }) => {
 };
 // 목표 추가 popup 클릭 이벤트
 $addGoal.onclick = ({ target }) => {
-  popup(target, $addGoal, addGoalFn);
+  popup(target, $addGoal, addGoalFn, resetAddGoal);
 };
 // 목표 수정 popup 클릭 이벤트
 $editGoal.onclick = ({ target }) => {

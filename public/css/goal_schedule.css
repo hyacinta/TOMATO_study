@@ -93,15 +93,17 @@
   top: 14px;
   left: 14px;
 }
-.indexInput input[type="radio"]::checked + label {
+.indexInput input[type="radio"]:checked + label {
   background-color: #ff551f;
   border-color: #ff551f;
 }
 
 
-.deleteGoal.popup {
+.deleteGoal.popup, .deleteTodo.popup {
   padding-top: 64px;
   height: 200px;
+  font-size: 1.4em;
+  text-align: center;
 }
 .deleteGoal.popup p {
   font-size: 20px;
@@ -136,6 +138,34 @@
   padding: 0 8px;
   z-index: 10;
 }
+
+/* 하은 날짜 추가 */
+#schedule .selectDate {
+  display: none;
+  list-style: none;
+}
+
+header .selectDate {
+  position: relative;
+}
+header .selectDate label {
+  position: absolute;
+  background-color: red;
+}
+header .selectDate input{
+  position: fixed;
+  top: 15px;
+  right: 17px;
+  width: 40%;
+  max-width: 175px;
+  height: 32px;
+  padding-right: 10px;
+  border: 1px solid #cecece;
+  background: url('../img/ico_arrow.png') no-repeat right;
+  background-size: 24px 24px;
+  z-index: 100;
+}
+
 .todo h4 {margin-right: 4px;}
 .todo.red {background-color: #ffddd2;}
 .todo.yellow {background-color: #ffeec1;}

@@ -15,7 +15,7 @@ const closePopup = target => {
 // popup 이벤트 함수
 const popup = (target, $popup, doCallback, cancelCallback) => {
   if (!target.matches('button')) return;
-  if (target.matches('.btnCancel') || target.matches('.btnClosed')) {
+  if (target.matches('.btnCancel')) {
     if (cancelCallback) cancelCallback();
     closePopup($popup);
   } else {

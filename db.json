@@ -1,12 +1,40 @@
 {
   "week": [
-    { "id": 0, "dayName": "일", "date": "" },
-    { "id": 1, "dayName": "월", "date": "" },
-    { "id": 2, "dayName": "화", "date": "" },
-    { "id": 3, "dayName": "수", "date": "" },
-    { "id": 4, "dayName": "목", "date": "" },
-    { "id": 5, "dayName": "금", "date": "" },
-    { "id": 6, "dayName": "토", "date": "" }
+    {
+      "id": 0,
+      "dayName": "일",
+      "date": ""
+    },
+    {
+      "id": 1,
+      "dayName": "월",
+      "date": ""
+    },
+    {
+      "id": 2,
+      "dayName": "화",
+      "date": ""
+    },
+    {
+      "id": 3,
+      "dayName": "수",
+      "date": ""
+    },
+    {
+      "id": 4,
+      "dayName": "목",
+      "date": ""
+    },
+    {
+      "id": 5,
+      "dayName": "금",
+      "date": ""
+    },
+    {
+      "id": 6,
+      "dayName": "토",
+      "date": ""
+    }
   ],
   "goals": [
     {
@@ -31,12 +59,6 @@
       "id": 4,
       "content": "알바",
       "dDay": "2020-07-10",
-      "color": "blue"
-    },
-    {
-      "id": 5,
-      "content": "창업",
-      "dDay": "2020-08-01",
       "color": "purple"
     }
   ],

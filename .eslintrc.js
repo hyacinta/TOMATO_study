@@ -36,6 +36,7 @@ module.exports = {
     "no-trailing-spaces": 0,
     "arrow-body-style": 0,
     "no-return-assign": 0,
-    "linebreak-style" : 0
+    "linebreak-style" : 0,
+    "import/extensions": ['warn', 'always']
   }
 };

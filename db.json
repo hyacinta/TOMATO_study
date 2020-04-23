@@ -1,12 +1,40 @@
 {
   "week": [
-    { "id": 0, "dayName": "일", "date": "" },
-    { "id": 1, "dayName": "월", "date": "" },
-    { "id": 2, "dayName": "화", "date": "" },
-    { "id": 3, "dayName": "수", "date": "" },
-    { "id": 4, "dayName": "목", "date": "" },
-    { "id": 5, "dayName": "금", "date": "" },
-    { "id": 6, "dayName": "토", "date": "" }
+    {
+      "id": 0,
+      "dayName": "일",
+      "date": ""
+    },
+    {
+      "id": 1,
+      "dayName": "월",
+      "date": ""
+    },
+    {
+      "id": 2,
+      "dayName": "화",
+      "date": ""
+    },
+    {
+      "id": 3,
+      "dayName": "수",
+      "date": ""
+    },
+    {
+      "id": 4,
+      "dayName": "목",
+      "date": ""
+    },
+    {
+      "id": 5,
+      "dayName": "금",
+      "date": ""
+    },
+    {
+      "id": 6,
+      "dayName": "토",
+      "date": ""
+    }
   ],
   "goals": [
     {
@@ -32,12 +60,6 @@
       "content": "알바",
       "dDay": "2020-07-10",
       "color": "blue"
-    },
-    {
-      "id": 5,
-      "content": "창업",
-      "dDay": "2020-08-01",
-      "color": "purple"
     }
   ],
   "todos": [
@@ -104,7 +126,7 @@
       "startTime": "08:00",
       "goalTime": "4:00",
       "detail": "프로젝트 tomato javascript 제작",
-      "done": "03:40:00"
+      "done": "03:40:11"
     },
     {
       "id": 6,
@@ -157,6 +179,19 @@
       "goalTime": "2:00",
       "detail": "프로젝트 toamto 디버깅",
       "done": "01:04:46"
+    },
+    {
+      "id": 10,
+      "content": "할일 입력 테스트",
+      "goal": 2,
+      "color": "green",
+      "date": "2020-04-24",
+      "day": 5,
+      "important": true,
+      "startTime": "08:00",
+      "goalTime": "0:30",
+      "detail": "세부내용",
+      "done": "00:00:00"
     }
   ]
 }

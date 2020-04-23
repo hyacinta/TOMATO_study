@@ -1,62 +1,15 @@
+import { 
+  generateId,
+  openPopup,
+  closePopup,
+  popup
+} from './common.js';
+
+
 let week = [];
 let goals = [];
 let todos = [];
-// 가상 데이터
-// const goals = [
-//   {
-//     id: 1, content: 'project tomato', dDay: '2020-04-24', color: 'red'
-//   },
-//   {
-//     id: 2, content: 'react tomato', dDay: '2020-04-24', color: 'yellow'
-//   },
-//   {
-//     id: 3, content: 'test0 test0', dDay: '2020-04-24', color: 'green'
-//   },
-//   {
-//     id: 4, content: 'project test0', dDay: '2020-04-24', color: 'blue'
-//   },
-//   {
-//     id: 5, content: 'test0 tomato', dDay: '2020-04-24', color: 'purple'
-//   }
-// ];
-// const todos = [
-//   {
-//     id: 0, content: 'test', goal: 0, color: 'red', date: '2020-04-19', day: '0', important: true, startTime: '07:00', goalTime: '2:00', detail: '프로젝트 tomato HTML 제작', done: '02:05:38'
-//   },
-//   {
-//     id: 1, content: 'HTML', goal: 2, color: 'green', date: '2020-04-18', day: 'SAT', important: true, startTime: '07:00', goalTime: '2:00', detail: '프로젝트 tomato HTML 제작', done: '02:05:38'
-//   },
-//   {
-//     id: 2, content: 'HTML', goal: 0, color: 'red', date: '2020-04-21', day: 'TUE', important: true, startTime: '07:00', goalTime: '3:30', detail: '프로젝트 tomato HTML 제작', done: '02:05:38'
-//   },
-//   {
-//     id: 3, content: 'HTML', goal: 1, color: 'yellow', date: '2020-04-22', day: 'WED', important: true, startTime: '07:00', goalTime: '4:30', detail: '프로젝트 tomato HTML 제작', done: '00:20:38'
-//   },
-//   {
-//     id: 4, content: 'HTML', goal: 0, color: 'blue', date: '2020-04-21', day: 'TUE', important: true, startTime: '07:00', goalTime: '1:30', detail: '프로젝트 tomato HTML 제작', done: '02:05:38'
-//   },
-//   {
-//     id: 5, content: 'HTML', goal: 2, color: 'purple', date: '2020-04-23', day: 'THU', important: true, startTime: '07:00', goalTime: '4:00', detail: '프로젝트 tomato HTML 제작', done: '02:05:38'
-//   },
-//   {
-//     id: 6, content: 'HTML', goal: 4, color: 'yellow', date: '2020-04-24', day: 'FRI', important: true, startTime: '07:00', goalTime: '1:30', detail: '프로젝트 tomato HTML 제작', done: '02:05:38'
-//   },
-//   {
-//     id: 7, content: 'HTML', goal: 0, color: 'blue', date: '2020-04-21', day: 'TUE', important: true, startTime: '07:00', goalTime: '3:30', detail: '프로젝트 tomato HTML 제작', done: '02:05:38'
-//   },
-//   {
-//     id: 8, content: 'HTML', goal: 3, color: 'green', date: '2020-04-20', day: 'MON', important: true, startTime: '07:00', goalTime: '2:00', detail: '프로젝트 tomato HTML 제작', done: '02:05:38'
-//   },
-//   {
-//     id: 9, content: 'HTML', goal: 0, color: 'purple', date: '2020-04-23', day: 'THU', important: true, startTime: '07:00', goalTime: '1:30', detail: '프로젝트 tomato HTML 제작', done: '02:05:38'
-//   },
-//   {
-//     id: 10, content: 'HTML', goal: 5, color: 'purple', date: '2020-04-20', day: 'MON', important: true, startTime: '07:00', goalTime: '2:30', detail: '프로젝트 tomato HTML 제작', done: '02:05:38'
-//   },
-//   {
-//     id: 11, content: 'HTML', goal: 5, color: 'green', date: '2020-04-19', day: 'SUN', important: true, startTime: '07:00', goalTime: '2:00', detail: '프로젝트 tomato HTML 제작', done: '02:05:38'
-//   }  
-// ];
+
 // 일주일 날짜 구하기
 const getCurrentWeek = () => {
   const now = new Date();
@@ -85,8 +38,6 @@ const $weeklyAchievementGoalTime = document.querySelector('.weekly .achievement 
 const $weeklyAchievement = document.querySelector('.weekly .achievement > p');
 const $weeklyProgressBar = document.querySelector('.weekly .progressBar');
 const $weeklyGraph = document.querySelector('.weekly .graph');
-
-
 
 // 오늘 날짜 구하기
 const getToday = () => {
@@ -423,20 +374,6 @@ $statsContent.onclick = ({ target }) => {
   }
 };
 
-
-// 통신
-// fetch('/todos')
-//   .then(response => console.log(response))
-//   .then(getTodos => todos = getTodos);
-// fetch('/week')
-//   .then(response => response.json())
-//   .then(getWeek => week = getWeek)
-//   .then(getCurrentWeek);
-// fetch('/goals')
-//   .then(response => response.json())
-//   .then(getGoals => goals = getGoals)
-//   .then(render);
-
 const onLoad = async () => {
   const getTodos = await fetch('/todos');
   todos = await getTodos.json();
@@ -449,4 +386,182 @@ const onLoad = async () => {
   render();
 };
 
-window.onload = onLoad;
+/* 치원님 할일 추가 code 시작 */
+const $btnAddTodo = document.querySelector('.btnAddTodo');
+// popup
+// 할일 추가 popup
+const $addTodos = document.querySelector('.createTodos');
+const $addTodoGoal = $addTodos.querySelector('.category #categorySelect');
+const $addTodoCont = $addTodos.querySelector('.todoInput #todoContent');
+const $addTodoImp = $addTodos.querySelector('.impSelect input');
+const $addTodoDate = $addTodos.querySelector('#dateStart');
+const $addTodoStart = {
+  hour: $addTodos.querySelector('.startTime #startTime'),
+  minute: $addTodos.querySelector('.startTime #countrySelectBox')
+};
+const $addTodoGTime = $addTodos.querySelector('.goalTime #countrySelectBox');
+const $addTodoDetail = $addTodos.querySelector('.contentInput #todoDetail');
+
+// 함수
+// 숫자 생성
+const generateDate = time => `${
+  time.getFullYear()
+}-${
+  time.getMonth() > 9 ? time.getMonth() + 1 : '0' + (time.getMonth() + 1)
+}-${
+  time.getDate() > 9 ? time.getDate() : '0' + time.getDate()
+}`;
+
+const transSecond = (hh = 0, mm = 0, ss = 0) => {
+  let count = 0;
+  count += +hh * 3600;
+  count += +mm * 60;
+  count += +ss;
+  return count;
+};
+
+// popup에 빈 input 있는지 확인하는 함수
+const checkValue = popupTarget => {
+  const inputAll = popupTarget.querySelectorAll('input:not(#dateEnd)');
+  const selectAll = popupTarget.querySelectorAll('select');
+  const inputCk = inputAll.length ? [...inputAll].every(input => input.value.trim()) : true;
+  const selectCk = selectAll.length ? [...selectAll].every(select => select.value) : true;
+  return inputCk && selectCk;
+};
+// 시간이 중복되는지 확인하는 함수
+const checkTime = (date, time, goalTime) => {
+  const filterDate = todos.filter(todo => todo.date === date);
+  const todosTime = filterDate.map(todo => [transSecond(...todo.startTime.split(':')), transSecond(...todo.goalTime.split(':'))]);
+  const targetTime = transSecond(...time.split(':'));
+  const targetGoal = transSecond(...goalTime.split(':'));
+  
+  return (todosTime.every(timeArr => {
+    const check = timeArr[0] - targetTime;
+    return check > 0 ? check - targetGoal >= 0 : check + timeArr[1] <= 0;
+  }));
+};
+const todoGoalOption = (hour, minute) => {
+  let html = '';
+  // if (hour < 19 || (hour === 19 && !minute)) {
+    
+  // }
+  html = `
+  <option value="0:30">30분</option>
+  <option value="1:00">1시간</option>
+  <option value="1:30">1시간 30분</option>
+  <option value="2:00">2시간</option>
+  <option value="2:30">2시간 30분</option>
+  <option value="3:00">3시간</option>
+  <option value="3:30">3시간 30분</option>
+  <option value="4:00">4시간</option>
+  <option value="4:30">4시간 30분</option>
+  <option value="5:00">5시간</option>`;
+  console.log('시간에 따라 옵션 수 줄이기', hour, minute);
+  $addTodoGTime.innerHTML = html;
+};
+
+// 통신
+// 할일 추가 함수
+const addTodos = async () => {
+  // 입력란 확인
+  if (!checkValue($addTodos)) {
+    window.alert('필수 입력란이 전부 채워지지 않았습니다.');
+    return;
+  }
+  const hour = $addTodoStart.hour.value;
+  const minute = $addTodoStart.minute.value;
+  // 중복 예정 확인
+  if (!checkTime($addTodoDate.value, `${hour}:${minute}`, $addTodoGTime.value)) {
+    window.alert('할일 예정이 다른 예정과 겹칩니다.');
+    return;
+  }
+  try {
+    const _todo = await fetch('/todos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: generateId(todos),
+        content: $addTodoCont.value,
+        goal: +$addTodoGoal.value,
+        color: goals.find(({ id }) => id === +$addTodoGoal.value).color,
+        date: $addTodoDate.value,
+        day: new Date($addTodoDate.value).getDay(),
+        important: $addTodoImp.checked,
+        startTime: `${hour < 10 ? '0' + hour : hour}:${$addTodoStart.minute.value}`,
+        goalTime: $addTodoGTime.value,
+        detail: $addTodoDetail.value,
+        done: '00:00:00'
+      })
+    });
+    const todo = await _todo.json();
+    todos = [...todos, todo];
+    window.alert('할일이 추가되었습니다.');
+    closePopup($addTodos);
+    $addTodoCont.value = '';
+    $addTodoImp.checked = false;
+    $addTodoDate.value = '';
+    $addTodoDate.max = null;
+    $addTodoStart.hour.value = '';
+    $addTodoStart.minute.innerHTML = '<option value=""> 분 </option>';
+    $addTodoGTime.innerHTML = '<option value=""> - </option>';
+    $addTodoDetail.value = '';
+    console.log('조건에 따라서 뷰 랜더');
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+// 이벤트 핸들러
+// 버튼
+// 할일 추가 버튼 클릭 이벤트
+$btnAddTodo.onclick = () => {
+  let html = '<option value="" selected>목표를 선택하세요</option>';
+  goals.forEach(goal => {
+    html += `<option value="${goal.id}">${goal.content}</option>`;
+  });
+  $addTodoGoal.innerHTML = html;
+  openPopup($addTodos);
+};
+
+// popup
+// 할일 추가 popup 클릭 이벤트
+$addTodos.onclick = ({ target }) => {
+  popup(target, $addTodos, addTodos);
+};
+// 할일 선택 이벤트
+$addTodos.onchange = ({ target }) => {
+  if (target.matches('#important')) return;
+  // 목표 선택 시 날짜 데이터 Dday 이전만 선택 가능하게 만드는 식
+  if (target === $addTodoGoal && $addTodoGoal.value !== '') {
+    const targetGoal = goals.find(({ id }) => id === +$addTodoGoal.value);
+    $addTodoDate.max = targetGoal.dDay;
+  }
+  if (target === $addTodoStart.hour) {
+    $addTodoStart.minute.innerHTML = target.value === '23' ? `
+    <option value="00">00분</option>
+    <option value="10">10분</option>
+    <option value="20">20분</option>
+    <option value="30">30분</option>` : `
+    <option value="00">00분</option>
+    <option value="10">10분</option>
+    <option value="20">20분</option>
+    <option value="30">30분</option>
+    <option value="40">40분</option>
+    <option value="50">50분</option>`;
+    todoGoalOption(+$addTodoStart.hour.value, 0);
+  }
+};
+
+/* 치원님 할일 추가 code 종료 */
+
+
+
+window.onload = () => {
+  const now = new Date();
+  // 날짜 선택 최소 값 설정
+  document.querySelectorAll('input[type="date"]').forEach(input => input.min = generateDate(now));
+  // 시간 선택 최소 최대 값 설정
+  $addTodoStart.hour.max = 23;
+  $addTodoStart.hour.min = 6;
+  onLoad();
+};

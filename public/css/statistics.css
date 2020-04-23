@@ -39,6 +39,43 @@
   background-repeat: no-repeat;
   background-position: center;
   overflow: hidden;
+  animation-name: stampLoad;
+  animation-duration: .3s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+@keyframes stampLoad {
+  0% {
+    opacity: 0;
+    transform: scale(1.2, 1.2)
+  }
+  40% {
+    opacity: 1;
+  }
+  90% {
+    transform: scale(0.95, 0.95)
+  }
+  100% {
+    transform: scale(1, 1)
+  }
+}
+.weeklyChallenge div:nth-child(2) button.stamp {
+  animation-delay: 0.15s;
+}
+.weeklyChallenge div:nth-child(3) button.stamp {
+  animation-delay: 0.3s;
+}
+.weeklyChallenge div:nth-child(4) button.stamp {
+  animation-delay: 0.45s;
+}
+.weeklyChallenge div:nth-child(5) button.stamp {
+  animation-delay: 0.6s;
+}
+.weeklyChallenge div:nth-child(6) button.stamp {
+  animation-delay: 0.75s;
+}
+.weeklyChallenge div:nth-child(7) button.stamp {
+  animation-delay: 0.9s;
 }
 
 .weeklyChallenge .perfect button.stamp {background-image: url('../img/stamp_perfact_on.png');}
@@ -132,6 +169,7 @@
   -webkit-box-orient:vertical;
   -webkit-line-clamp:1;
   display:-webkit-box;
+  z-index: 10;
 }
 
 
@@ -148,26 +186,49 @@
   border-width: 1px 1px 0 1px;
   border-style: solid;
   border-bottom: none;
+  animation-name: graphBarStart;
+  animation-duration: .5s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+@keyframes graphBarStart {
+  0% {
+    opacity: 0;
+    height: 0;
+    /* transform: translateY(100px); */
+  }
+  30% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .red .bar {
   background-color: #ffddd2;
   border-color: #ffa98e;
+  animation-delay: .1s;
 }
 .yellow .bar {
   background-color: #ffeec1;
   border-color: #f4c753;
+  animation-delay: .15s;
 }
 .green .bar {
   background-color: #c6f2d2;
   border-color: #5fc47c;
+  animation-delay: .2s;
 }
 .blue .bar {
   background-color: #bdeaf4;
   border-color: #5cafc1;
+  animation-delay: .25s;
 }
 .purple .bar {
   background-color: #e3d3fd;
   border-color: #a98dd7;
+  animation-delay: .3s;
 }
 .bar .percent {
   position: absolute;
@@ -179,4 +240,37 @@
   width: 26px;
   font-size: 10px;
   text-align: center;
+  animation-name: percentDissolve;
+  animation-duration: .4s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+@keyframes percentDissolve {
+  0% {
+      opacity: 0;
+      transform: translateY(30px);
+  }
+  80% {
+      transform: translateY(-5px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+li.red .bar .percent {
+  animation-delay: .4s;
+}
+li.yellow .bar .percent {
+  animation-delay: .45s;
+}
+li.green .bar .percent {
+  animation-delay: .5s;
+}
+li.blue .bar .percent {
+  animation-delay: .55s;
+}
+li.purple .bar .percent {
+  animation-delay: .6s;
 }

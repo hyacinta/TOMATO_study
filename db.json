@@ -135,19 +135,6 @@
       "done": "00:50:00"
     },
     {
-      "id": 6,
-      "content": "알바 사이트 조사",
-      "goal": 1,
-      "color": "blue",
-      "date": "2020-04-23",
-      "day": 4,
-      "important": true,
-      "startTime": "09:00",
-      "goalTime": "0:30",
-      "detail": "알바 면접 준비",
-      "done": "00:30:00"
-    },
-    {
       "id": 7,
       "content": "이력서 작성",
       "goal": 5,

@@ -115,7 +115,6 @@ const getTodayPersent = () => {
   const [nowHour, nowMin] = getTodayDone();
   let percent = Math.round(((nowHour * 60 + +nowMin) / (goalHour * 60 + +goalMin)) * 100);
   percent = percent > 9 ? percent : '0' + percent;
-  console.log(percent);
   $todayPercent.textContent = `${percent}%`;
 };
 
@@ -378,28 +377,25 @@ const renderEditTodo = target => {
           <label for="" class="a11yHidden">할일 입력</label>
           <input type="text" placeholder="${todo.content}">
         </li>
-        <li class="impSelect"><label for="test" class="a11yHidden">text</label>
+        <li class="impSelect"><label for="test" class="a11yHidden btnImpLabel">text</label>
           <button class="btnImp ${todo.color}${todo.important ? ' impCheck' : ''}" id="test">중요</button>
         </li>
         <li class="startDate">
           <label for="">시작 날짜</label>
           <input type="date" name="" id="">
         </li>
-        <li class="endDate">
-          <label for="">종료 날짜</label>
-          <input type="date" name="" id="">
-        </li>
         <li class="startTime">
           <label for="">공부 시작시간</label>
-          <input type="number" name="" id="" placeholder="시">
+          <input type="number" name="" id="" placeholder="입력하세요"><span>시</span>
           <select name="country" id="countrySelectBox">
+            <option value="">선택하세요</option>
             <option value="1">00분</option>
             <option value="2">10분</option>
             <option value="3">20분</option>
             <option value="4">30분</option>
             <option value="5">40분</option>
             <option value="6">50분</option>
-          </select>
+          </select><span>분</span>
         </li>
         <li class="goalTime">
           <label for="">목표 공부시간</label>
@@ -667,6 +663,17 @@ const todoGoalOption = (hour, minute) => {
   console.log('시간에 따라 옵션 수 줄이기', hour, minute);
   $addTodoGTime.innerHTML = html;
 };
+// addTodo popup 초기화 함수
+const resetAddtodo = () => {
+  $addTodoCont.value = '';
+  $addTodoImp.checked = false;
+  $addTodoDate.value = '';
+  $addTodoDate.max = null;
+  $addTodoStart.hour.value = '';
+  $addTodoStart.minute.innerHTML = '<option value=""> 분 </option>';
+  $addTodoGTime.innerHTML = '<option value=""> - </option>';
+  $addTodoDetail.value = '';
+};
 
 // 통신
 // 할일 추가 함수
@@ -683,19 +690,6 @@ const addTodos = async () => {
     window.alert('할일 예정이 다른 예정과 겹칩니다.');
     return;
   }
-  console.log({
-    id: generateId(todos),
-    content: $addTodoCont.value,
-    goal: +$addTodoGoal.value,
-    color: goals.find(({ id }) => id === +$addTodoGoal.value).color,
-    date: $addTodoDate.value,
-    day: new Date($addTodoDate.value).getDay(),
-    important: $addTodoImp.checked,
-    startTime: `${hour < 10 ? '0' + hour : hour}:${$addTodoStart.minute.value}`,
-    goalTime: $addTodoGTime.value,
-    detail: $addTodoDetail.value,
-    done: '00:00:00'
-  });
   try {
     const _todo = await fetch('/todos', {
       method: 'POST',
@@ -720,18 +714,8 @@ const addTodos = async () => {
     closePopup($addTodos);
     console.log('조건에 따라서 뷰 랜더');
     // render();
-    if ($addTodoDate.value === generateDateCW(now)) {
-      filterTodayTodos();
-      render();
-    }
-    $addTodoCont.value = '';
-    $addTodoImp.checked = false;
-    $addTodoDate.value = '';
-    $addTodoDate.max = null;
-    $addTodoStart.hour.value = '';
-    $addTodoStart.minute.innerHTML = '<option value=""> 분 </option>';
-    $addTodoGTime.innerHTML = '<option value=""> - </option>';
-    $addTodoDetail.value = '';
+    if ($addTodoDate.value === generateDateCW(now)) render();
+    resetAddtodo();
   } catch (e) {
     console.error(e);
   }
@@ -752,7 +736,7 @@ $btnAddTodo.onclick = () => {
 // popup
 // 할일 추가 popup 클릭 이벤트
 $addTodos.onclick = ({ target }) => {
-  popup(target, $addTodos, addTodos);
+  popup(target, $addTodos, addTodos, resetAddtodo);
 };
 // 할일 선택 이벤트
 $addTodos.onchange = ({ target }) => {

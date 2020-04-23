@@ -311,6 +311,7 @@ const editGoalFn = async id => {
   } catch (e) {
     console.error(e);
   }
+  console.log('todos 색상 데이터 변환');
   goalRender();
   closePopup($editGoal);
   targetId = null;

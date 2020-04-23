@@ -5,10 +5,22 @@ import {
   popup
 } from './common.js';
 
-
 let week = [];
 let goals = [];
 let todos = [];
+
+// DOMS
+const $period = document.querySelector('.period');
+const $weeklyChallenge = document.querySelector('.weeklyChallenge');
+const $statsContent = document.querySelector('.statsContent');
+const $statsChildren = [...$statsContent.children];
+const $statsData = document.querySelector('.statsData');
+const $weeklyTotal = document.querySelector('.weekly .total > p');
+const $weeklySum = document.querySelector('.weekly .sum > p');
+const $weeklyAchievementGoalTime = document.querySelector('.weekly .achievement span');
+const $weeklyAchievement = document.querySelector('.weekly .achievement > p');
+const $weeklyProgressBar = document.querySelector('.weekly .progressBar');
+const $weeklyGraph = document.querySelector('.weekly .graph');
 
 // 일주일 날짜 구하기
 const getCurrentWeek = () => {
@@ -25,20 +37,6 @@ const getCurrentWeek = () => {
   }
   return week;
 };
-
-// DOMS
-const $period = document.querySelector('.period');
-const $weeklyChallenge = document.querySelector('.weeklyChallenge');
-const $statsContent = document.querySelector('.statsContent');
-const $statsChildren = [...$statsContent.children];
-const $statsData = document.querySelector('.statsData');
-const $weeklyTotal = document.querySelector('.weekly .total > p');
-const $weeklySum = document.querySelector('.weekly .sum > p');
-const $weeklyAchievementGoalTime = document.querySelector('.weekly .achievement span');
-const $weeklyAchievement = document.querySelector('.weekly .achievement > p');
-const $weeklyProgressBar = document.querySelector('.weekly .progressBar');
-const $weeklyGraph = document.querySelector('.weekly .graph');
-
 // 오늘 날짜 구하기
 const getToday = () => {
   const now = new Date();
@@ -48,6 +46,7 @@ const getToday = () => {
   return `${year}-${month < 10 ? '0' + month : month}-${date < 10 ? '0' + date : date}`;
 };
 const today = getToday();
+
 // 공통 사용 함수
 // 날짜 형식 변경하기 ex) 2020년 04월 05일
 const dateChangeForm = targetDate => {
@@ -76,7 +75,34 @@ const rateCalc = (divisor, dividend) => {
   const temp = (divisor / dividend) * 100;
   return Math.round(temp);
 };
+// 목표 이름 구하기
+const getGoalTitle = color => {
+  let tempTitle = '';
+  goals.forEach(goal => {
+    if (goal.color === color) tempTitle = goal.content;
+  });
+  return tempTitle;
+};
 
+// 선택 날짜 찾기
+const selectDateSearch = btnSelectId => {
+  let selectDateTemp = '';
+  week.forEach(day => {
+    if (day.id !== +btnSelectId) return;
+    selectDateTemp = day.date;
+  });
+  return selectDateTemp;
+};
+
+// 일간 평균 공부시간 구하기
+const averageDate = target => {
+  let temp = 0;
+  week.forEach(day => {
+    if (day.date !== target) return;
+    temp = day.id;
+  });
+  return temp;
+};
 // 시간의 합 구하기
 // 하루 목표 시간 구하기 (초)
 const getDailyGoalSeconds = date => {
@@ -191,24 +217,6 @@ const getWeeklyIndexDoneSeconds = color => {
   return sumTemp;
 };
 
-// 목표 이름 구하기
-const getGoalTitle = color => {
-  let tempTitle = '';
-  goals.forEach(goal => {
-    if (goal.color === color) tempTitle = goal.content;
-  });
-  return tempTitle;
-};
-
-// 선택 날짜 찾기
-const selectDateSearch = btnSelectId => {
-  let selectDateTemp = '';
-  week.forEach(day => {
-    if (day.id !== +btnSelectId) return;
-    selectDateTemp = day.date;
-  });
-  return selectDateTemp;
-};
 const getIndexRate = (checkDate, color) => {
   const indexGoalSeconds = getDailyIndexGoalSeconds(checkDate, color);
   const indexDoneSeconds = getDailyIndexDoneSeconds(checkDate, color);
@@ -253,14 +261,14 @@ const dailyDataRender = date => {
     <p>${secondsToHours(doneSeconds)}</p>
   </li>
   <li class="achievement">
-    <h4>달성률 <span>${secondsToHours(goalSeconds)}</span></h4>
-    <p>${rateCalc(doneSeconds, goalSeconds)}%</p>
+    <h4>달성률 <span>목표 : ${secondsToHours(goalSeconds)}</span></h4>
+    <p>${rateCalc(doneSeconds, goalSeconds) ? rateCalc(doneSeconds, goalSeconds) : '0'}%</p>
     <div class="progress">
       <div class="progressBar" style="width:${rateCalc(doneSeconds, goalSeconds)}%;"></div>
     </div>
   </li>
   <li class="category">
-    <h4>목표별 공부시간 <span>(%)</span></h4>
+    <h4>목표별 공부시간</h4>
     <ul class="graph">
       <li class="red">
         <label>${getGoalTitle('red')}</label>
@@ -363,10 +371,10 @@ $statsContent.onclick = ({ target }) => {
   if (target.parentNode.classList.contains('weekly')) {
     const goalSeconds = getWeeklyGoalSeconds();
     const doneSeconds = getWeeklyDoneSeconds();
-    const averageCalc = doneSeconds / 2;
+    const averageCalc = doneSeconds / averageDate(today);
 
     $weeklyTotal.textContent = `${secondsToHours(doneSeconds)}`;
-    $weeklyAchievementGoalTime.textContent = `${secondsToHours(goalSeconds)}`;
+    $weeklyAchievementGoalTime.textContent = `목표 : ${secondsToHours(goalSeconds)}`;
     $weeklyAchievement.textContent = `${rateCalc(doneSeconds, goalSeconds)}%`;
     $weeklySum.textContent = `${secondsToHours(averageCalc)}`;
     $weeklyProgressBar.style.width = `${rateCalc(doneSeconds, goalSeconds)}%`;
@@ -382,7 +390,6 @@ const onLoad = async () => {
   getCurrentWeek();
   const getGoals = await fetch('/goals');
   goals = await getGoals.json();
-  console.log(todos, week, goals);
   render();
 };
 

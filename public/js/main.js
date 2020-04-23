@@ -649,6 +649,17 @@ const todoGoalOption = (hour, minute) => {
   console.log('시간에 따라 옵션 수 줄이기', hour, minute);
   $addTodoGTime.innerHTML = html;
 };
+// addTodo popup 초기화 함수
+const resetAddtodo = () => {
+  $addTodoCont.value = '';
+  $addTodoImp.checked = false;
+  $addTodoDate.value = '';
+  $addTodoDate.max = null;
+  $addTodoStart.hour.value = '';
+  $addTodoStart.minute.innerHTML = '<option value=""> 분 </option>';
+  $addTodoGTime.innerHTML = '<option value=""> - </option>';
+  $addTodoDetail.value = '';
+};
 
 // 통신
 // 할일 추가 함수
@@ -665,19 +676,6 @@ const addTodos = async () => {
     window.alert('할일 예정이 다른 예정과 겹칩니다.');
     return;
   }
-  console.log({
-    id: generateId(todos),
-    content: $addTodoCont.value,
-    goal: +$addTodoGoal.value,
-    color: goals.find(({ id }) => id === +$addTodoGoal.value).color,
-    date: $addTodoDate.value,
-    day: new Date($addTodoDate.value).getDay(),
-    important: $addTodoImp.checked,
-    startTime: `${hour < 10 ? '0' + hour : hour}:${$addTodoStart.minute.value}`,
-    goalTime: $addTodoGTime.value,
-    detail: $addTodoDetail.value,
-    done: '00:00:00'
-  });
   try {
     const _todo = await fetch('/todos', {
       method: 'POST',
@@ -703,14 +701,7 @@ const addTodos = async () => {
     console.log('조건에 따라서 뷰 랜더');
     // render();
     if ($addTodoDate.value === generateDateCW(now)) render();
-    $addTodoCont.value = '';
-    $addTodoImp.checked = false;
-    $addTodoDate.value = '';
-    $addTodoDate.max = null;
-    $addTodoStart.hour.value = '';
-    $addTodoStart.minute.innerHTML = '<option value=""> 분 </option>';
-    $addTodoGTime.innerHTML = '<option value=""> - </option>';
-    $addTodoDetail.value = '';
+    resetAddtodo();
   } catch (e) {
     console.error(e);
   }
@@ -731,7 +722,7 @@ $btnAddTodo.onclick = () => {
 // popup
 // 할일 추가 popup 클릭 이벤트
 $addTodos.onclick = ({ target }) => {
-  popup(target, $addTodos, addTodos);
+  popup(target, $addTodos, addTodos, resetAddtodo);
 };
 // 할일 선택 이벤트
 $addTodos.onchange = ({ target }) => {

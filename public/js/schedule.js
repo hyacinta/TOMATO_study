@@ -62,8 +62,8 @@ const renderSche = () => {
   const timeArr = mkTimeArr();
   const scheArr = [...$scheduleList];
 
-  todos = todos.filter(todo => goals.find(goal => goal.id === todo.goal));
-  const _todos = $selectDate.value === '' ? getToday(todos) : filterTodos();
+  let _todos = todos.filter(todo => goals.find(goal => goal.id === todo.goal));
+  _todos = $selectDate.value === '' ? getToday(_todos) : filterTodos();
 
   scheArr.forEach(sche => sche.innerHTML = '');
 

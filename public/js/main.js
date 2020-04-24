@@ -132,7 +132,7 @@ const render = () => {
     <button class="btnStopWatch">정지</button>
     <a class="todoTitSet">
       <h4 class="todoTit"><span class="icoImp${todo.important ? ' impCheck' : ''}">중요</span>${todo.content}</h4>
-      <span class="todoSchedule">${startTimeArr[0] > 12 ? 'PM' : 'AM'} ${changePm(startTimeArr)} ~ ${changeText(todo.goalTime)}</span>
+      <span class="todoSchedule">시작 : ${startTimeArr[0] > 12 ? 'PM' : 'AM'} ${changePm(startTimeArr)} / 목표 : ${changeText(todo.goalTime)}</span>
     </a>
     <div class="simulationTime">${todo.done}</div>
     <div class="todoContent">
@@ -276,11 +276,12 @@ const renderPopup = target => {
   play = !play;
   $timerPopup.classList.add('active');
   todayTodos.forEach(todo => {
+    const startTimeArr = todo.startTime.split(':', 2);
     if (+target.parentNode.id === todo.id) {
       $timerPopup.innerHTML = `
         <a id="${todo.id}" class="todoTitSet">
           <h4 class="todoTit">${todo.content}</h4>
-          <span class="todoSchedule">PM ${todo.startTime} ~ ${todo.goalTime} 예정</span>
+          <span class="todoSchedule">시작예정 ${startTimeArr[0] > 12 ? 'PM' : 'AM'} ${todo.startTime} / 목표시간 ${todo.goalTime}</span>
         </a>
         <div class="stopTimer ${target.parentNode.classList.item(0)} ing">
           <button class="btnStopWatch">일시정지</button>

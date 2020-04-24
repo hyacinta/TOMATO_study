@@ -55,7 +55,7 @@ const getToday = _todos => {
   });
 };
 
-const filterTodos = () => todos.filter(todo => todo.date === $selectDate.value);
+const filterTodos = _todos => _todos.filter(todo => todo.date === $selectDate.value);
 
 // timeArr를 돌면서 todos와 매칭하는것만 필터 후 요소로 i를 주고 스케줄[i]에innerHtml 한다. 
 // innerHtml이라서 시작시간이 겹치는 구간은 덮어쓴다. 고로 랜더링이 안된다.
@@ -64,7 +64,7 @@ const renderSche = () => {
   const scheArr = [...$scheduleList];
 
   let _todos = todos.filter(todo => goals.find(goal => goal.id === todo.goal));
-  _todos = $selectDate.value === '' ? getToday(_todos) : filterTodos();
+  _todos = $selectDate.value === '' ? getToday(_todos) : filterTodos(_todos);
 
   scheArr.forEach(sche => sche.innerHTML = '');
 
@@ -273,16 +273,16 @@ $addTodos.onchange = ({ target }) => {
   }
   if (target === $addTodoStart.hour) {
     $addTodoStart.minute.innerHTML = target.value === '23' ? `
-    <option value="00">00분</option>
-    <option value="10">10분</option>
-    <option value="20">20분</option>
-    <option value="30">30분</option>` : `
-    <option value="00">00분</option>
-    <option value="10">10분</option>
-    <option value="20">20분</option>
-    <option value="30">30분</option>
-    <option value="40">40분</option>
-    <option value="50">50분</option>`;
+    <option value="00">00</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="30">30</option>` : `
+    <option value="00">00</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="30">30</option>
+    <option value="40">40</option>
+    <option value="50">50</option>`;
     todoGoalOption(+$addTodoStart.hour.value, 0);
   }
 };

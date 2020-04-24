@@ -132,7 +132,7 @@ const render = () => {
     <button class="btnStopWatch">정지</button>
     <a class="todoTitSet">
       <h4 class="todoTit"><span class="icoImp${todo.important ? ' impCheck' : ''}">중요</span>${todo.content}</h4>
-      <span class="todoSchedule">${startTimeArr[0] > 12 ? 'PM' : 'AM'} ${changePm(startTimeArr)} ~ ${changeText(todo.goalTime)}</span>
+      <span class="todoSchedule">시작 : ${startTimeArr[0] > 12 ? 'PM' : 'AM'} ${changePm(startTimeArr)} / 목표 : ${changeText(todo.goalTime)}</span>
     </a>
     <div class="simulationTime">${todo.done}</div>
     <div class="todoContent">
@@ -276,11 +276,12 @@ const renderPopup = target => {
   play = !play;
   $timerPopup.classList.add('active');
   todayTodos.forEach(todo => {
+    const startTimeArr = todo.startTime.split(':', 2);
     if (+target.parentNode.id === todo.id) {
       $timerPopup.innerHTML = `
         <a id="${todo.id}" class="todoTitSet">
           <h4 class="todoTit">${todo.content}</h4>
-          <span class="todoSchedule">PM ${todo.startTime} ~ ${todo.goalTime} 예정</span>
+          <span class="todoSchedule">시작예정 ${startTimeArr[0] > 12 ? 'PM' : 'AM'} ${todo.startTime} / 목표시간 ${todo.goalTime}</span>
         </a>
         <div class="stopTimer ${target.parentNode.classList.item(0)} ing">
           <button class="btnStopWatch">일시정지</button>
@@ -375,7 +376,7 @@ const renderEditTodo = target => {
         </li>
         <li class="todoInput">
           <label for="" class="a11yHidden">할일 입력</label>
-          <input type="text" placeholder="${todo.content}">
+          <input type="text" placeholder="할일을 입력하세요">
         </li>
         <li class="impSelect"><label for="test" class="a11yHidden btnImpLabel">text</label>
           <button class="btnImp ${todo.color}${todo.important ? ' impCheck' : ''}" id="test">중요</button>
@@ -389,12 +390,12 @@ const renderEditTodo = target => {
           <input type="number" name="" id="" placeholder="입력하세요"><span>시</span>
           <select name="country" id="countrySelectBox">
             <option value="">선택하세요</option>
-            <option value="1">00분</option>
-            <option value="2">10분</option>
-            <option value="3">20분</option>
-            <option value="4">30분</option>
-            <option value="5">40분</option>
-            <option value="6">50분</option>
+            <option value="1">00</option>
+            <option value="2">10</option>
+            <option value="3">20</option>
+            <option value="4">30</option>
+            <option value="5">40</option>
+            <option value="6">50</option>
           </select><span>분</span>
         </li>
         <li class="goalTime">
@@ -727,7 +728,7 @@ const addTodos = async () => {
     todos = [...todos, todo];
     window.alert('할일이 추가되었습니다.');
     closePopup($addTodos);
-    console.log('조건에 따라서 뷰 랜더');
+    filterTodayTodos();
     // render();
     if ($addTodoDate.value === generateDateCW(now)) render();
     resetAddtodo();
@@ -763,16 +764,16 @@ $addTodos.onchange = ({ target }) => {
   }
   if (target === $addTodoStart.hour) {
     $addTodoStart.minute.innerHTML = target.value === '23' ? `
-    <option value="00">00분</option>
-    <option value="10">10분</option>
-    <option value="20">20분</option>
-    <option value="30">30분</option>` : `
-    <option value="00">00분</option>
-    <option value="10">10분</option>
-    <option value="20">20분</option>
-    <option value="30">30분</option>
-    <option value="40">40분</option>
-    <option value="50">50분</option>`;
+    <option value="00">00</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="30">30</option>` : `
+    <option value="00">00</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="30">30</option>
+    <option value="40">40</option>
+    <option value="50">50</option>`;
     todoGoalOption(+$addTodoStart.hour.value, 0);
   }
 };

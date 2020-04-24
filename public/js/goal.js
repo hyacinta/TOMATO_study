@@ -79,11 +79,12 @@ const transSecond = (hh = 0, mm = 0, ss = 0) => {
 const goalRender = () => {
   let html = '';
   goals.forEach(goal => {
+    const _dDay = generateDday(new Date(goal.dDay) - (9 * oneHour));
     const goalDday = goal.dDay.split('-');
     html += `<li id="${goal.id}" class="${goal.color}">
     <div class="goalTit">
       <h4>${goal.content}</h3>
-      <span class="closingDate">${goalDday[0]}.${goalDday[1]}.${goalDday[2]} / D-${generateDday(new Date(goal.dDay) - (9 * oneHour))}</span>
+      <span class="closingDate">${goalDday[0]}.${goalDday[1]}.${goalDday[2]} / D-${_dDay || 'Day'}</span>
     </div>
     <button class="btnEdit">수정</button>
     <button class="btnDelete">삭제</button>

@@ -376,7 +376,7 @@ const renderEditTodo = target => {
         </li>
         <li class="todoInput">
           <label for="" class="a11yHidden">할일 입력</label>
-          <input type="text" placeholder="${todo.content}">
+          <input type="text" placeholder="할일을 입력하세요">
         </li>
         <li class="impSelect"><label for="test" class="a11yHidden btnImpLabel">text</label>
           <button class="btnImp ${todo.color}${todo.important ? ' impCheck' : ''}" id="test">중요</button>
@@ -728,7 +728,7 @@ const addTodos = async () => {
     todos = [...todos, todo];
     window.alert('할일이 추가되었습니다.');
     closePopup($addTodos);
-    console.log('조건에 따라서 뷰 랜더');
+    filterTodayTodos();
     // render();
     if ($addTodoDate.value === generateDateCW(now)) render();
     resetAddtodo();

@@ -252,9 +252,29 @@ header .selectDate input{
   z-index: 100;
 }
 
-.todo h4 {margin-right: 4px;}
-.todo.red {background-color: #ffddd2;}
-.todo.yellow {background-color: #ffeec1;}
-.todo.green {background-color: #c6f2d2;}
-.todo.blue {background-color: #bdeaf4;}
-.todo.purple {background-color: #e3d3fd;}
+.todo h4 {margin-right: 10px;}
+.todo.red {
+  background-color: #ffddd2;
+  border-top: 1px solid #ffa98e;
+  border-bottom: 1px solid #ffa98e;
+}
+.todo.yellow {
+  background-color: #ffeec1;
+  border-top: 1px solid #f4c753;
+  border-bottom: 1px solid #f4c753;
+}
+.todo.green {
+  background-color: #c6f2d2;
+  border-top: 1px solid #5fc47c;
+  border-bottom: 1px solid #5fc47c;
+}
+.todo.blue {
+  background-color: #bdeaf4;
+  border-top: 1px solid #5cafc1;
+  border-bottom: 1px solid #5cafc1;
+}
+.todo.purple {
+  background-color: #e3d3fd;
+  border-top: 1px solid #a98dd7;
+  border-bottom: 1px solid #a98dd7;
+}

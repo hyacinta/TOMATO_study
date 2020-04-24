@@ -38,16 +38,10 @@
   ],
   "goals": [
     {
-      "id": 1,
-      "content": "알바",
-      "dDay": "2020-04-25",
-      "color": "blue"
-    },
-    {
       "id": 2,
       "content": "면접",
       "dDay": "2020-04-28",
-      "color": "green"
+      "color": "blue"
     },
     {
       "id": 3,
@@ -58,8 +52,20 @@
     {
       "id": 4,
       "content": "디자인 마감",
-      "dDay": "2020-04-28",
+      "dDay": "2020-04-25",
+      "color": "purple"
+    },
+    {
+      "id": 5,
+      "content": "코딩 테스트 준비",
+      "dDay": "2020-04-27",
       "color": "yellow"
+    },
+    {
+      "id": 6,
+      "content": "새로운 목표 수정",
+      "dDay": "2020-04-28",
+      "color": "green"
     }
   ],
   "todos": [
@@ -87,7 +93,7 @@
       "startTime": "06:30",
       "goalTime": "1:00",
       "detail": "",
-      "done": "00:10:08"
+      "done": "00:10:21"
     },
     {
       "id": 3,
@@ -100,33 +106,20 @@
       "startTime": "06:00",
       "goalTime": "0:30",
       "detail": "피그마 사용",
-      "done": "00:39:00"
+      "done": "00:39:08"
     },
     {
       "id": 4,
-      "content": "GUI 작업",
-      "goal": 2,
-      "color": "green",
-      "date": "2020-04-23",
-      "day": 4,
-      "important": true,
-      "startTime": "10:40",
+      "content": "GUI 작업 완료",
+      "goal": 4,
+      "color": "yellow",
+      "date": "2020-04-29",
+      "day": 3,
+      "important": false,
+      "startTime": "12:10",
       "goalTime": "1:30",
       "detail": "피그마 사용",
       "done": "01:00:07"
-    },
-    {
-      "id": 5,
-      "content": "html 마크업",
-      "goal": 3,
-      "color": "red",
-      "date": "2020-04-23",
-      "day": 4,
-      "important": false,
-      "startTime": "13:00",
-      "goalTime": "3:00",
-      "detail": "코딩 컨벤션 조사 후 작성",
-      "done": "00:50:00"
     },
     {
       "id": 7,
@@ -157,14 +150,28 @@
     {
       "id": 12,
       "content": "222",
-      "goal": 3,
-      "color": "red",
+      "goal": 2,
+      "color": "green",
       "date": "2020-04-24",
       "day": 5,
       "important": false,
       "startTime": "12:00",
       "goalTime": "0:30",
+      "detail": "ㅅㄷㄴㅅ",
+      "done": "00:03:06"
+    },
+    {
+      "id": 13,
+      "content": "할일",
+      "goal": 3,
+      "color": "red",
+      "date": "2020-04-29",
+      "day": 3,
+      "important": false,
+      "startTime": "06:00",
+      "goalTime": "0:30",
       "detail": "",
+<<<<<<< HEAD
       "done": "00:03:00"
     },
     {
@@ -191,6 +198,34 @@
       "startTime": "06:50",
       "goalTime": "0:30",
       "detail": "dsafa",
+=======
+      "done": "00:00:00"
+    },
+    {
+      "id": 15,
+      "content": "더 할일",
+      "goal": 3,
+      "color": "red",
+      "date": "2020-04-30",
+      "day": 4,
+      "important": false,
+      "startTime": "06:00",
+      "goalTime": "0:30",
+      "detail": "",
+      "done": "00:00:00"
+    },
+    {
+      "id": 16,
+      "content": "새로운 할일 입력",
+      "goal": 6,
+      "color": "green",
+      "date": "2020-04-27",
+      "day": 1,
+      "important": false,
+      "startTime": "13:00",
+      "goalTime": "0:30",
+      "detail": "ㄹㅇㄴㅁㄴ",
+>>>>>>> a99680bb9010828ca8a98208aa54e5115ac164b8
       "done": "00:00:00"
     }
   ]

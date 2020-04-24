@@ -394,6 +394,7 @@ const onLoad = async () => {
 };
 
 /* 치원님 할일 추가 code 시작 */
+// DOM
 const $btnAddTodo = document.querySelector('.btnAddTodo');
 // popup
 // 할일 추가 popup
@@ -473,7 +474,7 @@ const resetAddtodo = () => {
   $addTodoDate.value = '';
   $addTodoDate.max = null;
   $addTodoStart.hour.value = '';
-  $addTodoStart.minute.innerHTML = '<option value=""> 분 </option>';
+  $addTodoStart.minute.innerHTML = '<option value="">선택하세요</option>';
   $addTodoGTime.innerHTML = '<option value=""> - </option>';
   $addTodoDetail.value = '';
 };
@@ -481,13 +482,28 @@ const resetAddtodo = () => {
 // 통신
 // 할일 추가 함수
 const addTodos = async () => {
+  const now = new Date();
+
   // 입력란 확인
   if (!checkValue($addTodos)) {
     window.alert('필수 입력란이 전부 채워지지 않았습니다.');
     return;
   }
+
+  // 할일 일정이 오늘 이후인지 확인
+  if (new Date($addTodoDate.value) - new Date(generateDate(now)) < 0) {
+    window.alert('시작 날짜를 오늘 이후로 선택하십시요.');
+    return;
+  }
+  
   const hour = $addTodoStart.hour.value;
   const minute = $addTodoStart.minute.value;
+  // 시작 시간이 6 - 23 인지 확인
+  if (hour < 6 || hour > 23) {
+    window.alert('시작 시간은 6시부터 23시까지 입니다.');
+    return;
+  }
+
   // 중복 예정 확인
   if (!checkTime($addTodoDate.value, `${hour}:${minute}`, $addTodoGTime.value)) {
     window.alert('할일 예정이 다른 예정과 겹칩니다.');
@@ -549,16 +565,16 @@ $addTodos.onchange = ({ target }) => {
   }
   if (target === $addTodoStart.hour) {
     $addTodoStart.minute.innerHTML = target.value === '23' ? `
-    <option value="00">00분</option>
-    <option value="10">10분</option>
-    <option value="20">20분</option>
-    <option value="30">30분</option>` : `
-    <option value="00">00분</option>
-    <option value="10">10분</option>
-    <option value="20">20분</option>
-    <option value="30">30분</option>
-    <option value="40">40분</option>
-    <option value="50">50분</option>`;
+    <option value="00">00</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="30">30</option>` : `
+    <option value="00">00</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="30">30</option>
+    <option value="40">40</option>
+    <option value="50">50</option>`;
     todoGoalOption(+$addTodoStart.hour.value, 0);
   }
 };

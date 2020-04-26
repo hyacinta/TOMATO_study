@@ -49,7 +49,9 @@ img {vertical-align: top;}
   clip: rect(0, 0);
   clip-path: polygon(0, 0);
   overflow: hidden;
+  text-indent: -9999px;
 }
+
 .clearfix::after {
   content: "";
   display: block;
@@ -92,11 +94,29 @@ img {vertical-align: top;}
   position: absolute;
   top: 0;
   left: 0;
-  width: 10%;
+  width: 0%;
+  max-width: 100%;
   height: 8px;
   border-radius: 0 4px 4px 0;
   background-color: #FF551F;
   box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+  animation-name: progressBarStart;
+  animation-duration: .5s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+@keyframes progressBarStart {
+  0% {
+      opacity: 0;
+      transform: translateX(-100px);
+  }
+  10% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+      transform: translateX(0);
+  }
 }
 #goal, #statistics, #schedule {padding-top: 64px;}
 #todos, #statistics, .schedule {background-color: #fff;}
@@ -104,7 +124,7 @@ img {vertical-align: top;}
 
 
 
-button, input[type="checkbox"], select, a {cursor: pointer;}
+button, input[type="checkbox"], select, a, .indexInput label,.indexInput input[type="radio"] {cursor: pointer;}
 input[type="text"], input[type="date"], input[type="number"], textarea {
   width: 100%;
   border-width: 0 0 1px 0;
@@ -178,6 +198,7 @@ nav {
   background: url('../img/ico_plus_white.png') no-repeat center;
   background-size: 24px 24px;
   background-color: #FF551F;
+  box-shadow: 0 0 12px 1px rgba(0,0,0,0.2);
   overflow: hidden;
 }
 .navLink {
@@ -236,7 +257,7 @@ nav {
   top: 28px;
   right: 24px;
 }
-.popup .btnCancel, .popup .btnRegister {
+.popup .btnCancel, .popup .btnRegister, .popup .btnRemove {
   position: absolute;
   bottom: 0;
   width: 50%;
@@ -250,7 +271,7 @@ nav {
   color: #FF551F;
   border-bottom-left-radius: 16px;
 }
-.popup .btnRegister {
+.popup .btnRegister, .popup .btnRemove {
   right: 0;
   color: #fff;
   background-color: #FF551F;
@@ -267,17 +288,17 @@ nav {
   z-index: 150;
 }
 
-.addTodos.popup {height: 572px;}
-.addGoal.popup {height: 362px;}
+.addTodos.popup {height: 666px;}
+.addGoal.popup, .editGoal.popup {height: 362px;}
 .timer.popup {height: 250px;}
 
-.addInput {
+.addInput, .editInput {
   display: flex;
   flex-wrap: wrap;
 }
-.addInput li {margin-bottom: 16px;}
+.addInput li, .editInput li {margin-bottom: 16px;}
 .category {width: 100%;}
-.addInput .categorySelect {
+.addInput .categorySelect, .editInput .categorySelect {
   width: 100%;
   font-size: 1.4rem;
   font-weight: 400;
@@ -285,7 +306,8 @@ nav {
   border-bottom: 1px solid #cecece;
 }
 .todoInput {width: 232px;}
-.impSelect  button {
+.impSelect {position: relative;}
+.impSelect  label {
   width: 40px;
   height: 40px;
   padding-left: 40px;
@@ -296,9 +318,25 @@ nav {
   background-image: url('../img/ico_imp_off.png');
   border-bottom: 1px solid #cecece;
 }
-.startDate, .endDate, .startTime, .goalTime  {
-  width: 50%;
+.impSelect input[type="checkbox"]:checked + label {
+  background-image: url('../img/ico_imp_on.png');
+}
+.impSelect input[type="checkbox"] {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+}
+.startDate, .startTime, .goalTime  {
+  width: 100%;
   text-align: center;
+} 
+.startTime span {
+  padding-top: 10px;
+  padding-right: 5px;
+  border-bottom: 1px solid #cecece;
 }
 .contentInput {width: 100%;}
 .contentInput textarea {height: 80px;}
@@ -313,9 +351,9 @@ nav {
   padding-left: 10px;
   text-align: left;
 }
-.startTime input {width: 56px;}
+.startTime input {width: 106px;}
 .startTime select {
-  width: 80px;
+  width: 130px;
   text-align: right;
   color: #707070;
 }

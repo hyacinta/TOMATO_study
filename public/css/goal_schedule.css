@@ -1,9 +1,58 @@
-.goalList {background-color: #fff;}
+.goalList {
+  background-color: #fff;
+  animation-name: bgColorChange;
+  animation-duration: .5s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+@keyframes bgColorChange {
+  0% {
+    transform: translateY(-100%);
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .goalList li {
   display: flex;
   align-items: center;
   padding: 20px;
+  animation-name: indexInputLoad;
+  animation-duration: .2s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
 }
+@keyframes indexInputLoad {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.goalList li:nth-child(1) {
+  animation-delay: .2s;
+}
+.goalList li:nth-child(2) {
+  animation-delay: .25s;
+}
+.goalList li:nth-child(3) {
+  animation-delay: .3s;
+}
+.goalList li:nth-child(4) {
+  animation-delay: .35s;
+}
+.goalList li:nth-child(5) {
+  animation-delay: .4s;
+}
+
+
 .goalList li::before {
   display: block;
   content: '';
@@ -24,8 +73,22 @@
   justify-content: center;
   width: 240px;
   margin: 40px auto;
+  padding-right: 10px;
   font-size: 2rem;
   color: #707070;
+  animation-name: btnDissolve;
+  animation-duration: .5s;
+  animation-delay: .5s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+@keyframes btnDissolve {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
 }
 .btnAddGoal .icoPlusGray {
   display: inline-block;
@@ -56,7 +119,14 @@
   position: relative;
   width: 20%;
 }
+.indexInput input[type="radio"] {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: -10;
+}
 .indexInput label {
+  /* position: relative; */
   display: block;
   width: 40px;
   height: 40px;
@@ -65,36 +135,58 @@
   border: 1px solid #cecece;
   border-radius: 20px;
   overflow: hidden;
+  z-index: 10;
 }
 .indexInput .red label {
   background-color: #ffddd2;
   border-color: #ffa98e;
 }
+.indexInput .red input[type="radio"]:checked + label {
+  background-color: #ffa98e;
+}
 .indexInput .yellow label {
   background-color: #ffeec1;
   border-color: #f4c753;
+}
+.indexInput .yellow input[type="radio"]:checked + label {
+  background-color: #f4c753;
 }
 .indexInput .green label {
   background-color: #c6f2d2;
   border-color: #5fc47c;
 }
+.indexInput .green input[type="radio"]:checked + label {
+  background-color: #5fc47c;
+}
 .indexInput .blue label {
   background-color: #bdeaf4;
   border-color: #5cafc1;
+}
+.indexInput .blue input[type="radio"]:checked + label {
+  background-color: #5cafc1;
 }
 .indexInput .purple label{
   background-color: #e3d3fd;
   border-color: #a98dd7;
 }
-.indexInput input[type="radio"] {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  opacity: 0;
+.indexInput .purple input[type="radio"]:checked + label {
+  background-color: #a98dd7;
 }
 
+
+
+
+.deleteGoal.popup, .deleteTodo.popup {
+  padding-top: 64px;
+  height: 200px;
+  font-size: 1.4em;
+  text-align: center;
+}
+.deleteGoal.popup p {
+  font-size: 20px;
+  text-align: center;
+}
 /* 스케줄 플래너 */
-.scheduleList {position: relative;}
 .hour {display: flex;}
 .timeTit {
   width: 36px;
@@ -109,6 +201,7 @@
 .timeTit span {display: block;}
 .time {flex-grow: 1;}
 .halfMinute {
+  position: relative;
   height: 30px;
   border-bottom: 1px solid #cecece;
   background-color: #fff;
@@ -120,10 +213,68 @@
   width: 100%;
   min-height: 29px;
   padding: 0 8px;
+  z-index: 10;
+  animation-name: todoRanding;
+  animation-duration: .4s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+  transform-origin: left center;
 }
-.todo h4 {margin-right: 4px;}
-.todo.red {background-color: #ffddd2;}
-.todo.yellow {background-color: #ffeec1;}
-.todo.green {background-color: #c6f2d2;}
-.todo.blue {background-color: #bdeaf4;}
-.todo.purple {background-color: #e3d3fd;}
+@keyframes todoRanding {
+  0% {
+      opacity: .5;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+/* 하은 날짜 추가 */
+#schedule .selectDate {
+  display: none;
+  list-style: none;
+}
+
+header .selectDate {
+  position: relative;
+}
+
+header .selectDate input{
+  position: fixed;
+  top: 15px;
+  right: 17px;
+  width: 40%;
+  max-width: 175px;
+  height: 32px;
+  padding-right: 10px;
+  border: 1px solid #cecece;
+  /* background: url('../img/ico_arrow.png') no-repeat right; */
+  background-size: 24px 24px;
+  z-index: 100;
+}
+
+.todo h4 {margin-right: 10px;}
+.todo.red {
+  background-color: #ffddd2;
+  border-top: 1px solid #ffa98e;
+  border-bottom: 1px solid #ffa98e;
+}
+.todo.yellow {
+  background-color: #ffeec1;
+  border-top: 1px solid #f4c753;
+  border-bottom: 1px solid #f4c753;
+}
+.todo.green {
+  background-color: #c6f2d2;
+  border-top: 1px solid #5fc47c;
+  border-bottom: 1px solid #5fc47c;
+}
+.todo.blue {
+  background-color: #bdeaf4;
+  border-top: 1px solid #5cafc1;
+  border-bottom: 1px solid #5cafc1;
+}
+.todo.purple {
+  background-color: #e3d3fd;
+  border-top: 1px solid #a98dd7;
+  border-bottom: 1px solid #a98dd7;
+}

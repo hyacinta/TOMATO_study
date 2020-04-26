@@ -54,12 +54,6 @@
       "content": "HTML & CSS",
       "dDay": "2020-07-31",
       "color": "blue"
-    },
-    {
-      "id": 4,
-      "content": "토익시험",
-      "dDay": "2020-11-26",
-      "color": "yellow"
     }
   ],
   "todos": [
@@ -286,7 +280,7 @@
     },
     {
       "id": 17,
-      "content": "콜백함수",
+      "content": "고차함수",
       "goal": 2,
       "color": "green",
       "date": "2020-04-24",
@@ -294,8 +288,8 @@
       "important": true,
       "startTime": "10:00",
       "goalTime": "2:00",
-      "detail": "콜백함수 사용법 확인하기",
-      "done": "02:13:13"
+      "detail": "고차함수 사용법 확인하기",
+      "done": "02:13:06"
     },
     {
       "id": 18,
@@ -400,19 +394,6 @@
       "goalTime": "1:00",
       "detail": "오류 확인 및 디버깅",
       "done": "00:05:05"
-    },
-    {
-      "id": 27,
-      "content": "캐러셀 만들기",
-      "goal": 2,
-      "color": "green",
-      "date": "2020-04-25",
-      "day": 6,
-      "important": false,
-      "startTime": "14:00",
-      "goalTime": "1:00",
-      "detail": "",
-      "done": "00:00:00"
     }
   ]
 }

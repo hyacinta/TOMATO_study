@@ -16,6 +16,7 @@
   background-color: #f6f6f6;
 }
 .weeklyChallenge dd {
+  position: relative;
   height: 54px;
   padding: 12px;
   font-size: 2rem;
@@ -24,18 +25,65 @@
   overflow: hidden;
 }
 .weeklyChallenge .today dd {color: #202020;}
-.weeklyChallenge .perfect dd, .weeklyChallenge .seccess dd, .weeklyChallenge .fail dd {
-  padding: 53px 12px 0 12px;
+
+.weeklyChallenge button.stamp {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 36px;
+  height: 36px;
+  margin-top: -18px;
+  margin-left: -18px;
+  padding-top: 36px;
   background-size: 36px 36px;
   background-repeat: no-repeat;
   background-position: center;
+  overflow: hidden;
+  animation-name: stampLoad;
+  animation-duration: .3s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
 }
-.weeklyChallenge .perfect dd {background-image: url('../img/stamp_perfact_on.png');}
-.weeklyChallenge .perfect.off dd {background-image: url('../img/stamp_perfact_off.png');}
-.weeklyChallenge .seccess dd {background-image: url('../img/stamp_seccess_on.png');}
-.weeklyChallenge .seccess.off dd {background-image: url('../img/stamp_seccess_off.png');}
-.weeklyChallenge .fail dd {background-image: url('../img/stamp_fail_on.png');}
-.weeklyChallenge .fail.off dd {background-image: url('../img/stamp_fail_off.png');}
+@keyframes stampLoad {
+  0% {
+    opacity: 0;
+    transform: scale(1.2, 1.2)
+  }
+  40% {
+    opacity: 1;
+  }
+  90% {
+    transform: scale(0.95, 0.95)
+  }
+  100% {
+    transform: scale(1, 1)
+  }
+}
+.weeklyChallenge div:nth-child(2) button.stamp {
+  animation-delay: 0.15s;
+}
+.weeklyChallenge div:nth-child(3) button.stamp {
+  animation-delay: 0.3s;
+}
+.weeklyChallenge div:nth-child(4) button.stamp {
+  animation-delay: 0.45s;
+}
+.weeklyChallenge div:nth-child(5) button.stamp {
+  animation-delay: 0.6s;
+}
+.weeklyChallenge div:nth-child(6) button.stamp {
+  animation-delay: 0.75s;
+}
+.weeklyChallenge div:nth-child(7) button.stamp {
+  animation-delay: 0.9s;
+}
+
+.weeklyChallenge .perfect button.stamp {background-image: url('../img/stamp_perfact_on.png');}
+.weeklyChallenge .perfect.off button.stamp {background-image: url('../img/stamp_perfact_off.png');}
+.weeklyChallenge .seccess button.stamp {background-image: url('../img/stamp_seccess_on.png');}
+.weeklyChallenge .seccess.off button.stamp {background-image: url('../img/stamp_seccess_off.png');}
+.weeklyChallenge .fail button.stamp {background-image: url('../img/stamp_fail_on.png');}
+.weeklyChallenge .fail.off button.stamp {background-image: url('../img/stamp_fail_off.png');}
 
 .statsContent {
   position: relative;
@@ -112,9 +160,20 @@
   position: absolute;
   bottom: -32px;
   width: 100%;
+  height: 24px;
   text-align: center;
   color: #202020;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  word-wrap:break-word;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:1;
+  display:-webkit-box;
+  z-index: 10;
 }
+
+
+
 .category .bar {
   position: absolute;
   left: 0;
@@ -122,31 +181,55 @@
   bottom: 0;
   width: 20px;
   height: 140px;
+  max-height: 100%;
   margin: auto;
   border-radius: 4px 4px 0 0;
   border-width: 1px 1px 0 1px;
   border-style: solid;
   border-bottom: none;
+  animation-name: graphBarStart;
+  animation-duration: .5s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+@keyframes graphBarStart {
+  0% {
+    opacity: 0;
+    height: 0;
+    /* transform: translateY(100px); */
+  }
+  30% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .red .bar {
   background-color: #ffddd2;
   border-color: #ffa98e;
+  animation-delay: .1s;
 }
 .yellow .bar {
   background-color: #ffeec1;
   border-color: #f4c753;
+  animation-delay: .15s;
 }
 .green .bar {
   background-color: #c6f2d2;
   border-color: #5fc47c;
+  animation-delay: .2s;
 }
 .blue .bar {
   background-color: #bdeaf4;
   border-color: #5cafc1;
+  animation-delay: .25s;
 }
 .purple .bar {
   background-color: #e3d3fd;
   border-color: #a98dd7;
+  animation-delay: .3s;
 }
 .bar .percent {
   position: absolute;
@@ -155,6 +238,40 @@
   right: -4px;
   display: block;
   content: '100%';
-  width: 100%;
+  width: 26px;
   font-size: 10px;
+  text-align: center;
+  animation-name: percentDissolve;
+  animation-duration: .4s;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+@keyframes percentDissolve {
+  0% {
+      opacity: 0;
+      transform: translateY(30px);
+  }
+  80% {
+      transform: translateY(-5px);
+  }
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+li.red .bar .percent {
+  animation-delay: .4s;
+}
+li.yellow .bar .percent {
+  animation-delay: .45s;
+}
+li.green .bar .percent {
+  animation-delay: .5s;
+}
+li.blue .bar .percent {
+  animation-delay: .55s;
+}
+li.purple .bar .percent {
+  animation-delay: .6s;
 }

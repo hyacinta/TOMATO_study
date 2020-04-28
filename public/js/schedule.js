@@ -30,7 +30,7 @@ const mkTimeArr = () => {
 };
 
 const getGoalContent = id => {
-  console.log(goals);
+  // console.log(goals);
   return goals.find(goal => +goal.id === +id).content;
 };
 
@@ -63,13 +63,13 @@ const renderSche = () => {
   const timeArr = mkTimeArr();
   const scheArr = [...$scheduleList];
 
-  let _todos = todos.filter(todo => goals.find(goal => goal.id === todo.goal));
+  let _todos = todos.filter(todo => goals.find(goal => goal.id === todo.goal)); // get 다음에 들어가도 될 듯
   _todos = $selectDate.value === '' ? getToday(_todos) : filterTodos(_todos);
 
   scheArr.forEach(sche => sche.innerHTML = '');
 
   _todos.forEach(todo => {
-    console.log(todo.goal);
+    // console.log(todo.goal);
     const timeLimit = getTimeCal(todo.startTime);
     if (timeLimit < 360 || timeLimit > 1439) return;
     const i = timeArr.findIndex(time => time === roundTime(todo.startTime));

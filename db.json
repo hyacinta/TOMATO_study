@@ -360,7 +360,7 @@
       "startTime": "21:30",
       "goalTime": "2:30",
       "detail": "box 모델 공부하기",
-      "done": "00:00:00"
+      "done": "01:00:36"
     },
     {
       "id": 23,
@@ -413,6 +413,45 @@
       "goalTime": "1:00",
       "detail": "",
       "done": "00:00:00"
+    },
+    {
+      "id": 28,
+      "content": "ㅇㅇㅇ",
+      "goal": 2,
+      "color": "green",
+      "date": "2020-04-24",
+      "day": 5,
+      "important": false,
+      "startTime": "17:00",
+      "goalTime": "0:30",
+      "detail": "",
+      "done": "00:00:00"
+    },
+    {
+      "id": 29,
+      "content": "하은",
+      "goal": 2,
+      "color": "green",
+      "date": "2020-04-28",
+      "day": 2,
+      "important": true,
+      "startTime": "15:50",
+      "goalTime": "0:30",
+      "detail": "공부",
+      "done": "00:09:16"
+    },
+    {
+      "id": 30,
+      "content": "dxddx",
+      "goal": 3,
+      "color": "blue",
+      "date": "2020-04-28",
+      "day": 2,
+      "important": false,
+      "startTime": "19:00",
+      "goalTime": "4:00",
+      "detail": "",
+      "done": "00:02:00"
     }
   ]
 }

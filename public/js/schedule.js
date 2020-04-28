@@ -7,9 +7,14 @@ import {
 
 let goals = [];
 let todos = [];
+let targetId = [];
 
 const $scheduleList = document.querySelectorAll('main#schedule ul.scheduleList div.halfMinute');
 const $selectDate = document.querySelector('.selectDate > input[type="date"]');
+const $schedule = document.querySelector('ul.scheduleList');
+const $shecDimd = document.querySelector('div.shec + .dimd');
+const $schePopup = document.querySelector('div.shec.popup');
+const $delShecTodo = document.querySelector('div.delShecTodo');
 
 const addZero = num => {
   return num.length > 1 || num > 9 ? num : '0' + num;
@@ -47,13 +52,12 @@ const roundTime = time => {
   return `${addZero(hour)}:${addZero(min)}`;
 };
 
-const getToday = _todos => {
-  return _todos.filter(todo => {
-    const today = new Date();
-    const month = today.getMonth() + 1 > 9 ? today.getMonth() + 1 : `0${today.getMonth() + 1}`;
-    return todo.date === `${today.getFullYear()}-${month}-${today.getDate()}`;
-  });
-};
+const getToday = _todos => _todos.filter(todo => {
+  const today = new Date();
+  const month = today.getMonth() + 1 > 9 ? today.getMonth() + 1 : `0${today.getMonth() + 1}`;
+  return todo.date === `${today.getFullYear()}-${month}-${today.getDate()}`;
+});
+
 
 const filterTodos = _todos => _todos.filter(todo => todo.date === $selectDate.value);
 
@@ -74,7 +78,7 @@ const renderSche = () => {
     if (timeLimit < 360 || timeLimit > 1439) return;
     const i = timeArr.findIndex(time => time === roundTime(todo.startTime));
     scheArr[i].innerHTML = `
-    <div class="todo ${todo.color}" style="height: ${getTimeCal(todo.goalTime) + 1}px; top: ${((todo.startTime[3] % 3) * 10) - 1}px;">
+    <div id="${todo.id}" class="todo ${todo.color}" style="height: ${getTimeCal(todo.goalTime) + 1}px; top: ${((todo.startTime[3] % 3) * 10) - 1}px;">
     <h4>${getGoalContent(todo.goal)}</h4>
     <p>${todo.content}</p>
     </div>`;
@@ -96,6 +100,57 @@ $selectDate.onchange = e => {
   console.dir(e);
   renderSche();
 };
+
+// 20.04.29 수정삭제 기능 추가
+const removePopup = () => {
+  $schePopup.classList.remove('active');
+};
+const deletePopup = () => {
+  $delShecTodo.classList.remove('active');
+};
+
+const deleteSche = () => {
+  fetch(`/todos/${targetId}`, { method: 'DELETE' })
+    .then(() => todos = todos.filter(todo => todo.id !== targetId))
+    .then(renderSche)
+    .catch(error => console.error('Error:', error));
+};
+
+// 스케줄 클릭시 팝업창 띄움
+$schedule.onclick = e => {
+  if (!e.target.matches('ul.scheduleList div.halfMinute > div.todo')) return;
+  $schePopup.classList.add('active');
+  targetId = +e.target.id; 
+};
+
+$shecDimd.onclick = () => {
+  removePopup();
+};
+
+// 수정 삭제 선택 팝업창
+$schePopup.onclick = e => {
+  // if (e.target.matches('div.shec > span.editShec'))
+  if (e.target.matches('div.shec > span.delShec')) {
+    removePopup();
+    $delShecTodo.classList.add('active');
+  }
+};
+
+// 삭제 팝업창
+$delShecTodo.onclick = e => {
+  if (e.target.matches('.delShecTodo > button')) deletePopup();
+  if (e.target.matches('.delShecTodo > button.btnRemove')) deleteSche();
+};
+
+
+// 추가 팝업창
+
+
+
+
+
+
+
 
 // import
 /* 치원님 할일 추가 code 시작 */

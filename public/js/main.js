@@ -31,7 +31,7 @@ const filterTodayTodos = () => {
     const date = today.getDate() + 1 > 9 ? today.getDate() : `0${today.getDate()}`;
     return todo.date === `${today.getFullYear()}-${month}-${date}`; // --
   });
-  console.log(todayTodos);
+  // console.log(todayTodos);
 };
 
 // 현재 날짜부터 남은 날짜 구하는 함수
@@ -40,7 +40,10 @@ const generateDday = date => Math.ceil((date - now) / oneDay);
 const renderGoals = () => {
   let html = '<option value="All">목표 전체보기</option>';
   goals.forEach(goal => {
-    html += `<option value="${goal.id}">${goal.content} <span class="dDay" style="font-size: 1.6rem;">D-${generateDday(new Date(goal.dDay) - (9 * oneHour))}</span></option>`;
+    const _dDay = generateDday(new Date(goal.dDay) - (9 * oneHour));
+    html += `<option value="${goal.id}">${goal.content} 
+    <span class="dDay" style="font-size: 1.6rem;">D${_dDay > 0 ? '-' + _dDay : _dDay < 0 ? '+' + -_dDay : '-day'}</span>
+    </option>`;
   });
   $categorySelect.innerHTML = html;
 };
@@ -154,14 +157,6 @@ $categorySelect.onchange = () => {
   render();
 };
 
-// const getToday = _todos => {
-//   todos = _todos.filter(todo => {
-//     const today = new Date();
-//     const month = today.getMonth() + 1 > 9 ? today.getMonth() + 1 : `0${today.getMonth() + 1}`;
-//     const date = today.getDate() + 1 > 9 ? today.getDate() : `0${today.getDate()}`;
-//     return todo.date === `${today.getFullYear()}-${month}-${date}`; // --
-//   });
-// };
 
 const getData = async () => {
   try {
@@ -248,32 +243,42 @@ const popupControl = (() => {
 
 // 스탑워치 시작
 const startStopWatch = () => {
-  if (!play) return;
+  // play = !play;
+  // if (play === false) return;
+  // play = true;
   
   const timer = setInterval(() => {
-    if (!play) {
-      clearInterval(timer);
-      return;
-    }
+    play = true;
+
+    // if (!play) {  
+    //   clearInterval(timer);
+    //   return;
+    // }
     if (popupControl.containPlay()) {
+      play = false;
       clearInterval(timer);
       return;
     }
+    // if (!play) {  
+    //   clearInterval(timer);
+    //   return;
+    // }
     if (!$timerPopup.classList.contains('active')) {
       clearInterval(timer);
       return;
     }
     timerClosure.name($totalTime);
     timerClosure.name(popupControl.simulationTime());
-    // (async () => {
-    //   await timerClosure.name($totalTime);
-    //   await timerClosure.name(popupControl.simulationTime());
-    // })();
+    // play = true;
+
+    if (!play) {  
+      clearInterval(timer);
+    }
   }, 1000);
 };
 
 const renderPopup = target => {
-  play = !play;
+  play = true;
   $timerPopup.classList.add('active');
   todayTodos.forEach(todo => {
     const startTimeArr = todo.startTime.split(':', 2);
@@ -523,8 +528,6 @@ $addTodosPopup.onclick = e => {
   if (e.target.matches('.editTodos .addInput > li.impSelect .btnImp')) e.target.classList.toggle('impCheck');
 };
 
-
-
 const deletePopup = target => {
   $deletePopup.classList.add('active');
   targetId = +target.parentNode.id;
@@ -579,16 +582,40 @@ const patchTimer = target => {
 // 타이머 팝업창 클릭 > 1. 종료 버튼 2. 일시정지 버튼
 $timerPopup.onclick = e => {
   if (!e.target.matches('button')) return;
-  play = !play;
+ 
   if (e.target.matches('.timer > .btnRegister')) {
+    play = false;
     removeActive();
     patchTimer(e.target);
   }
   if (e.target.matches('.timer > .stopTimer > .btnStopWatch')) {
     e.target.classList.toggle('play');
-    if (!popupControl.containPlay()) startStopWatch();
+    // play = !play;
+    // if (!popupControl.containPlay()) startStopWatch();
+    // if (!play) startStopWatch();
+    if (play) return;
+    // play = !play;
+    // if (!play) return;
+    startStopWatch();
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // import
 /* 치원님 할일 추가 code 시작 */
@@ -661,7 +688,7 @@ const todoGoalOption = (hour, minute) => {
   <option value="4:00">4시간</option>
   <option value="4:30">4시간 30분</option>
   <option value="5:00">5시간</option>`;
-  console.log('시간에 따라 옵션 수 줄이기', hour, minute);
+  // console.log('시간에 따라 옵션 수 줄이기', hour, minute);
   $addTodoGTime.innerHTML = html;
 };
 // addTodo popup 초기화 함수

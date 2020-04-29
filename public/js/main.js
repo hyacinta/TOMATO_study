@@ -245,10 +245,10 @@ const popupControl = (() => {
 const startStopWatch = () => {
   // play = !play;
   // if (play === false) return;
-  // play = true;
+  play = true;
   
   const timer = setInterval(() => {
-    play = true;
+    // play = true;
 
     // if (!play) {  
     //   clearInterval(timer);

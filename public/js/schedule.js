@@ -7,14 +7,18 @@ import {
 
 let goals = [];
 let todos = [];
+let dayTodos = [];
 let targetId = [];
 
-const $scheduleList = document.querySelectorAll('main#schedule ul.scheduleList div.halfMinute');
+const $scheduleList = document.querySelectorAll('#schedule ul.scheduleList div.halfMinute');
 const $selectDate = document.querySelector('.selectDate > input[type="date"]');
 const $schedule = document.querySelector('ul.scheduleList');
-const $shecDimd = document.querySelector('div.shec + .dimd');
+const $scheDimd = document.querySelector('div.shec + .dimd');
 const $schePopup = document.querySelector('div.shec.popup');
-const $delShecTodo = document.querySelector('div.delShecTodo');
+const $delScheTodo = document.querySelector('div.delShecTodo');
+const $editScheTodo = document.querySelector('div.editShecTodo');
+
+console.dir($selectDate);
 
 const addZero = num => {
   return num.length > 1 || num > 9 ? num : '0' + num;
@@ -23,7 +27,7 @@ const addZero = num => {
 const mkTimeArr = () => {
   const timeArr = [];
   let [hour, min] = ['06', '00'];
-  for (let i = 0; i < 36; i++) {
+  for (let i = 0; i < $scheduleList.length; i++) {
     timeArr.push(`${addZero(hour)}:${addZero(min)}`);
     min = +min + 30;
     if (min === 60) {
@@ -61,19 +65,21 @@ const getToday = _todos => _todos.filter(todo => {
 
 const filterTodos = _todos => _todos.filter(todo => todo.date === $selectDate.value);
 
-// timeArr를 돌면서 todos와 매칭하는것만 필터 후 요소로 i를 주고 스케줄[i]에innerHtml 한다. 
+const getDayTodos = () => {
+  const _todos = todos.filter(todo => goals.find(goal => goal.id === todo.goal));
+  dayTodos = $selectDate.value === '' ? getToday(_todos) : filterTodos(_todos);
+};
+
 // innerHtml이라서 시작시간이 겹치는 구간은 덮어쓴다. 고로 랜더링이 안된다.
 const renderSche = () => {
   const timeArr = mkTimeArr();
   const scheArr = [...$scheduleList];
 
-  let _todos = todos.filter(todo => goals.find(goal => goal.id === todo.goal)); // get 다음에 들어가도 될 듯
-  _todos = $selectDate.value === '' ? getToday(_todos) : filterTodos(_todos);
+  getDayTodos();
 
   scheArr.forEach(sche => sche.innerHTML = '');
 
-  _todos.forEach(todo => {
-    // console.log(todo.goal);
+  dayTodos.forEach(todo => {
     const timeLimit = getTimeCal(todo.startTime);
     if (timeLimit < 360 || timeLimit > 1439) return;
     const i = timeArr.findIndex(time => time === roundTime(todo.startTime));
@@ -90,6 +96,7 @@ const getData = async () => {
     goals = await fetch('/goals').then(res => res.json());
     
     todos = await fetch('/todos').then(res => res.json());
+    // getDayTodos();
     renderSche();
   } catch (e) {
     console.error('Error:', e);
@@ -98,6 +105,8 @@ const getData = async () => {
 
 $selectDate.onchange = e => {
   console.dir(e);
+  // getData();
+  // getDayTodos();
   renderSche();
 };
 
@@ -106,12 +115,14 @@ const removePopup = () => {
   $schePopup.classList.remove('active');
 };
 const deletePopup = () => {
-  $delShecTodo.classList.remove('active');
+  $delScheTodo.classList.remove('active');
 };
 
 const deleteSche = () => {
   fetch(`/todos/${targetId}`, { method: 'DELETE' })
     .then(() => todos = todos.filter(todo => todo.id !== targetId))
+    // .then(() => dayTodos = dayTodos.filter(todo => todo.id !== targetId))
+    // .then(getDayTodos)
     .then(renderSche)
     .catch(error => console.error('Error:', error));
 };
@@ -123,27 +134,239 @@ $schedule.onclick = e => {
   targetId = +e.target.id; 
 };
 
-$shecDimd.onclick = () => {
+$scheDimd.onclick = () => {
   removePopup();
 };
 
-// 수정 삭제 선택 팝업창
-$schePopup.onclick = e => {
-  // if (e.target.matches('div.shec > span.editShec'))
-  if (e.target.matches('div.shec > span.delShec')) {
-    removePopup();
-    $delShecTodo.classList.add('active');
-  }
-};
-
 // 삭제 팝업창
-$delShecTodo.onclick = e => {
+$delScheTodo.onclick = e => {
   if (e.target.matches('.delShecTodo > button')) deletePopup();
   if (e.target.matches('.delShecTodo > button.btnRemove')) deleteSche();
 };
 
+// 수정 기능 시작
+const setGoals = todo => {
+  const $selectGoals = document.querySelector('.editShecTodo .addInput .category select');
+  let html = `<option value="${todo.goal}">${goals.find(goal => goal.id === +todo.goal).content}</option>`;
+  goals.forEach(goal => {
+    if (goal.id === todo.goal) return;
+    html += `<option value="${goal.id}">${goal.content}</option>`;
+  });
+  $selectGoals.innerHTML = html;
+};
 
-// 추가 팝업창
+const setStartMin = todo => {
+  const $startMin = $editScheTodo.querySelector('li.startTime > select');
+  let html = '';
+  for (let i = 0; i < 6; i++) {
+    html += `<option value="${i + 1}">${i}0</option>`;
+  }
+  $startMin.innerHTML = html;
+  $startMin.value = +todo.startTime[3] + 1;
+};
+
+// 목표시간 랜더링 해주면서 value값 지정해주는 함수
+const setGoalTime = todo => {
+  const $goalTime = $editScheTodo.querySelector('li.goalTime > select');
+  let html = '<option value="1">30분</option>';
+  let value = 1;
+  for (let i = 2; i <= 10; i++) {
+    const _i = Math.floor(i / 2);
+    html += `<option value="${i}">${!(i % 2) ? _i + '시간' : _i + '시간 30분'}</option>`;
+    if (todo.goalTime === (!(i % 2) ? `${_i}:00` : `${_i}:30`)) value = i;
+  }
+  $goalTime.innerHTML = html;
+  $goalTime.value = value;
+};
+
+const insertValue = todo => {
+  const $todoInput = $editScheTodo.querySelector('li.todoInput > input');
+  const $startDate = $editScheTodo.querySelector('li.startDate > input[type="date"]');
+  const $startHour = $editScheTodo.querySelector('li.startTime > input');
+
+  $todoInput.value = todo.content;
+  $startDate.value = todo.date;
+  [$startHour.value] = todo.startTime.split(':', 2);
+  setGoals(todo);
+  setStartMin(todo);
+  setGoalTime(todo);
+};
+
+// 수정 팝업창 랜더
+const renderEditSche = () => {
+  removePopup();
+  $editScheTodo.classList.add('active');
+  
+  dayTodos.forEach(todo => {
+    if (todo.id !== targetId) return;
+    $editScheTodo.innerHTML = `
+    <h3 id="${todo.id}">할일 수정</h3>
+    <ul class="addInput">
+      <li class="category">
+        <label for="" class="a11yHidden">목표 선택</label>
+        <select id="categorySelect" class="categorySelect">
+          <option value="">목표를 선택하세요</option>
+        </select>
+      </li>
+      <li class="todoInput">
+        <label for="" class="a11yHidden">할일 입력</label>
+        <input type="text" placeholder="할일을 입력하세요">
+      </li>
+      <li class="impSelect"><label for="test" class="a11yHidden btnImpLabel">중요</label>
+        <button class="btnImp${todo.important ? ' impCheck' : ''}" id="test">중요</button>
+      </li>
+      <li class="startDate">
+        <label for="">시작 날짜</label>
+        <input type="date" name="" id="">
+      </li>
+      <li class="startTime">
+        <label for="">공부 시작시간</label>
+        <input type="number" name="" id="" placeholder="입력하세요"><span>시</span>
+        <select name="country" id="countrySelectBox">
+        </select><span>분</span>
+      </li>
+      <li class="goalTime">
+        <label for="">목표 공부시간</label>
+        <select name="country" id="countrySelectBox">
+        </select>
+      </li>
+      <li class="contentInput">
+        <label for="" class="a11yHidden">상세 내용 입력</label>
+        <textarea name="" id="" cols="30" rows="10" placeholder="상세 내용을 입력하세요">${todo.detail}</textarea>
+      </li>
+    </ul>
+    <button class="btnCancel">취소</button>
+    <button class="btnRegister">등록</button>`;
+
+    insertValue(todo);
+  });
+};
+
+const _getContent = () => $editScheTodo.querySelector('.addInput > .todoInput input').value;
+
+const _getGoal = () => +$editScheTodo.querySelector('.addInput .category select').value;
+
+const _getColor = () => goals.find(goal => goal.id === _getGoal()).color;
+
+const _getDate = () => $editScheTodo.querySelector('li.startDate input').value;
+
+const _getDayNum = () => new Date(_getDate()).getDay();
+
+const _getImp = () => $editScheTodo.querySelector('li.impSelect .btnImp').classList.contains('impCheck');
+
+const _getStart = () => {
+  const $startHour = $editScheTodo.querySelector('.startTime input');
+  const $startMin = $editScheTodo.querySelector('.startTime select');
+  return `${addZero($startHour.value)}:${addZero(($startMin.value - 1) * 10)}`;
+};
+
+const _getGoalTime = () => {
+  const $goalTime = $editScheTodo.querySelector('li.goalTime > select');
+  const text = [...$goalTime.children].find(option => $goalTime.value === option.value).textContent;
+  if (text === '30분') return '0:30';
+  return text.includes('분') ? `${text[0]}:30` : `${text[0]}:00`;
+};
+
+const _getDetail = () => $editScheTodo.querySelector('li.contentInput > textarea').value;
+
+const generateDateCW = time => `${
+  time.getFullYear()
+}-${
+  time.getMonth() > 9 ? time.getMonth() + 1 : '0' + (time.getMonth() + 1)
+}-${
+  time.getDate() > 9 ? time.getDate() : '0' + time.getDate()
+}`;
+
+const removeEditSche = () => $editScheTodo.classList.remove('active');
+
+const editSche = async () => {
+  let data = {};
+  // 인풋이 비어있으면 리턴하기 추가
+  try {
+    data = await fetch(`/todos/${targetId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        content: _getContent(),
+        goal: _getGoal(),
+        color: _getColor(),
+        date: _getDate(),
+        day: _getDayNum(),
+        important: _getImp(),
+        startTime: _getStart(),
+        goalTime: _getGoalTime(),
+        detail: _getDetail(),
+      })
+    }).then(res => res.json());
+    // if (data.date !== ($selectDate.value || generateDateCW(new Date()))) {
+    //   todos = todos.map(todo => (todo.id === targetId ? data : todo));
+    //   dayTodos = dayTodos.filter(todo => (todo.id !== data.id));
+    // }
+    // dayTodos = dayTodos.map(todo => (todo.id === targetId ? data : todo));
+    // if문 부터 5줄을 주석 2줄로 간단히 바꿀 수 있지만 데이터가 큰 todos는 최대한 적게 돌도록 노력해봤다.
+    todos = todos.map(todo => (todo.id === targetId ? data : todo));
+    // getDayTodos(); 
+    renderSche();
+    removeEditSche();
+  } catch (e) {
+    console.error('Error:', e);
+  }
+};
+// const editSche = () => {
+//   // 인풋이 비어있으면 리턴하기 추가
+//   fetch(`/todos/${targetId}`, {
+//     method: 'PATCH',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify({
+//       content: _getContent(),
+//       goal: _getGoal(),
+//       color: _getColor(),
+//       date: _getDate(),
+//       day: _getDayNum(),
+//       // important: _getImp(),
+//       // startTime: _getStart(),
+//       goalTime: _getGoalTime(),
+//       // detail: _getDetail(),
+//     })
+//   }).then(res => res.json())
+//     // .then(data => {
+//     //   let _dayTodos = [];
+//     //   dayTodos.forEach(todo => {
+//     //     if (data.date !== ($selectDate.value || generateDateCW(new Date()))) return;
+//     //     // console.log('222' + $selectDate.value, generateDateCW(new Date()), data.date);
+//     //     _dayTodos = [..._dayTodos, (todo.id === targetId ? data : todo)];
+//     //     console.log(1);
+//     //   });
+//     //   dayTodos = _dayTodos;
+//     //   console.log(dayTodos);
+//     // })
+//     .then(data => dayTodos = dayTodos.map(todo => (todo.id === targetId ? data : todo)))
+//     // .then(_dayTodos => dayTodos = _dayTodos.filter(todo => (todo.id === targetId ? data : todo)))
+//     .then(renderSche)
+//     .then(removeEditSche) 
+//     .catch(error => console.error('Error:', error));
+// };
+
+// 수정 팝업창
+$editScheTodo.onclick = e => {
+  if (e.target.matches('.editShecTodo > .btnCancel')) removeEditSche();
+  if (e.target.matches('.editShecTodo > .btnRegister')) editSche();
+  if (e.target.matches('.editShecTodo li.impSelect .btnImp')) e.target.classList.toggle('impCheck');
+};
+
+
+// 수정 삭제 선택 팝업창
+$schePopup.onclick = e => {
+  if (e.target.matches('div.shec > span.editShec')) renderEditSche();
+  if (e.target.matches('div.shec > span.delShec')) {
+    removePopup();
+    $delScheTodo.classList.add('active');
+  }
+};
+
+
+
+
 
 
 
@@ -172,13 +395,6 @@ const $addTodoDetail = $addTodos.querySelector('.contentInput #todoDetail');
 
 // 함수
 // 숫자 생성
-const generateDateCW = time => `${
-  time.getFullYear()
-}-${
-  time.getMonth() > 9 ? time.getMonth() + 1 : '0' + (time.getMonth() + 1)
-}-${
-  time.getDate() > 9 ? time.getDate() : '0' + time.getDate()
-}`;
 
 const transSecond = (hh = 0, mm = 0, ss = 0) => {
   let count = 0;
@@ -294,7 +510,10 @@ const addTodos = async () => {
     closePopup($addTodos);
     console.log('조건에 따라서 뷰 랜더');
     // render();
-    if ($addTodoDate.value === generateDateCW(now)) renderSche();
+    if ($addTodoDate.value === generateDateCW(now)) {
+      // getDayTodos();
+      renderSche();
+    }
     resetAddtodo();
   } catch (e) {
     console.error(e);

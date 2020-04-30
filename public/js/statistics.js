@@ -261,7 +261,7 @@ const dailyDataRender = date => {
     <p>${secondsToHours(doneSeconds)}</p>
   </li>
   <li class="achievement">
-    <h4>달성률 <span>목표 : ${secondsToHours(goalSeconds)}</span></h4>
+    <h4>달성률 <span>목표 : ${secondsToHours(goalSeconds).slice(0, -4)}</span></h4>
     <p>${rateCalc(doneSeconds, goalSeconds) ? rateCalc(doneSeconds, goalSeconds) : '0'}%</p>
     <div class="progress">
       <div class="progressBar" style="width:${rateCalc(doneSeconds, goalSeconds)}%;"></div>
@@ -374,7 +374,7 @@ $statsContent.onclick = ({ target }) => {
     const averageCalc = doneSeconds / averageDate(today);
 
     $weeklyTotal.textContent = `${secondsToHours(doneSeconds)}`;
-    $weeklyAchievementGoalTime.textContent = `목표 : ${secondsToHours(goalSeconds)}`;
+    $weeklyAchievementGoalTime.textContent = `목표 : ${secondsToHours(goalSeconds).slice(0, -4)}`;
     $weeklyAchievement.textContent = `${rateCalc(doneSeconds, goalSeconds)}%`;
     $weeklySum.textContent = `${secondsToHours(averageCalc)}`;
     $weeklyProgressBar.style.width = `${rateCalc(doneSeconds, goalSeconds)}%`;

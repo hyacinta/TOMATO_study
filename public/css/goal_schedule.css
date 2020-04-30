@@ -294,3 +294,8 @@ header .selectDate input{
 .shec span.editShec {
   border-bottom: 1px solid #cecece;
 }
+
+/* 하은 추가 */
+.editShecTodo .impSelect label.btnImp {
+  background-image: none;
+}

@@ -31,7 +31,10 @@ const filterTodayTodos = () => {
     const date = today.getDate() + 1 > 9 ? today.getDate() : `0${today.getDate()}`;
     return todo.date === `${today.getFullYear()}-${month}-${date}`; // --
   });
-  // console.log(todayTodos);
+};
+
+const addZero = num => {
+  return num.length > 1 || num > 9 ? num : '0' + num;
 };
 
 // 현재 날짜부터 남은 날짜 구하는 함수
@@ -58,7 +61,7 @@ const progressBar = (done, goal) => {
 };
 
 const changePm = textArr => {
-  return textArr[0] > 12 ? (textArr[0] - 12) + ':' + textArr[1] : textArr[0] + ':' + textArr[1];
+  return textArr[0] > 12 ? addZero(textArr[0] - 12) + ':' + textArr[1] : textArr[0] + ':' + textArr[1];
 };
 
 const changeText = goalTime => {
@@ -123,6 +126,8 @@ const getTodayPersent = () => {
 
 const render = () => {
   let html = '';
+
+  todayTodos.sort((a, b) => (a.startTime > b.startTime ? 1 : a.startTime < b.startTime ? -1 : 0));
   
   const _todayTodos = todayTodos.filter(todo => {
     if ($categorySelect.value === 'All') return true;
@@ -245,10 +250,10 @@ const popupControl = (() => {
 const startStopWatch = () => {
   // play = !play;
   // if (play === false) return;
-  // play = true;
+  play = true;
   
   const timer = setInterval(() => {
-    play = true;
+    // play = true;
 
     // if (!play) {  
     //   clearInterval(timer);
@@ -342,18 +347,18 @@ const getGoalTime = ({ goalTime }) => {
 };
 
 const giveValue = todo => {
+  const $todoInput = document.querySelector('.editTodos .addInput > .todoInput input');
   const $startMin = document.querySelector('.editTodos .startTime select');
   const $startHour = document.querySelector('.editTodos .startTime input');
   const $goalTime = document.querySelector('.editTodos .goalTime select');
   const $startDate = document.querySelector('.editTodos li.startDate input');
-  const $todoInput = document.querySelector('.editTodos .addInput > .todoInput input');
   // const $endDate = document.querySelector('.editTodos li.endDate input');
 
+  $todoInput.value = todo.content;
   $startMin.value = +todo.startTime[3] + 1;
   $startHour.value = todo.startTime[0] + todo.startTime[1];
   $goalTime.value = getGoalTime(todo);
   $startDate.value = todo.date;
-  $todoInput.value = todo.content;
   // $endDate.value = 
 
   return {
@@ -394,7 +399,6 @@ const renderEditTodo = target => {
           <label for="">공부 시작시간</label>
           <input type="number" name="" id="" placeholder="입력하세요"><span>시</span>
           <select name="country" id="countrySelectBox">
-            <option value="">선택하세요</option>
             <option value="1">00</option>
             <option value="2">10</option>
             <option value="3">20</option>
@@ -436,10 +440,6 @@ const removeEdit = () => {
   $addTodosPopup.classList.remove('active');
 };
 
-const addZero = num => {
-  return num.length > 1 || num > 9 ? num : '0' + num;
-};
-
 const getContent = () => {
   const $todoInput = document.querySelector('.editTodos .addInput > .todoInput input');
   return $todoInput.value;
@@ -465,15 +465,15 @@ const getDayNum = () => {
   return day.getDay();
 };
 
+const getImp = () => {
+  const $btnImp = document.querySelector('.editTodos li.impSelect .btnImp');
+  return $btnImp.classList.contains('impCheck');
+};
+
 const getStart = () => {
   const $startHour = document.querySelector('.editTodos .startTime input');
   const $startMin = document.querySelector('.editTodos .startTime select');
   return `${addZero($startHour.value)}:${addZero(($startMin.value - 1) * 10)}`;
-};
-
-const getImp = () => {
-  const $btnImp = document.querySelector('.editTodos li.impSelect .btnImp');
-  return $btnImp.classList.contains('impCheck');
 };
 
 const getDetail = () => {
@@ -482,18 +482,25 @@ const getDetail = () => {
 };
 
 const getGoalTm = () => {
-  const $goalTime = +document.querySelector('.editTodos .goalTime select').value;
-  if ($goalTime === 1) return '0:30';
-  if ($goalTime === 2) return '1:00';
-  if ($goalTime === 3) return '1:30';
-  if ($goalTime === 4) return '2:00';
-  if ($goalTime === 5) return '2:30';
-  if ($goalTime === 6) return '3:00';
-  if ($goalTime === 7) return '3:30';
-  if ($goalTime === 8) return '4:00';
-  if ($goalTime === 9) return '4:30';
-  if ($goalTime === 10) return '5:00';
+  const $goalTime = document.querySelector('.editTodos .goalTime select');
+  const text = [...$goalTime.children].find(option => $goalTime.value === option.value).textContent;
+  if (text === '30분') return '0:30';
+  return text.includes('분') ? `${text[0]}:30` : `${text[0]}:00`;
 };
+
+// const getGoalTm = () => {
+//   const $goalTime = +document.querySelector('.editTodos .goalTime select').value;
+//   if ($goalTime === 1) return '0:30';
+//   if ($goalTime === 2) return '1:00';
+//   if ($goalTime === 3) return '1:30';
+//   if ($goalTime === 4) return '2:00';
+//   if ($goalTime === 5) return '2:30';
+//   if ($goalTime === 6) return '3:00';
+//   if ($goalTime === 7) return '3:30';
+//   if ($goalTime === 8) return '4:00';
+//   if ($goalTime === 9) return '4:30';
+//   return '5:00';
+// };
 
 const editTodo = target => {
   // 인풋이 비어있으면 리턴하기 추가
@@ -514,7 +521,6 @@ const editTodo = target => {
     })
   }).then(res => res.json())
     .then(data => todayTodos = todayTodos.map(todo => (todo.id === id ? data : todo)))
-    // .then(getToday) 
     .then(render)
     .then(removeEdit) 
     .catch(error => console.error('Error:', error));
@@ -523,7 +529,6 @@ const editTodo = target => {
 // 투두 수정 팝업창
 $addTodosPopup.onclick = e => {
   if (e.target.matches('.editTodos > .btnCancel')) removeEdit();
-  // if (e.target.matches('.editTodos > .btnClosed')) removeEdit();
   if (e.target.matches('.editTodos > .btnRegister')) editTodo(e.target);
   if (e.target.matches('.editTodos .addInput > li.impSelect .btnImp')) e.target.classList.toggle('impCheck');
 };

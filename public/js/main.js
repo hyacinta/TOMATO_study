@@ -167,10 +167,10 @@ $categorySelect.onchange = () => {
 const getData = async () => {
   try {
     // console.log(fetch('/goals').then(res => res.json()));
-    goals = await fetch('http://13.124.124.183/public//goals').then(res => res.json());
+    goals = await fetch('http://13.124.124.183/public/goals').then(res => res.json());
     renderGoals();
 
-    todos = await fetch('http://13.124.124.183/public//todos').then(res => res.json());
+    todos = await fetch('http://13.124.124.183/public/todos').then(res => res.json());
     filterTodayTodos();
     // getToday(todos);
     getTodayDone();

@@ -84,7 +84,8 @@ const goalRender = () => {
     html += `<li id="${goal.id}" class="${goal.color}">
     <div class="goalTit">
       <h4>${goal.content}</h3>
-      <span class="closingDate">${goalDday[0]}.${goalDday[1]}.${goalDday[2]} / D-${_dDay || 'Day'}</span>
+      <span class="closingDate">${goalDday[0]}.${goalDday[1]}.${goalDday[2]} / 
+      D${_dDay > 0 ? '-' + _dDay : _dDay < 0 ? '+' + -_dDay : '-day'}</span>
     </div>
     <button class="btnEdit">수정</button>
     <button class="btnDelete">삭제</button>

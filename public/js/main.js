@@ -56,7 +56,7 @@ const progressBar = (done, goal) => {
   const [goalHour, goalMin] = goal.split(':');
 
   let percent = Math.round(((doneHour * 60 + +doneMin) / (goalHour * 60 + +goalMin)) * 100);
-  if (isNaN(percent)) percent = 0; 
+  if (!percent) percent = 0; 
   return percent = percent > 100 ? 101 : percent;
 };
 
@@ -94,7 +94,7 @@ const getTodayDone = () => {
   min = min.length > 1 || min > 9 ? min : '0' + min;
   sec = sec.length > 1 || sec > 9 ? sec : '0' + sec;
   $totalTime.textContent = `${hour}:${min}:${sec}`;
-
+  
   return [hour, min];
 };
 
@@ -120,6 +120,7 @@ const getTodayPersent = () => {
   const [goalHour, goalMin] = getTodayGoalTIme();
   const [nowHour, nowMin] = getTodayDone();
   let percent = Math.round(((nowHour * 60 + +nowMin) / (goalHour * 60 + +goalMin)) * 100);
+  if (!percent) percent = 0; 
   percent = percent > 9 ? percent : '0' + percent;
   $todayPercent.textContent = `${percent}%`;
 };
@@ -166,10 +167,10 @@ $categorySelect.onchange = () => {
 const getData = async () => {
   try {
     // console.log(fetch('/goals').then(res => res.json()));
-    goals = await fetch('/goals').then(res => res.json());
+    goals = await fetch('/public/goals').then(res => res.json());
     renderGoals();
 
-    todos = await fetch('/todos').then(res => res.json());
+    todos = await fetch('/public/todos').then(res => res.json());
     filterTodayTodos();
     // getToday(todos);
     getTodayDone();

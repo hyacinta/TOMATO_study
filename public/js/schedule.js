@@ -56,11 +56,12 @@ const roundTime = time => {
   return `${addZero(hour)}:${addZero(min)}`;
 };
 
-const getToday = _todos => _todos.filter(todo => {
-  const today = new Date();
-  const month = today.getMonth() + 1 > 9 ? today.getMonth() + 1 : `0${today.getMonth() + 1}`;
-  return todo.date === `${today.getFullYear()}-${month}-${today.getDate()}`;
-});
+const getToday = _todos => {
+  return _todos.filter(todo => {
+    const today = new Date();
+    return todo.date === `${today.getFullYear()}-${addZero(today.getMonth() + 1)}-${addZero(today.getDate())}`;
+  });
+};
 
 
 const filterTodos = _todos => _todos.filter(todo => todo.date === $selectDate.value);
@@ -96,7 +97,7 @@ const getData = async () => {
     goals = await fetch('/goals').then(res => res.json());
     
     todos = await fetch('/todos').then(res => res.json());
-    // getDayTodos();
+    getDayTodos();
     renderSche();
   } catch (e) {
     console.error('Error:', e);

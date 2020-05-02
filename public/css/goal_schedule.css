@@ -176,7 +176,7 @@
 
 
 
-.deleteGoal.popup, .deleteTodo.popup {
+.deleteGoal.popup, .deleteTodo.popup, .delShecTodo.popup {
   padding-top: 64px;
   height: 200px;
   font-size: 1.4em;
@@ -277,4 +277,25 @@ header .selectDate input{
   background-color: #e3d3fd;
   border-top: 1px solid #a98dd7;
   border-bottom: 1px solid #a98dd7;
+}
+
+.shec {
+  height: 160px;
+  width: 300px;
+  padding: 5px 15px;
+  font-size: 1.4em;
+  text-align: center;
+}
+.shec span {
+  display: block;
+  text-align: center;
+  padding: 23px;
+}
+.shec span.editShec {
+  border-bottom: 1px solid #cecece;
+}
+
+/* 하은 추가 */
+.editShecTodo .impSelect label.btnImp {
+  background-image: none;
 }

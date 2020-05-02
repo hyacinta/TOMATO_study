@@ -31,7 +31,10 @@ const filterTodayTodos = () => {
     const date = today.getDate() + 1 > 9 ? today.getDate() : `0${today.getDate()}`;
     return todo.date === `${today.getFullYear()}-${month}-${date}`; // --
   });
-  console.log(todayTodos);
+};
+
+const addZero = num => {
+  return num.length > 1 || num > 9 ? num : '0' + num;
 };
 
 // 현재 날짜부터 남은 날짜 구하는 함수
@@ -40,7 +43,10 @@ const generateDday = date => Math.ceil((date - now) / oneDay);
 const renderGoals = () => {
   let html = '<option value="All">목표 전체보기</option>';
   goals.forEach(goal => {
-    html += `<option value="${goal.id}">${goal.content} <span class="dDay" style="font-size: 1.6rem;">D-${generateDday(new Date(goal.dDay) - (9 * oneHour))}</span></option>`;
+    const _dDay = generateDday(new Date(goal.dDay) - (9 * oneHour));
+    html += `<option value="${goal.id}">${goal.content} 
+    <span class="dDay" style="font-size: 1.6rem;">D${_dDay > 0 ? '-' + _dDay : _dDay < 0 ? '+' + -_dDay : '-day'}</span>
+    </option>`;
   });
   $categorySelect.innerHTML = html;
 };
@@ -50,12 +56,12 @@ const progressBar = (done, goal) => {
   const [goalHour, goalMin] = goal.split(':');
 
   let percent = Math.round(((doneHour * 60 + +doneMin) / (goalHour * 60 + +goalMin)) * 100);
-  if (isNaN(percent)) percent = 0; 
+  if (!percent) percent = 0; 
   return percent = percent > 100 ? 101 : percent;
 };
 
 const changePm = textArr => {
-  return textArr[0] > 12 ? (textArr[0] - 12) + ':' + textArr[1] : textArr[0] + ':' + textArr[1];
+  return textArr[0] > 12 ? addZero(textArr[0] - 12) + ':' + textArr[1] : textArr[0] + ':' + textArr[1];
 };
 
 const changeText = goalTime => {
@@ -88,7 +94,7 @@ const getTodayDone = () => {
   min = min.length > 1 || min > 9 ? min : '0' + min;
   sec = sec.length > 1 || sec > 9 ? sec : '0' + sec;
   $totalTime.textContent = `${hour}:${min}:${sec}`;
-
+  
   return [hour, min];
 };
 
@@ -114,12 +120,15 @@ const getTodayPersent = () => {
   const [goalHour, goalMin] = getTodayGoalTIme();
   const [nowHour, nowMin] = getTodayDone();
   let percent = Math.round(((nowHour * 60 + +nowMin) / (goalHour * 60 + +goalMin)) * 100);
+  if (!percent) percent = 0; 
   percent = percent > 9 ? percent : '0' + percent;
   $todayPercent.textContent = `${percent}%`;
 };
 
 const render = () => {
   let html = '';
+
+  todayTodos.sort((a, b) => (a.startTime > b.startTime ? 1 : a.startTime < b.startTime ? -1 : 0));
   
   const _todayTodos = todayTodos.filter(todo => {
     if ($categorySelect.value === 'All') return true;
@@ -154,14 +163,6 @@ $categorySelect.onchange = () => {
   render();
 };
 
-// const getToday = _todos => {
-//   todos = _todos.filter(todo => {
-//     const today = new Date();
-//     const month = today.getMonth() + 1 > 9 ? today.getMonth() + 1 : `0${today.getMonth() + 1}`;
-//     const date = today.getDate() + 1 > 9 ? today.getDate() : `0${today.getDate()}`;
-//     return todo.date === `${today.getFullYear()}-${month}-${date}`; // --
-//   });
-// };
 
 const getData = async () => {
   try {
@@ -248,32 +249,42 @@ const popupControl = (() => {
 
 // 스탑워치 시작
 const startStopWatch = () => {
-  if (!play) return;
+  // play = !play;
+  // if (play === false) return;
+  play = true;
   
   const timer = setInterval(() => {
-    if (!play) {
-      clearInterval(timer);
-      return;
-    }
+    // play = true;
+
+    // if (!play) {  
+    //   clearInterval(timer);
+    //   return;
+    // }
     if (popupControl.containPlay()) {
+      play = false;
       clearInterval(timer);
       return;
     }
+    // if (!play) {  
+    //   clearInterval(timer);
+    //   return;
+    // }
     if (!$timerPopup.classList.contains('active')) {
       clearInterval(timer);
       return;
     }
     timerClosure.name($totalTime);
     timerClosure.name(popupControl.simulationTime());
-    // (async () => {
-    //   await timerClosure.name($totalTime);
-    //   await timerClosure.name(popupControl.simulationTime());
-    // })();
+    // play = true;
+
+    if (!play) {  
+      clearInterval(timer);
+    }
   }, 1000);
 };
 
 const renderPopup = target => {
-  play = !play;
+  play = true;
   $timerPopup.classList.add('active');
   todayTodos.forEach(todo => {
     const startTimeArr = todo.startTime.split(':', 2);
@@ -337,18 +348,18 @@ const getGoalTime = ({ goalTime }) => {
 };
 
 const giveValue = todo => {
+  const $todoInput = document.querySelector('.editTodos .addInput > .todoInput input');
   const $startMin = document.querySelector('.editTodos .startTime select');
   const $startHour = document.querySelector('.editTodos .startTime input');
   const $goalTime = document.querySelector('.editTodos .goalTime select');
   const $startDate = document.querySelector('.editTodos li.startDate input');
-  const $todoInput = document.querySelector('.editTodos .addInput > .todoInput input');
   // const $endDate = document.querySelector('.editTodos li.endDate input');
 
+  $todoInput.value = todo.content;
   $startMin.value = +todo.startTime[3] + 1;
   $startHour.value = todo.startTime[0] + todo.startTime[1];
   $goalTime.value = getGoalTime(todo);
   $startDate.value = todo.date;
-  $todoInput.value = todo.content;
   // $endDate.value = 
 
   return {
@@ -389,7 +400,6 @@ const renderEditTodo = target => {
           <label for="">공부 시작시간</label>
           <input type="number" name="" id="" placeholder="입력하세요"><span>시</span>
           <select name="country" id="countrySelectBox">
-            <option value="">선택하세요</option>
             <option value="1">00</option>
             <option value="2">10</option>
             <option value="3">20</option>
@@ -431,10 +441,6 @@ const removeEdit = () => {
   $addTodosPopup.classList.remove('active');
 };
 
-const addZero = num => {
-  return num.length > 1 || num > 9 ? num : '0' + num;
-};
-
 const getContent = () => {
   const $todoInput = document.querySelector('.editTodos .addInput > .todoInput input');
   return $todoInput.value;
@@ -460,15 +466,15 @@ const getDayNum = () => {
   return day.getDay();
 };
 
+const getImp = () => {
+  const $btnImp = document.querySelector('.editTodos li.impSelect .btnImp');
+  return $btnImp.classList.contains('impCheck');
+};
+
 const getStart = () => {
   const $startHour = document.querySelector('.editTodos .startTime input');
   const $startMin = document.querySelector('.editTodos .startTime select');
   return `${addZero($startHour.value)}:${addZero(($startMin.value - 1) * 10)}`;
-};
-
-const getImp = () => {
-  const $btnImp = document.querySelector('.editTodos li.impSelect .btnImp');
-  return $btnImp.classList.contains('impCheck');
 };
 
 const getDetail = () => {
@@ -477,18 +483,25 @@ const getDetail = () => {
 };
 
 const getGoalTm = () => {
-  const $goalTime = +document.querySelector('.editTodos .goalTime select').value;
-  if ($goalTime === 1) return '0:30';
-  if ($goalTime === 2) return '1:00';
-  if ($goalTime === 3) return '1:30';
-  if ($goalTime === 4) return '2:00';
-  if ($goalTime === 5) return '2:30';
-  if ($goalTime === 6) return '3:00';
-  if ($goalTime === 7) return '3:30';
-  if ($goalTime === 8) return '4:00';
-  if ($goalTime === 9) return '4:30';
-  if ($goalTime === 10) return '5:00';
+  const $goalTime = document.querySelector('.editTodos .goalTime select');
+  const text = [...$goalTime.children].find(option => $goalTime.value === option.value).textContent;
+  if (text === '30분') return '0:30';
+  return text.includes('분') ? `${text[0]}:30` : `${text[0]}:00`;
 };
+
+// const getGoalTm = () => {
+//   const $goalTime = +document.querySelector('.editTodos .goalTime select').value;
+//   if ($goalTime === 1) return '0:30';
+//   if ($goalTime === 2) return '1:00';
+//   if ($goalTime === 3) return '1:30';
+//   if ($goalTime === 4) return '2:00';
+//   if ($goalTime === 5) return '2:30';
+//   if ($goalTime === 6) return '3:00';
+//   if ($goalTime === 7) return '3:30';
+//   if ($goalTime === 8) return '4:00';
+//   if ($goalTime === 9) return '4:30';
+//   return '5:00';
+// };
 
 const editTodo = target => {
   // 인풋이 비어있으면 리턴하기 추가
@@ -509,7 +522,6 @@ const editTodo = target => {
     })
   }).then(res => res.json())
     .then(data => todayTodos = todayTodos.map(todo => (todo.id === id ? data : todo)))
-    // .then(getToday) 
     .then(render)
     .then(removeEdit) 
     .catch(error => console.error('Error:', error));
@@ -518,12 +530,9 @@ const editTodo = target => {
 // 투두 수정 팝업창
 $addTodosPopup.onclick = e => {
   if (e.target.matches('.editTodos > .btnCancel')) removeEdit();
-  // if (e.target.matches('.editTodos > .btnClosed')) removeEdit();
   if (e.target.matches('.editTodos > .btnRegister')) editTodo(e.target);
   if (e.target.matches('.editTodos .addInput > li.impSelect .btnImp')) e.target.classList.toggle('impCheck');
 };
-
-
 
 const deletePopup = target => {
   $deletePopup.classList.add('active');
@@ -579,16 +588,40 @@ const patchTimer = target => {
 // 타이머 팝업창 클릭 > 1. 종료 버튼 2. 일시정지 버튼
 $timerPopup.onclick = e => {
   if (!e.target.matches('button')) return;
-  play = !play;
+ 
   if (e.target.matches('.timer > .btnRegister')) {
+    play = false;
     removeActive();
     patchTimer(e.target);
   }
   if (e.target.matches('.timer > .stopTimer > .btnStopWatch')) {
     e.target.classList.toggle('play');
-    if (!popupControl.containPlay()) startStopWatch();
+    // play = !play;
+    // if (!popupControl.containPlay()) startStopWatch();
+    // if (!play) startStopWatch();
+    if (play) return;
+    // play = !play;
+    // if (!play) return;
+    startStopWatch();
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // import
 /* 치원님 할일 추가 code 시작 */
@@ -661,7 +694,7 @@ const todoGoalOption = (hour, minute) => {
   <option value="4:00">4시간</option>
   <option value="4:30">4시간 30분</option>
   <option value="5:00">5시간</option>`;
-  console.log('시간에 따라 옵션 수 줄이기', hour, minute);
+  // console.log('시간에 따라 옵션 수 줄이기', hour, minute);
   $addTodoGTime.innerHTML = html;
 };
 // addTodo popup 초기화 함수

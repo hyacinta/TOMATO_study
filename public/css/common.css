@@ -250,6 +250,11 @@ nav {
   box-shadow: 0 0 10px rgba(0, 0, 0, .3);
   z-index: 200;
 }
+
+.alert.popup {
+  z-index: 300;
+}
+
 .popup h3 {
   margin-bottom: 40px;
   font-size: 20px;
@@ -269,6 +274,22 @@ nav {
   text-align: center;
   border-top: 1px solid #FF551F;
 }
+
+.popup .btnOk {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 16px;
+  font-size: 20px;
+  text-align: center;
+  border-top: 1px solid #FF551F;
+  color: #fff;
+  background-color: #FF551F;
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+
 .popup .btnCancel {
   left: 0;
   color: #FF551F;
@@ -291,9 +312,20 @@ nav {
   z-index: 150;
 }
 
+.alert.active + .dimd {
+  z-index: 250;
+}
+
 .addTodos.popup {height: 666px;}
 .addGoal.popup, .editGoal.popup {height: 362px;}
 .timer.popup {height: 250px;}
+.alert.popup {height: 200px;}
+
+.alert.popup p {
+  font-size: 20px;
+  text-align: center;
+  word-break: keep-all;
+}
 
 .addInput, .editInput {
   display: flex;

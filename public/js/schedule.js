@@ -2,6 +2,7 @@ import {
   generateId,
   openPopup,
   closePopup,
+  openAlert,
   popup
 } from './common.js';
 
@@ -461,13 +462,14 @@ const resetAddtodo = () => {
 const addTodos = async () => {
   // 입력란 확인
   if (!checkValue($addTodos)) {
-    window.alert('필수 입력란이 전부 채워지지 않았습니다.');
+    openAlert('필수 입력란이 전부 채워지지 않았습니다.');
     return;
   }
 
   // 할일 일정이 오늘 이후인지 확인
   if (new Date($addTodoDate.value) - new Date(generateDateCW(now)) < 0) {
-    window.alert('시작 날짜를 오늘 이후로 선택하십시요.');
+    openAlert('시작 날짜를 오늘 이후로 선택하십시요.');
+
     return;
   }
 
@@ -475,13 +477,15 @@ const addTodos = async () => {
   const minute = $addTodoStart.minute.value;
   // 시작 시간이 6 - 23 인지 확인
   if (hour < 6 || hour > 23) {
-    window.alert('시작 시간은 6시부터 23시까지 입니다.');
+    openAlert('시작 시간은 6시부터 23시까지 입니다.');
+
     return;
   }
   
   // 중복 예정 확인
   if (!checkTime($addTodoDate.value, `${hour}:${minute}`, $addTodoGTime.value)) {
-    window.alert('할일 예정이 다른 예정과 겹칩니다.');
+    openAlert('할일 예정이 다른 예정과 겹칩니다.');
+
     return;
   }
 
@@ -506,7 +510,7 @@ const addTodos = async () => {
     });
     const todo = await _todo.json();
     todos = [...todos, todo];
-    window.alert('할일이 추가되었습니다.');
+    openAlert('할일이 추가되었습니다.');
     closePopup($addTodos);
     console.log('조건에 따라서 뷰 랜더');
     // render();

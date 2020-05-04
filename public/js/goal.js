@@ -3,6 +3,7 @@ import {
   generateId,
   openPopup,
   closePopup,
+  openAlert,
   popup
 } from './common.js';
 // 함수]
@@ -158,13 +159,13 @@ const resetAddGoal = () => {
 const addTodos = async () => {
   // 입력란 확인
   if (!checkValue($addTodos)) {
-    window.alert('필수 입력란이 전부 채워지지 않았습니다.');
+    openAlert('필수 입력란이 전부 채워지지 않았습니다.');
     return;
   }
 
   // 할일 일정이 오늘 이후인지 확인
   if (new Date($addTodoDate.value) - new Date(generateDate(now)) < 0) {
-    window.alert('시작 날짜를 오늘 이후로 선택하십시요.');
+    openAlert('시작 날짜를 오늘 이후로 선택하십시요.');
     return;
   }
 
@@ -172,13 +173,13 @@ const addTodos = async () => {
   const minute = $addTodoStart.minute.value;
   // 시작 시간이 6 - 23 인지 확인
   if (hour < 6 || hour > 23) {
-    window.alert('시작 시간은 6시부터 23시까지 입니다.');
+    openAlert('시작 시간은 6시부터 23시까지 입니다.');
     return;
   }
   
   // 중복 예정 확인
   if (!checkTime($addTodoDate.value, `${hour}:${minute}`, $addTodoGTime.value)) {
-    window.alert('할일 예정이 다른 예정과 겹칩니다.');
+    openAlert('할일 예정이 다른 예정과 겹칩니다.');
     return;
   }
 
@@ -203,7 +204,7 @@ const addTodos = async () => {
     });
     const todo = await _todo.json();
     todos = [...todos, todo];
-    window.alert('할일이 추가되었습니다.');
+    openAlert('할일이 추가되었습니다.');
     resetAddtodo();
     closePopup($addTodos);
   } catch (e) {
@@ -220,18 +221,18 @@ const addGoalFn = async () => {
   
   // 입력란 확인
   if (!goalContent || !goalDday || !$goalColor) {
-    window.alert('입력란이 전부 채워지지 않았습니다.');
+    openAlert('입력란이 전부 채워지지 않았습니다.');
     return;
   }
   // 목표 Dday가 오늘 이후인지 확인
   if (new Date(goalDday) - new Date(generateDate(now)) < 0) {
-    window.alert('목표 D-day를 오늘 이후로 선택하십시요.');
+    openAlert('목표 D-day를 오늘 이후로 선택하십시요.');
     return;
   }
   // 목표 색상이 중복되는지 확인
   const goalColor = $goalColor.value;
   if (goals.some(goal => goal.color === goalColor)) {
-    window.alert('추가하는 목표 색상이 중복됩니다.');
+    openAlert('추가하는 목표 색상이 중복됩니다.');
     return;
   }
 
@@ -316,14 +317,14 @@ const editGoalFn = async id => {
   // 목표의 D-day가 오늘 이후인지 확인
   const checkDday = checkInputs.datas.some(data => data.key === 'dDay');
   if (checkDday && new Date($editGoalDday.value) - new Date(generateDate(now)) < 0) {
-    window.alert('목표 D-day를 오늘 이후로 선택하십시요.');
+    openAlert('목표 D-day를 오늘 이후로 선택하십시요.');
     return;
   }
   
   // 색상이 중복되는지 확인
   const checkColor = checkInputs.datas.some(data => data.key === 'color');
   if (checkColor && goals.some(goal => goal.color === $editGoalColor.querySelector('input:checked').value)) {
-    window.alert('수정하는 목표 색상이 중복됩니다.');
+    openAlert('수정하는 목표 색상이 중복됩니다.');
     return;
   }
 
@@ -364,7 +365,7 @@ $btnAddTodo.onclick = () => {
 // 목표 추가 버튼 클릭 이벤트
 $btnAddGoal.onclick = () => {
   if (goals.length >= 5) {
-    window.alert('목표는 최대 5개까지 입니다.');
+    openAlert('목표는 최대 5개까지 입니다.');
     return;
   }
   openPopup($addGoal);
